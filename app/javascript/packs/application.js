@@ -6,7 +6,14 @@
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+import "channels
+// 以下、BootStrapのため追記
+import "jquery";
+import "popper.js";
+import "bootstrap";
+import "../stylesheets/application"
+
+// ここまで、BootStrapのため追記
 
 Rails.start()
 Turbolinks.start()

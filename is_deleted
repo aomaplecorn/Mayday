@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/ec2-user/environment/Mayday/app/views/admin/users/index.html.erb:20 #<Class:0x00007efc24724558>#_app_views_admin_users_index_html_erb__2940065185256189343_69810704164400:
+
+    [1;34m15[0m:       <td><%= artist.name %></td>
+    [1;34m16[0m:       <td><%= artist.email %></td>
+    [1;34m17[0m:       <td><%= artist.telephone_number %></td>
+    [1;34m18[0m:       <!--is_deleted＝falseの場合、アカウントは有効、trueで無効となる。-->
+    [1;34m19[0m:       <% if artist.is_deleted == false %>
+ => [1;34m20[0m:       <% binding.pry %>
+    [1;34m21[0m:         <%= form_with model: artist do |f| %>
+    [1;34m22[0m:       <td><%= f.radio_button :is_deleted, false %><%= f.label :is_deleted_1, "有効" %></td>
+    [1;34m23[0m:         <% end %>
+    [1;34m24[0m:       <% else %>
+    [1;34m25[0m: 
+

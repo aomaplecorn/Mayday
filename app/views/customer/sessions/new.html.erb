@@ -1,27 +1,41 @@
-<h2>Log in</h2>
+<h2>カスタマー　Log in</h2>
 
-<!--<a%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
-<%= form_with model: @customer,url: customer_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-5" style="background-color: #EEEEEE;">ログイン</h4>
+  </div>
+  <div class="row">
+    <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員の方はこちらからログイン</h6>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="row">
+    <table class="d-flex align-items-center justify-content-center my-auto mx-auto" style="height:200px;">
+      <%= form_with model: @customer,url: customer_session_path do |f| %>
+      <tr>
+        <div class="field">
+          <td>メールアドレス</td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        </div>
+      </tr>
+      <tr>
+        <div class="field">
+          <td>パスワード</td>
+          <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+        </div>
+      </tr>
+      <tr>
+        <td></td>
+        <td><div class="actions pt-4">
+          <%= f.submit "ログイン", class: "btn btn-primary" %>
+        </div></td>
+      </tr>
+      <% end %>
+    </table>
   </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "customer/shared/links" %>
+<div class="row">
+  <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員登録がお済みでない方</h6>
+</div>
+<p class="d-flex align-items-center justify-content-center my-auto mx-auto">
+  <%= link_to "こちら", '/customers/sign_up' %>から新規登録を行ってください
+</p>

@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>Mayday</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,20 +14,26 @@
     <header>
 <!--以下、adminのログイン確認-->
       <% if admin_signed_in? %>
-        <%= link_to 'log_out', destroy_admin_session_path, method: :delete %>
+        <%= button_to 'アドミンlog_out', destroy_admin_session_path, method: :delete %>
       <% else %>
-        <%= link_to 'log_in', admin_session_path %>
+        <%= link_to 'アドミンlog_in', admin_session_path %>
       <% end %>
 <!--ここまで、adminのログイン確認-->
 <!--以下、artistのログイン確認-->
       <% if artist_signed_in? %>
-        <%= link_to 'artist_log_out', destroy_artist_session_path, method: :delete %>
+        <%= button_to 'アーティストlog_out', destroy_artist_session_path, method: :delete %>
       <% else %>
-        <%= link_to 'artist_log_in', artist_session_path %>
+        <%= link_to 'アーティストlog_in', artist_session_path %>
+        <%= link_to 'アーティストsign_up', new_artist_registration_path %>
       <% end %>
 <!--ここまで、artistのログイン確認-->
 <!--以下、userのログイン確認-->
-
+      <% if customer_signed_in? %>
+        <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'カスタマーlog_in', customer_session_path %>
+        <%= link_to 'カスタマーsign_up', new_customer_registration_path %>
+      <% end %>
 <!--ここまで、userのログイン確認-->
 
     </header>
