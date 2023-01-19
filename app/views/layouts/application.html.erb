@@ -11,6 +11,27 @@
   </head>
 
   <body>
+    <header>
+<!--以下、adminのログイン確認-->
+      <% if admin_signed_in? %>
+        <%= link_to 'log_out', destroy_admin_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'log_in', admin_session_path %>
+      <% end %>
+<!--ここまで、adminのログイン確認-->
+<!--以下、artistのログイン確認-->
+      <% if artist_signed_in? %>
+        <%= link_to 'artist_log_out', destroy_artist_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'artist_log_in', artist_session_path %>
+      <% end %>
+<!--ここまで、artistのログイン確認-->
+<!--以下、userのログイン確認-->
+
+<!--ここまで、userのログイン確認-->
+
+    </header>
+
     <%= yield %>
   </body>
 </html>
