@@ -1,36 +1,84 @@
 <h1>Admin::Users#index</h1>
+<!--以下、ユーザーを管理するタブ本体-->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#tables1" class="nav-link active" data-toggle="tab">アーティストユーザー</a>
+  </li>
+  <li class="nav-item">
+    <a href="#tables2" class="nav-link" data-toggle="tab">カスタマーユーザー</a>
+  </li>
+</ul>
+<!--ここまで、ユーザーを管理するタブ-->
 
-<table class="table">
-  <thead>
-    <tr>
-      <td>グループ名</td>
-      <td>メールアドレス</td>
-      <td>連絡先</td>
-      <td>ステータス</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @artists.each do |artist| %>
-    <tr>
-      <td><%= artist.name %></td>
-      <td><%= artist.email %></td>
-      <td><%= artist.telephone_number %></td>
-      <!--is_deleted＝falseの場合、アカウントは有効、trueで無効となる。-->
-      <%= form_with model: @artist,url: admin_user_path(artist.id), method: :patch do |f| %>
-        <% if artist.is_deleted == false %>
-          <td><%= f.radio_button :is_deleted, false, checked: true %><%= f.label :is_deleted_1, "有効" %></td>
-          <td><%= f.radio_button :is_deleted, true %><%= f.label :is_deleted_2, "無効" %></td>
+<!--以下、artistのユーザー一覧-->
+<div class="tab-content">
+  <div id="tables1" class="tab-pane active">
+    <h2>アーティスト</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>グループ名</td>
+          <td>メールアドレス</td>
+          <td>連絡先</td>
+          <td>アカウントステータス</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @artists.each do |artist| %>
+        <tr>
+          <td><%= artist.name %></td>
+          <td><%= artist.email %></td>
+          <td><%= artist.telephone_number %></td>
+          <% @artist = artist %>
+          <!--以下、is_deletedの更新-->
+          <%= form_with model: @artist,url: admin_user_path(@artist.id), method: :patch do |f| %>
+          <!--is_deletedのステータス　false＝アカウント有効　true＝アカウント無効-->
+          <td>
+            <%= f.radio_button :is_deleted, false, checked: true %><%= f.label :is_deleted_1, "有効" %>
+            <%= f.radio_button :is_deleted, true %><%= f.label :is_deleted_2, "無効" %>
+          </td>
           <td><%= f.submit 'ステータス更新' %></td>
-        <% else %>
-          <td><%= f.radio_button :is_deleted, false %><%= f.label :is_deleted_1, "有効" %></td>
-          <td><%= f.radio_button :is_deleted, true, checked: true %><%= f.label :is_deleted_2, "無効" %></td>
-          <td><%= f.submit 'ステータス更新' %></td>
+          <% end %>
+          <!--ここまで、is_deletedの更新-->
+        </tr>
         <% end %>
-        <% @artist = artist %>
-      <% end %>
-    </tr>
-    <% end %>
+      </tbody>
+    </table>
+  </div>
+<!--ここまで、artistのユーザー一覧-->
 
-
-  </tbody>
-</table>
+<!--以下、customerのユーザー一覧-->
+  <div id="tables2" class="tab-pane">
+    <h2>カスタマー</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>氏名</td>
+          <td>メールアドレス</td>
+          <td>連絡先</td>
+          <td>アカウントステータス</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.name %></td>
+          <td><%= customer.email %></td>
+          <td><%= customer.telephone_number %></td>
+          <% @customer = customer %>
+          <!--以下、is_deletedの更新-->
+          <%= form_with model: @customer,url: admin_user_path(@customer.id), method: :patch do |f| %>
+          <!--is_deletedのステータス　false＝アカウント有効　true＝アカウント無効-->
+          <td>
+            <%= f.radio_button :is_deleted, false, checked: true %><%= f.label :is_deleted_1, "有効" %>
+            <%= f.radio_button :is_deleted, true %><%= f.label :is_deleted_2, "無効" %>
+          </td>
+          <td><%= f.submit 'ステータス更新' %></td>
+          <% end %>
+          <!--ここまで、is_deletedの更新-->
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
