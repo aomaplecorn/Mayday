@@ -1,0 +1,41 @@
+<h1>Artist::Users#edit</h1>
+
+<%= form_with model: @artist, url: artist_users_path(current_artist.id), method: :patch do |f| %>
+    <label>グループ名</label>
+    <div>
+        <%= f.text_field :name %>
+    </div>
+
+    <label>BIOGRAPHY</label>
+    <div>
+        <%= f.text_area :introduction %>
+    </div>
+
+    <label>連絡先</label>
+    <div>
+        <%= f.text_field :telephone_number %>
+    </div>
+
+    <label>背景画像</label>
+    <div>
+        <%= f.file_field :background_image, accept: "image/*" %>
+    </div>
+
+    <label>BIOGRAPHY画像</label>
+    <div>
+        <%= f.file_field :introduction_image, accept: "image/*" %>
+    </div>
+    <div>
+        <%= f.submit 'サイトを更新' %>
+    </div>
+    <div class="m-3"></div>
+
+    <div><%= link_to "退会する", artist_check_path, class: "btn btn-danger" %></div>
+
+
+<% end %>
+
+
+
+
+

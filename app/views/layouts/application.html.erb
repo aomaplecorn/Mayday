@@ -14,6 +14,10 @@
     <!--ここまで、adminで使うタブ用にBootstrapをCDNから参照-->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      /*bodyの画面の高さの最低値を100vhに設定*/
+      body { min-height: 100vh; }
+    </style>
   </head>
 
   <body>
@@ -21,28 +25,36 @@
       <div>ヘッダー</div>
       <div><%= link_to 'top', root_path %></div>
 <!--以下、adminのログイン確認-->
+<div>
       <% if admin_signed_in? %>
         <%= button_to 'アドミンlog_out', destroy_admin_session_path, method: :delete %>
         <%= link_to 'ユーザー管理一覧', admin_users_path %>
       <% else %>
         <%= link_to 'アドミンlog_in', admin_session_path %>
       <% end %>
+</div>
 <!--ここまで、adminのログイン確認-->
 <!--以下、artistのログイン確認-->
+<div>
       <% if artist_signed_in? %>
+        <%= link_to 'アーティストmypage', artist_mypage_path %>
+        <%= link_to 'アーティストedit_mypage', artist_edit_mypage_path %>
         <%= button_to 'アーティストlog_out', destroy_artist_session_path, method: :delete %>
       <% else %>
         <%= link_to 'アーティストlog_in', artist_session_path %>
         <%= link_to 'アーティストsign_up', new_artist_registration_path %>
       <% end %>
+</div>
 <!--ここまで、artistのログイン確認-->
 <!--以下、userのログイン確認-->
+<div>
       <% if customer_signed_in? %>
         <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
       <% else %>
         <%= link_to 'カスタマーlog_in', customer_session_path %>
         <%= link_to 'カスタマーsign_up', new_customer_registration_path %>
       <% end %>
+</div>
 <!--ここまで、userのログイン確認-->
 
     </header>

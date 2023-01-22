@@ -76,5 +76,6 @@ Rails.application.configure do
 
   # チーム開発を想定しているため、下記の表記とする。
   config.hosts.clear
+  config.active_job.queue_adapter = :inline
 
 end
