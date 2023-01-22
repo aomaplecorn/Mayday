@@ -2,14 +2,19 @@ Rails.application.routes.draw do
 
 
   namespace :admin, path:"" do
-    resources :users, only: [:index,:update]
+    # resources :users, only: [:index,:update]
 # admin_users GET    /admin/users(.:format)        admin/users#index
 # admin_user PATCH  /admin/users/:id(.:format)     admin/users#update
 # PUT    /admin/users/:id(.:format)                admin/users#update
 
-  # get 'users' => 'users#index'
-  # patch 'users/:id' => 'users#update', as: 'update_admin_user'
-# admin_users_index GET    /users/index(.:format)  admin/users#index
+  get 'users' => 'users#index'
+  patch 'artist_user/:id' => 'users#artist_update', as: 'artist_user'
+  patch 'customer_user/:id' => 'users#customer_update', as: 'customer_user'
+# admin_users GET    /users(.:format)              admin/users#index
+# admin_update_user PATCH  /users/:id(.:format)    admin/users#update
+
+# admin_artist_user PATCH  /artist_users/:id(.:format)         admin/users#update
+# admin_customer_user PATCH  /customer_users/:id(.:format)     admin/users#update
 
   end
 

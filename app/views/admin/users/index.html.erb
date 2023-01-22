@@ -2,17 +2,17 @@
 <!--以下、ユーザーを管理するタブ本体-->
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a href="#tables1" class="nav-link active" data-toggle="tab">アーティストユーザー</a>
+    <a href="#contents1" class="nav-link active" data-toggle="tab">アーティストユーザー</a>
   </li>
   <li class="nav-item">
-    <a href="#tables2" class="nav-link" data-toggle="tab">カスタマーユーザー</a>
+    <a href="#contents2" class="nav-link" data-toggle="tab">カスタマーユーザー</a>
   </li>
 </ul>
 <!--ここまで、ユーザーを管理するタブ-->
 
 <!--以下、artistのユーザー一覧-->
 <div class="tab-content">
-  <div id="tables1" class="tab-pane active">
+  <div id="contents1" class="tab-pane active">
     <h2>アーティスト</h2>
     <table class="table table-striped">
       <thead>
@@ -31,7 +31,7 @@
           <td><%= artist.telephone_number %></td>
           <% @artist = artist %>
           <!--以下、is_deletedの更新-->
-          <%= form_with model: @artist,url: admin_user_path(@artist.id), method: :patch do |f| %>
+          <%= form_with model: @artist,url: admin_artist_user_path(@artist.id), method: :patch do |f| %>
           <!--is_deletedのステータス　false＝アカウント有効　true＝アカウント無効-->
           <td>
             <%= f.radio_button :is_deleted, false, checked: true %><%= f.label :is_deleted_1, "有効" %>
@@ -48,7 +48,7 @@
 <!--ここまで、artistのユーザー一覧-->
 
 <!--以下、customerのユーザー一覧-->
-  <div id="tables2" class="tab-pane">
+  <div id="contents2" class="tab-pane">
     <h2>カスタマー</h2>
     <table class="table table-striped">
       <thead>
@@ -67,7 +67,7 @@
           <td><%= customer.telephone_number %></td>
           <% @customer = customer %>
           <!--以下、is_deletedの更新-->
-          <%= form_with model: @customer,url: admin_user_path(@customer.id), method: :patch do |f| %>
+          <%= form_with model: @customer,url: admin_customer_user_path(@customer.id), method: :patch do |f| %>
           <!--is_deletedのステータス　false＝アカウント有効　true＝アカウント無効-->
           <td>
             <%= f.radio_button :is_deleted, false, checked: true %><%= f.label :is_deleted_1, "有効" %>

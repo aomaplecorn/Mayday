@@ -1,23 +1,23 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @artists = Artist.all
     @customers = Customer.all
   end
-# updateの分岐製作中
-  def update
-    # index（ユーザー一覧）から送られてきた情報でaddress（artistにはないカラム）が空であれば「artistのステータス更新」を実行
-    if @customer = Customer.find(params[:id]).address == nil
-    ## artistのステータス更新
-      @artist = Artist.find(params[:id])
-      @artist.update(artist_params)
-      redirect_to admin_users_path
-    else
-    ## customerのステータス更新
-      @customer = Customer.find(params[:id])
-      @customer.update(customer_params)
-      redirect_to admin_users_path
-    end
+
+  # artistのステータス更新
+  def artist_update
+    @artist = Artist.find(params[:id])
+    @artist.update(artist_params)
+    redirect_to admin_users_path
+  end
+
+  # customerのステータス更新
+  def customer_update
+    @customer = Customer.find(params[:id])
+    @customer.update(customer_params)
+    redirect_to admin_users_path
   end
 
   private
