@@ -1,0 +1,30 @@
+<h1>Artist::Albums#new</h1>
+
+<%= form_with model: [:artist,@album] do |f| %>
+
+<label>ジャケット写真</label>
+<div>
+  <%= f.file_field :jacket_image, accept: "image/*" %>
+</div>
+
+<label>アルバム名</label>
+<div>
+  <%= f.text_field :name, value: "アルバム名" %>
+</div>
+
+<label>アルバム価格</label>
+<div>
+  <%= f.number_field :price, value: "100"%>
+</div>
+
+<label>リリースしますか？</label>
+<div>
+  <%= f.check_box :released %>
+</div>
+  <%= f.hidden_field :editor_id, :value => current_artist.id %>
+<div>
+　<%= f.submit 'アルバム作成' %>
+</div>
+
+<% end %>
+

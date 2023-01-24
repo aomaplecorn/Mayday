@@ -1,0 +1,9 @@
+<h1>Artist::Albums#show</h1>
+
+<h2>アルバム詳細画面</h2>
+<%= image_tag @album.get_jacket_image(400,300) %>
+<%= current_artist.name %>
+<%= @album.name %>
+<%= @album.price %>
+
+<%= link_to '編集画面', edit_artist_album_path(@album.id) %>

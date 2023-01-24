@@ -1,0 +1,10 @@
+<h1>Artist::Albums#edit</h1>
+
+<h2>アルバム編集画面</h2>
+<%= image_tag @album.get_jacket_image(400,300) %>
+<%= current_artist.name %>
+<%= @album.name %>
+<%= @album.price %>
+
+<%= link_to '戻る', artist_album_path(@album.id) %>
+<%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除した場合、データは二度と戻りません"  %>

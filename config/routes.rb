@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'homes#top'
 
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -22,17 +23,26 @@ Rails.application.routes.draw do
   end
 
   namespace :artist do
+  # 以下、ユーザー
     get 'users/mypage' => 'users#show', as: 'mypage'
     get 'users/edit' => 'users#edit', as: 'edit_mypage'
     patch 'users' => 'users#update'
     get 'users/check' => 'users#check', as: 'check'
     patch 'users/withdraw' => 'users#withdraw'
 
-# artist_mypage GET             /artist/users/mypage(.:format)      artist/users#show
-# artist_edit_mypage GET        /artist/users/edit(.:format)        artist/users#edit
-# artist_users PATCH            /artist/users(.:format)             artist/users#update
-# artist_check GET              /artist/users/check(.:format)       artist/users#check
-# artist_users_withdraw PATCH   /artist/users/withdraw(.:format)    artist/users#withdraw
+  # 以下、アルバム
+    resources :albums
+# artist_albums GET       /artist/albums(.:format)               artist/albums#index
+# POST                    /artist/albums(.:format)               artist/albums#create
+# new_artist_album GET    /artist/albums/new(.:format)           artist/albums#new
+# edit_artist_album GET   /artist/albums/:id/edit(.:format)      artist/albums#edit
+# artist_album GET        /artist/albums/:id(.:format)           artist/albums#show
+# PATCH                   /artist/albums/:id(.:format)           artist/albums#update
+# PUT                     /artist/albums/:id(.:format)           artist/albums#update
+# DELETE                  /artist/albums/:id(.:format)           artist/albums#destroy
+
+  # 以下、音楽
+    resources :musics, except: [:show]
 
   end
 

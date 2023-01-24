@@ -1,0 +1,9 @@
+<h1>Artist::Musics#index</h1>
+
+<% @musics.each do |music| %>
+
+<%= music.name %>
+<%= music.price %>
+<%= audio_tag(music.audio, controls: true) %>
+<!--<a%= audio_tag(movie.title_song, controls: true) %>-->
+<% end %>
