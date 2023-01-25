@@ -1,7 +1,7 @@
 class Album < ApplicationRecord
 
-  # モデルの関係
-  has_many :musics, dependent: :destroy
+  # モデルの関係、trackが昇順に並び替える
+  has_many :musics, -> { order(track: :asc) }, dependent: :destroy
 
   # ジャケット画像
   has_one_attached :jacket_image
@@ -14,7 +14,7 @@ class Album < ApplicationRecord
   def get_jacket_image(width,height)
     unless jacket_image.attached?
       file_path = Rails.root.join('app/assets/images/background_image.jpg')
-      jacket_image.attach(io: File.open(file_path),filename: 'background_image.jpg',content_type: 'image/jpeg')
+      jacket_image.attach(io: File.open(file_path),filename: 'background_image.jpg',content_type: 'image/jpeg' 'image/png')
     end
     jacket_image.variant(resize_to_limit: [width, height]).processed
   end

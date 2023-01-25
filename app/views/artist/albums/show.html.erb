@@ -6,4 +6,13 @@
 <%= @album.name %>
 <%= @album.price %>
 
+<!--以下、楽曲表示-->
+<% @musics.each do |music| %>
+<%= music.name %>
+<!--<a%= audio_tag(polymorphic_path(music.get_audio), controls{controlslist: :nodownload}) %>-->
+<%= audio_tag(music.get_audio, controls: true) %>
+<% end %>
+
 <%= link_to '編集画面', edit_artist_album_path(@album.id) %>
+
+<%= render 'artist/musics/form', album: @album, music: @music %>

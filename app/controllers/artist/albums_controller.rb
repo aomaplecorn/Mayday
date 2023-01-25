@@ -7,7 +7,7 @@ class Artist::AlbumsController < ApplicationController
   def create
     @album = Album.new(album_params)
     @album.save
-    redirect_to new_artist_music_path
+    redirect_to artist_album_path(@album.id)
   end
 
   def index
@@ -16,6 +16,14 @@ class Artist::AlbumsController < ApplicationController
 
   def show
     @album = Album.find(params[:id])
+    #@musicsにalbum.idが同じものを格納。一つのalbum_idのみ表示されるようにする。
+    # @album.musics.each do |album_musics|
+    #   if album_musics.album_id == @album.id
+        # @musics = album_musics
+        @musics = @album.musics
+      # end
+    # end
+    @music = Music.new
   end
 
   def edit
@@ -29,13 +37,15 @@ class Artist::AlbumsController < ApplicationController
   end
 
   def destroy
-
+    @album = Album.find(params[:id])
+    @album.destroy
+    redirect_to artist_albums_path
   end
 
 
   private
   def album_params
-    params.require(:album).permit(:name,:price,:released,:editor_id)
+    params.require(:album).permit(:name,:price,:released,:editor_id,:jacket_image)
   end
 
 end

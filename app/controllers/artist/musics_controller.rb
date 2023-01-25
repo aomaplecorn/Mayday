@@ -1,7 +1,9 @@
 class Artist::MusicsController < ApplicationController
 
   def new
-    @music = Music.new
+    # @album = Album.find(params[:album_id])
+    # @music = @album.musics.build
+
   end
 
   def create
@@ -21,7 +23,7 @@ class Artist::MusicsController < ApplicationController
 
   private
   def music_params
-    params.require(:music).permit(:name,:price,:audio)
+    params.require(:music).permit(:name,:price,:audio,:artist_id,:index_info,:album_id,:track)
   end
 
 
