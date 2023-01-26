@@ -1,10 +1,72 @@
 <h1>Artist::Albums#edit</h1>
 
 <h2>アルバム編集画面</h2>
-<%= image_tag @album.get_jacket_image(400,300) %>
-<%= current_artist.name %>
-<%= @album.name %>
-<%= @album.price %>
+<%= form_with model: [:artist,@album] do |f| %>
+<div class="row">
+  <div class="col-2">
+    <%= image_tag @album.get_jacket_image(350,350) %>
+    <%= f.file_field :jacket_image, accept: 'image/*' %>
+  </div>
+  <div class="col-xl-9 offset-xl-1">
+    <h2>
+      <%= f.text_field :name %>
+    </h2>
+    <div>
+      ¥<%= f.number_field :price %>-
+    </div>
+  </div>
+  <div class="offset-1">
+    <% if @album.released == true %>
+      <%= f.check_box :released %>
+      このアルバムを非公開にしますか？
+    <% else %>
+      <%= f.check_box :released %>
+      このアルバムを公開しますか？
+    <% end %>
+    <div><%= f.submit 'アルバムの情報を更新する', class: 'btn btn-success' %></div>
+  </div>
+</div>
+<% end %>
 
-<%= link_to '戻る', artist_album_path(@album.id) %>
+
+<!--以下、アルバム一覧とアルバム削除-->
+<div>
+  <%= link_to '戻る', artist_album_path(@album.id) %>
+</div>
+<div>
 <%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除した場合、データは二度と戻りません"  %>
+</div>
+<!--ここまで、アルバム一覧とアルバム削除-->
+
+
+<!--以下、アルバムに属する楽曲を表示-->
+<table class="table">
+  <thead>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @musics.each do |music| %>
+    <tr>
+      <td><%= music.track %></td>
+      <td><%= image_tag music.album.get_jacket_image(50,50) %></td>
+      <td><%= music.name %></td>
+      <td><%= music.artist.name %></td>
+      <td><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
+      <td>¥<%= music.price.to_s(:delimited) %>-</td>
+      <td><%= link_to '曲を編集する', edit_artist_music_path(music.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<!--ここまで、アルバムに属する楽曲を表示-->
+
+
+<!--以下、音楽登録フォーム-->
+<%= render 'artist/musics/form', album: @album, music: @music %>

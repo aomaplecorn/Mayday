@@ -1,2 +1,44 @@
 <h1>Artist::Musics#edit</h1>
-<p>Find me in app/views/artist/musics/edit.html.erb</p>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td colspan="3"></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td><%= @music.track %></td>
+      <td><%= image_tag @music.album.get_jacket_image(50,50) %></td>
+      <td><%= @music.name %></td>
+      <td><%= @music.artist.name %></td>
+      <td><%= audio_tag(polymorphic_path(@music.get_audio), controls: true ,controlslist: "nodownload") %></td>
+      <td>¥<%= @music.price.to_s(:delimited) %>-</td>
+      <td><%= link_to '曲を編集する', edit_artist_music_path(@music.id) %></td>
+    </tr>
+
+<!--以下、編集フォーム　部分テンプレートにしたい-->
+    <%= form_with model: [:artist,@music] do |f| %>
+    <tr>
+      <td><%= f.number_field :track %></td>
+      <td colspan="1"></td>
+      <td><%= f.text_field :name  %></td>
+      <td colspan="1"></td>
+      <td><%= f.file_field :audio, accept: 'audio/*' %></td>
+      <td>¥<%= f.number_field :price %></td>
+      <td><%= f.submit '更新する' %></td>
+    </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= link_to 'アルバムへ戻る', edit_artist_album_path(@music.album_id), class: "d-flex justify-content-end m-5"%>
+<%= link_to '曲を削除する', artist_music_path(@music.id), method: :delete, confirm: "削除しますか？", class: "d-flex justify-content-end m-5"%>

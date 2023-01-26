@@ -29,20 +29,10 @@ Rails.application.routes.draw do
     patch 'users' => 'users#update'
     get 'users/check' => 'users#check', as: 'check'
     patch 'users/withdraw' => 'users#withdraw'
-
   # 以下、アルバム
     resources :albums
-# artist_albums GET       /artist/albums(.:format)               artist/albums#index
-# POST                    /artist/albums(.:format)               artist/albums#create
-# new_artist_album GET    /artist/albums/new(.:format)           artist/albums#new
-# edit_artist_album GET   /artist/albums/:id/edit(.:format)      artist/albums#edit
-# artist_album GET        /artist/albums/:id(.:format)           artist/albums#show
-# PATCH                   /artist/albums/:id(.:format)           artist/albums#update
-# PUT                     /artist/albums/:id(.:format)           artist/albums#update
-# DELETE                  /artist/albums/:id(.:format)           artist/albums#destroy
-
   # 以下、音楽
-    resources :musics, except: [:show]
+    resources :musics, only: [:create,:update,:destroy,:edit]
 
   end
 

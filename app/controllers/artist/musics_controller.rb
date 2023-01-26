@@ -1,24 +1,26 @@
 class Artist::MusicsController < ApplicationController
 
-  def new
-    # @album = Album.find(params[:album_id])
-    # @music = @album.musics.build
-
-  end
-
   def create
     @music = Music.new(music_params)
     @music.save
   end
 
-  def index
-    @musics = Music.all
-  end
-
-  def show
-  end
-
   def edit
+    @music = Music.find(params[:id])
+  end
+
+  def update
+    @music = Music.find(params[:id])
+    @music.update(music_params)
+    # アルバム編集画面へ戻る
+    redirect_to edit_artist_album_path(@music.album_id)
+  end
+
+  def destroy
+    @music = Music.find(params[:id])
+    @music.destroy
+    # アルバム編集画面へ戻る
+    redirect_to edit_artist_album_path(@music.album_id)
   end
 
   private

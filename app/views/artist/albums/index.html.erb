@@ -1,27 +1,16 @@
 <h1>Artist::Albums#index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <td>ジャケット写真</td>
-            <td>アルバム名</td>
-            <td>値段</td>
-        </tr>
-    </thead>
-    <tbody>
-        <% @albums.each do |album| %>
-        <tr>
-            <td>
-            <%= link_to artist_album_path(album.id) do %>
-                <%= image_tag album.get_jacket_image(150,150) %>
-            <% end %>
-            </td>
-            <td><%= album.name %></td>
-            <td><%= album.price %></td>
-        </tr>
+
+<% @albums.each do |album| %>
+    <div>
+        <%= link_to artist_album_path(album.id) do %>
+            <%= image_tag album.get_jacket_image(150,150) %>
         <% end %>
-    </tbody>
-</table>
+    </div>
+        <%= album.name %>
+        ¥<%= album.price.to_s(:delimited) %>-
+
+<% end %>
 
 
 
