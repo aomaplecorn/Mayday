@@ -2,7 +2,7 @@
 
 <h2>アルバム詳細画面</h2>
 <div class="row">
-  <div class="col-2">
+  <div class="col-2 ml-3">
     <%= image_tag @album.get_jacket_image(350,350) %>
   </div>
   <div class="col-xl-8 offset-xl-1">
@@ -14,8 +14,8 @@
     <div>
       作成日：<%= @album.created_at.strftime('%Y/%m/%d') %>
     </div>
-    <div>
-      <%= link_to 'アルバムを編集する', edit_artist_album_path(@album.id) %>
+    <div class="d-flex justify-content-end">
+      <%= link_to 'アルバム・楽曲の編集', edit_artist_album_path(@album.id), class: "btn btn-primary" %>
     </div>
   </div>
 <div class="offset-1">
@@ -28,30 +28,34 @@
 <!--rowのdiv-->
 </div>
 
-<!--以下、楽曲表示-->
-<table>
+<!--以下、楽曲一覧-->
+<table class="table table-striped text-center">
   <thead>
-    <tr>
-      <td colspan="1"></td>
-      <td colspan="3"></td>
+    <tr class="bg-info text-white">
+      <td>track</td>
+      <td></td>
+      <td>楽曲名</td>
+      <td>アーティスト名</td>
+      <td>値段</td>
+      <td>楽曲ファイル</td>
     </tr>
   </thead>
   <tbody>
     <% @musics.each do |music| %>
     <tr>
-      <td><%= music.track %></td>
-      <td><%= image_tag music.album.get_jacket_image(50,50) %></td>
-      <td><%= music.name %></td>
-      <td><%= music.artist.name %></td>
-      <td><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
-      <td><%= link_to '曲を編集する', edit_artist_music_path(music.id) %></td>
+      <td class="align-middle"><%= music.track %></td>
+      <td class="align-middle"><%= image_tag music.album.get_jacket_image(50,50) %></td>
+      <td class="align-middle"><%= music.name %></td>
+      <td class="align-middle"><%= music.artist.name %></td>
+      <td class="align-middle">¥<%= music.price.to_s(:delimited)%></td>
+      <td class="align-middle"><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
 
 
-<!--<a%= render 'artist/musics/form', album: @album, music: @music %>-->
+
 
 
 

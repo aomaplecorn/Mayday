@@ -1,0 +1,36 @@
+
+
+<!--以下、楽曲編集フォーム-->
+<table class="table table-striped">
+  <thead class="text-center">
+    <tr class="bg-info text-white">
+      <td>track</td>
+      <td></td>
+      <td>楽曲名</td>
+      <td>アーティスト名</td>
+      <td>値段</td>
+      <td>楽曲ファイル</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+<% @musics.each do |music| %>
+    <%= form_with model: [:artist,music] do |f| %>
+    <tr>
+      <td class="align-middle text-center"><%= f.number_field :track %></td>
+      <td class="align-middle text-center"><%= image_tag @album.get_jacket_image(50,50) %></td>
+      <td class="align-middle text-center"><%= f.text_field :name  %></td>
+      <td class="align-middle text-center"><%= music.artist.name %></td>
+      <td class="align-middle text-center">¥<%= f.number_field :price %></td>
+      <td class="align-middle text-start"><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %><%= f.file_field :audio, accept: 'audio/*', class: "d-flex jusitfy-content-center" %></td>
+      <td class="align-middle text-center"><%= f.submit '更新する',class: "btn btn-primary" %></td>
+    </tr>
+    <% end %>
+<% end %>
+  </tbody>
+</table>
+
+
+
+
+

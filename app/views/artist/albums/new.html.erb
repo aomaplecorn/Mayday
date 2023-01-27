@@ -2,18 +2,18 @@
 
 <%= form_with model: [:artist,@album] do |f| %>
 
-<label>ジャケット写真</label>
 <div>
+  <label class="m-2">ジャケット写真</label>
   <%= f.file_field :jacket_image, accept: "image/*", class: "form-control" %>
 </div>
 
-<label>アルバム名</label>
 <div>
+  <label class="m-2">アルバム名</label>
   <%= f.text_field :name, placeholder: "アルバム名", class: "form-control" %>
 </div>
 
-<label>アルバム価格</label>
 <div>
+  <label class="m-2">アルバム価格</label>
   <%= f.number_field :price, placeholder: "100", class: "form-control"%>
 </div>
   <%= f.hidden_field :editor_id, :value => current_artist.id %>

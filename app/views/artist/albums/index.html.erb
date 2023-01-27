@@ -1,17 +1,17 @@
 <h1>Artist::Albums#index</h1>
 
-
-<% @albums.each do |album| %>
-    <div>
-        <%= link_to artist_album_path(album.id) do %>
-            <%= image_tag album.get_jacket_image(150,150) %>
-        <% end %>
-    </div>
-        <%= album.name %>
-        ¥<%= album.price.to_s(:delimited) %>-
-
-<% end %>
-
-
-
-
+<table class="table">
+    <tbody>
+        <tr>
+            <% @albums.order(created_at: :desc).each do |album| %>
+            <td>
+                <%= link_to artist_album_path(album.id) do %>
+                    <%= image_tag album.get_jacket_image(200,200) %><br>
+                    <%= album.name %>
+                    ¥<%= album.price.to_s(:delimited) %>-
+                <% end %>
+            </td>
+            <% end %>
+        </tr>
+    </tbody>
+</table>

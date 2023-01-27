@@ -5,10 +5,6 @@ class Artist::MusicsController < ApplicationController
     @music.save
   end
 
-  def edit
-    @music = Music.find(params[:id])
-  end
-
   def update
     @music = Music.find(params[:id])
     @music.update(music_params)

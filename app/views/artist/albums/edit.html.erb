@@ -1,13 +1,14 @@
 <h1>Artist::Albums#edit</h1>
 
+<!--以下、アルバム編集画面-->
 <h2>アルバム編集画面</h2>
 <%= form_with model: [:artist,@album] do |f| %>
 <div class="row">
-  <div class="col-2">
+  <div class="col-3 ml-3">
     <%= image_tag @album.get_jacket_image(350,350) %>
     <%= f.file_field :jacket_image, accept: 'image/*' %>
   </div>
-  <div class="col-xl-9 offset-xl-1">
+  <div class="col-xl-8">
     <h2>
       <%= f.text_field :name %>
     </h2>
@@ -23,50 +24,69 @@
       <%= f.check_box :released %>
       このアルバムを公開しますか？
     <% end %>
-    <div><%= f.submit 'アルバムの情報を更新する', class: 'btn btn-success' %></div>
+  </div>
+  <div class="col-xl-9 d-flex justify-content-end">
+    <%= link_to '戻る', artist_album_path(@album.id), class: 'btn btn-secondary' %>
+    <%= f.submit 'アルバムの情報を更新する', class: 'btn btn-success' %>
   </div>
 </div>
 <% end %>
+<!--ここまで、アルバム編集画面-->
 
+<!--以下、楽曲一覧と楽曲編集のタブ切り替えの設定-->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">楽曲一覧</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">楽曲編集</a>
+  </li>
+</ul>
+<!--ここまでタブヘッダー-->
 
-<!--以下、アルバム一覧とアルバム削除-->
-<div>
-  <%= link_to '戻る', artist_album_path(@album.id) %>
+<!--以下、タブの中身-->
+<div class="tab-content" id="myTabContent">
+<!--以下、タブ１　楽曲一覧-->
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <table class="table table-striped text-center">
+      <thead>
+        <tr class="bg-info text-white ">
+          <td>track</td>
+          <td></td>
+          <td>楽曲名</td>
+          <td>アーティスト名</td>
+          <td>値段</td>
+          <td>楽曲ファイル</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @musics.each do |music| %>
+        <tr>
+          <td class="align-middle"><%= music.track %></td>
+          <td class="align-middle"><%= image_tag music.album.get_jacket_image(50,50) %></td>
+          <td class="align-middle"><%= music.name %></td>
+          <td class="align-middle"><%= music.artist.name %></td>
+          <td class="align-middle">¥<%= music.price.to_s(:delimited)%></td>
+          <td class="align-middle"><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<!--ここまで、タブ１　楽曲一覧-->
+
+<!--以下、タブ２　楽曲編集の部分テンプレート-->
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <%= render 'artist/musics/edit-form', album: @album, music: @music %>
+  </div>
+<!--ここまで、タブ２　楽曲編集の部分テンプレート-->
 </div>
-<div>
-<%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除した場合、データは二度と戻りません"  %>
-</div>
-<!--ここまで、アルバム一覧とアルバム削除-->
-
-
-<!--以下、アルバムに属する楽曲を表示-->
-<table class="table">
-  <thead>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td colspan="3"></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @musics.each do |music| %>
-    <tr>
-      <td><%= music.track %></td>
-      <td><%= image_tag music.album.get_jacket_image(50,50) %></td>
-      <td><%= music.name %></td>
-      <td><%= music.artist.name %></td>
-      <td><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
-      <td>¥<%= music.price.to_s(:delimited) %>-</td>
-      <td><%= link_to '曲を編集する', edit_artist_music_path(music.id) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-<!--ここまで、アルバムに属する楽曲を表示-->
-
+<!--ここまで、タブの中身-->
 
 <!--以下、音楽登録フォーム-->
-<%= render 'artist/musics/form', album: @album, music: @music %>
+<%= render 'artist/musics/form', album: @album, music: @musics %>
+
+<!--以下、アルバム削除ボタン-->
+  <div class=" d-flex justify-content-end m-3">
+    <%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除した場合、データは二度と戻りません", class: "btn btn-danger"  %>
+  </div>

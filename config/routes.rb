@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # 以下、アルバム
     resources :albums
   # 以下、音楽
-    resources :musics, only: [:create,:update,:destroy,:edit]
+    resources :musics, only: [:create,:update,:destroy]
 
   end
 
