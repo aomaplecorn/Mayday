@@ -1,4 +1,5 @@
 class Artist::MusicsController < ApplicationController
+  before_action :authenticate_artist!
 
   def create
     @music = Music.new(music_params)

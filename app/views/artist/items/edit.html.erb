@@ -1,0 +1,73 @@
+<h1>Artist::Items#edit</h1>
+
+<!--以下、エラーメッセージ-->
+<% if @item.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<!--ここまで、エラーメッセージ-->
+
+<!--以下、商品編集-->
+<div class="container">
+  <div class="row">
+    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">商品編集</h4>
+  </div>
+
+<table class="d-flex align-items-center justify-content-center my-auto mx-auto">
+  <div>
+    <%= form_with model: [:artist, @item] do |f| %>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">商品画像</td>
+      <td class="form_control pt-3 mt-3"><%= image_tag @item.get_item_image(150,150) %></td>
+      <td><%= f.file_field :item_image, accept: "image/*" %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">商品名</td>
+      <td class="form_control pt-3 mt-3"><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">商品説明</td>
+      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction, rows: "5" %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">販売価格</td>
+      <td class="form_control pt-3 mt-3"><%= f.number_field :price %>円</td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">在庫</td>
+      <td class="form_control pt-3 mt-3"><%= f.number_field :amount %>個</td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">販売ステータス</td>
+      <td class="form_control pt-3 mt-3">
+        <%= f.radio_button :is_active, true %><%= f.label :is_active_1, "販売中" %>
+        <%= f.radio_button :is_active, false %><%= f.label :is_active_2, "販売停止中" %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="form_control pt-3 mt-3" >
+        <%= f.submit '変更を保存', class: "btn btn-success" %>
+      </td>
+      <td class="form_control pt-3 mt-3">
+        <%= link_to '一覧へ戻る', artist_items_path, class: "btn btn-secondary" %>
+      </td>
+      <td>
+        <%= link_to '商品を削除する', artist_item_path(@item.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除したデータは二度と復元できません", class: "btn btn-danger"  %>
+      </td>
+    </tr>
+  </div>
+  <% end %>
+</table>
+
+</div>
+<!--ここまで、商品編集-->
+

@@ -88,5 +88,5 @@
 
 <!--以下、アルバム削除ボタン-->
   <div class=" d-flex justify-content-end m-3">
-    <%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除した場合、データは二度と戻りません", class: "btn btn-danger"  %>
+    <%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除したデータは二度と復元", class: "btn btn-danger"  %>
   </div>

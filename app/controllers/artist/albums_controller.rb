@@ -1,4 +1,5 @@
 class Artist::AlbumsController < ApplicationController
+  before_action :authenticate_artist!
 
   def new
     @album = Album.new

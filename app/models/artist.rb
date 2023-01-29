@@ -20,8 +20,8 @@ class Artist < ApplicationRecord
   # 背景画像の確認
   def get_background_image
     unless background_image.attached?
-      file_path = Rails.root.join('app/assets/images/background_image.jpg')
-      background_image.attach(io: File.open(file_path),filename: 'background_image.jpg',content_type: 'image/jpeg')
+      file_path = Rails.root.join('app/assets/images/default-image.jpeg')
+      background_image.attach(io: File.open(file_path),filename: 'default-image.jpeg',content_type: 'image/jpeg')
     end
     background_image
   end
@@ -29,8 +29,8 @@ class Artist < ApplicationRecord
   # 紹介画像の確認
   def get_introduction_image(width, height)
     unless introduction_image.attached?
-      file_path = Rails.root.join('app/assets/images/background_image.jpg')
-    introduction_image.attach(io: File.open(file_path),filename: 'background_image.jpg',content_type: 'image/jpeg' 'image/png')
+      file_path = Rails.root.join('app/assets/images/default-image.jpeg')
+    introduction_image.attach(io: File.open(file_path),filename: 'default-image.jpeg',content_type: 'image/jpeg' 'image/png')
     end
     introduction_image.variant(resize_to_limit: [width, height]).processed
   end

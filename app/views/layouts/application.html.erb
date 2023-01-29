@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <!--以下、adminで使うタブ用にBootstrapをCDNから-->
+    <!--以下、adminで使うタブ用にBootstrapをCDNから参照-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-jJ2L/Ujk8jWEwtIXPFEk3X+f20QKnj4IIscn+JZzxqkbAUC79idDdiAhAi2E7czT" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-K09cMhJkkwNoZK1BRIJX6fQk06LqHSs8LdWAE24M/18F4NlePaltFx1cnB9wKwQX" crossorigin="anonymous"></script>
 
@@ -44,7 +44,9 @@
             <%= link_to '作成', new_artist_album_path %>
             <%= link_to '一覧', artist_albums_path %>
 
-          ここまでアルバム関連
+          グッズ関連
+            <%= link_to '作成', new_artist_item_path %>
+            <%= link_to '一覧', artist_items_path %>
 
         <%= button_to 'アーティストlog_out', destroy_artist_session_path, method: :delete %>
       <% else %>
