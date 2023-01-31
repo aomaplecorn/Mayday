@@ -10,10 +10,13 @@
   </div>
   <div class="col-xl-8">
     <h2>
-      <%= f.text_field :name %>
+      タイトル：<%= f.text_field :name %>
     </h2>
     <div>
-      ¥<%= f.number_field :price %>-
+      <%= current_artist.name %>
+    </div>
+    <div>
+      販売価格：<%= f.number_field :price %>円
     </div>
   </div>
   <div class="offset-1">
@@ -54,7 +57,6 @@
           <td>track</td>
           <td></td>
           <td>楽曲名</td>
-          <td>アーティスト名</td>
           <td>値段</td>
           <td>楽曲ファイル</td>
         </tr>
@@ -65,7 +67,6 @@
           <td class="align-middle"><%= music.track %></td>
           <td class="align-middle"><%= image_tag music.album.get_jacket_image(50,50) %></td>
           <td class="align-middle"><%= music.name %></td>
-          <td class="align-middle"><%= music.artist.name %></td>
           <td class="align-middle">¥<%= music.price.to_s(:delimited)%></td>
           <td class="align-middle"><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
         </tr>

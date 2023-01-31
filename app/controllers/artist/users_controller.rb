@@ -11,8 +11,11 @@ class Artist::UsersController < ApplicationController
 
   def update
     @artist = current_artist
-    @artist.update(artist_params)
-    redirect_to artist_mypage_path
+    if @artist.update(artist_params)
+      redirect_to artist_mypage_path
+    else
+      render :edit
+    end
   end
 
   # 以下、退会機能

@@ -17,4 +17,17 @@ class Customer < ApplicationRecord
           # 電話番号は 空白を禁止、正規表現（ハイフンなし10桁〜11桁）
           validates :telephone_number, presence: true,  format: { with: /\A\d{10,11}\z/ }
 
+  # ゲストログイン
+  def self.guest
+    find_or_create_by!(email: 'aaa@aaa.com') do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.password_confirmation = customer.password
+      customer.name = 'カスタマー'
+      customer.name_kana = 'カスタマー'
+      customer.postal_code = '1234567'
+      customer.address = '住所'
+      customer.telephone_number = '08012345678'
+    end
+  end
+
 end

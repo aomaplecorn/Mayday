@@ -1,6 +1,4 @@
-<h1>Artist::Users#check</h1>
-
-
+<h1>Customer::Users#check</h1>
 
 <div class="container">
     <div class="row mt-5 pt-5"></div>
@@ -11,12 +9,14 @@
     <div class="d-flex align-items-center justify-content-center">
         <p class="text-start">
             退会すると、会員登録情報や</br>
-            これまでに登録した楽曲・グッズ・ライブの全てが閲覧できなくなります。</br>
+            これまでに購入した楽曲・グッズの全ての購入履歴が閲覧できなくなります。</br>
+            また、購入した楽曲を聴くことができなくなります。</br>
             退会する場合は、「退会する」をクリックしてください。
         </p>
     </div>
 
     <div class=" d-flex align-items-center justify-content-center text-center">
-        <span class="m-3"><%= link_to "退会しない", artist_mypage_path, class: "btn btn-primary" %></span>
-        <span class="m-3"><%= link_to "退会する", artist_users_withdraw_path(@artist),method: :patch, class: "btn btn-danger"  %></span>
+        <span class="m-3"><%= link_to "退会しない", customer_mypage_path, class: "btn btn-primary" %></span>
+        <span class="m-3"><%= link_to "退会する", customer_users_withdraw_path(@customer),method: :patch, class: "btn btn-danger"  %></span>
     </div>
+

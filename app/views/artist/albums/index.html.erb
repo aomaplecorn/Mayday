@@ -4,6 +4,7 @@
     <tbody>
         <tr>
             <% @albums.order(created_at: :desc).each do |album| %>
+            <% if album.editor_id == current_artist.id %>
             <td>
                 <%= link_to artist_album_path(album.id) do %>
                     <%= image_tag album.get_jacket_image(200,200) %><br>
@@ -11,6 +12,7 @@
                     ¥<%= album.price.to_s(:delimited) %>-
                 <% end %>
             </td>
+            <% end %>
             <% end %>
         </tr>
     </tbody>

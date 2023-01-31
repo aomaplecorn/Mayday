@@ -20,8 +20,8 @@ class Artist < ApplicationRecord
   # 背景画像の確認
   def get_background_image
     unless background_image.attached?
-      file_path = Rails.root.join('app/assets/images/default-image.jpeg')
-      background_image.attach(io: File.open(file_path),filename: 'default-image.jpeg',content_type: 'image/jpeg')
+      file_path = Rails.root.join('app/assets/images/background_image.jpg')
+      background_image.attach(io: File.open(file_path),filename: 'background_image.jpg',content_type: 'image/jpeg')
     end
     background_image
   end
@@ -35,6 +35,16 @@ class Artist < ApplicationRecord
     introduction_image.variant(resize_to_limit: [width, height]).processed
   end
 
+
+  # ゲストログイン
+  def self.guest
+    find_or_create_by!(email: 'aaa@aaa.com') do |artist|
+      artist.password = SecureRandom.urlsafe_base64
+      artist.password_confirmation = artist.password
+      artist.name = 'アーティスト'
+      artist.telephone_number = '08012345678'
+    end
+  end
 
 
 end

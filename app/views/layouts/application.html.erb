@@ -55,9 +55,13 @@
       <% end %>
 </div>
 <!--ここまで、artistのログイン確認-->
+
 <!--以下、userのログイン確認-->
 <div>
       <% if customer_signed_in? %>
+        <%= link_to 'カスタマーmypage', customer_mypage_path %>
+        <%= link_to 'カスタマーedit_mypage', customer_edit_mypage_path %>
+
         <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
       <% else %>
         <%= link_to 'カスタマーlog_in', customer_session_path %>

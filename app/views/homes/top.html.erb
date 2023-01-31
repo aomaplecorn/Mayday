@@ -1,2 +1,32 @@
 <h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+
+<% if flash[:notice] %>
+    <p id="notice">
+      <%= flash[:notice] %>
+    </p>
+<% end %>
+
+<!--アドミン-->
+<div>
+<% if admin_signed_in? %>
+  <%= button_to 'ログアウト（管理者）', destroy_admin_session_path, method: :delete, class: "logout" %></li>
+<% else %>
+  <%= link_to 'ゲストログイン（管理者）', admins_guest_sign_in_path, method: :post, class: "login" %>
+<% end %>
+</div>
+<!--アーティスト-->
+<div>
+<% if artist_signed_in? %>
+  <%= button_to 'ログアウト（アーティスト）', destroy_artist_session_path, method: :delete, class: "logout" %></li>
+<% else %>
+  <%= link_to 'ゲストログイン（アーティスト）', artists_guest_sign_in_path, method: :post, class: "login" %>
+<% end %>
+</div>
+<!--カスタマー-->
+<div>
+<% if customer_signed_in? %>
+  <%= button_to 'ログアウト（カスタマー）', destroy_customer_session_path, method: :delete, class: "logout" %></li>
+<% else %>
+  <%= link_to 'ゲストログイン（カスタマー）', customers_guest_sign_in_path, method: :post, class: "login" %>
+<% end %>
+</div>

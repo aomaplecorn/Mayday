@@ -4,6 +4,26 @@ class Artist::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :artist_state, only: [:create]
 
+  def after_sign_in_path_for(resource)
+    flash[:notice] = 'ログインしました。'
+    artist_mypage_path
+  end
+
+  def after_sign_out_path_for(resource)
+    flash[:notice] = 'ログアウトしました。'
+    "/"
+  end
+
+  # ゲストログイン
+  def new_guest
+    artist = Artist.guest
+    sign_in artist
+    flash[:notice] = 'ゲストアーティストとしてログインしました。'
+    redirect_to artist_mypage_path
+  end
+
+
+
   # GET /resource/sign_in
   # def new
   #   super
