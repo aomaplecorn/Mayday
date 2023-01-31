@@ -4,8 +4,11 @@ class Customer::CartItemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items
     @cart_item = CartItem.new
-    # 合計金額の表示
-    @total_price = @cart_items.inject(0) { |total, item| total }
+
+    # 商品の合計金額
+    @total_item_price = @cart_items.inject(0) { |total, item| total }
+    # 配送料合計
+    @total_delivery_cost = @cart_items.inject(0) { |total, item| total }
   end
 
   def create
@@ -24,7 +27,7 @@ class Customer::CartItemsController < ApplicationController
       redirect_to customer_cart_items_path
     else
     # 選択肢を間違えた時＋「個数選択」を選択した場合
-      redirect_to customer_item_path(@cart_item.item_id) # 'public/items/index'
+      redirect_to customer_item_path(@cart_item.item_id)
     end
   end
 

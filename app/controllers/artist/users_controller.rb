@@ -36,7 +36,7 @@ class Artist::UsersController < ApplicationController
 
   private
   def artist_params
-    params.require(:artist).permit(:name,:introduction,:telephone_number,:background_image,:introduction_image)
+    params.require(:artist).permit(:name,:introduction,:telephone_number,:background_image,:introduction_image,:delivery_cost)
   end
 
 end

@@ -67,10 +67,12 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => 'users#withdraw'
   # アイテム
     resources :items, only: [:index,:show]
-    get '/search' => 'items#search', as: 'search'
   # カートアイテム
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
+  # オーダー
+  
+
   end
 ## ここまで、カスタマー
 

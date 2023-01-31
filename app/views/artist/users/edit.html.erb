@@ -29,11 +29,15 @@
     </tr>
     <tr>
       <td class="form_control pt-3 mt-3">BIOGRAPHY</td>
-      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction %></td>
+      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction, rows: "5", placeholder: "自己紹介" %></td>
     </tr>
     <tr>
       <td class="form_control pt-3 mt-3">ご連絡先<br><h6>※この情報はサイトに表示されません</h6></td>
       <td class="form_control pt-3 mt-3"><%= f.number_field :telephone_number %></td>
+    </tr>
+    <tr>
+      <td class="form_control pt-3 mt-3">配送費用<br><h6>※グッズの配送にかかる費用です</h6></td>
+      <td class="form_control pt-3 mt-3"><%= f.number_field :delivery_cost %></td>
     </tr>
     <tr>
       <td class="form_control pt-3 mt-3">背景画像</td>
