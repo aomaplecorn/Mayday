@@ -59,8 +59,14 @@
 <!--以下、userのログイン確認-->
 <div>
       <% if customer_signed_in? %>
+        カスタマー情報
         <%= link_to 'カスタマーmypage', customer_mypage_path %>
         <%= link_to 'カスタマーedit_mypage', customer_edit_mypage_path %>
+        カートアイテム関連
+        <%= link_to 'カートアイテム', customer_cart_items_path %>
+        アイテム関連
+        <%= link_to '一覧', customer_items_path %>
+
 
         <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
       <% else %>

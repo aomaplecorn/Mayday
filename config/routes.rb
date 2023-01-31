@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root to: 'homes#top'
 
   # 以下、ユーザー認証(devise)
@@ -64,6 +65,12 @@ Rails.application.routes.draw do
     patch 'users' => 'users#update'
     get 'users/check' => 'users#check', as: 'check'
     patch 'users/withdraw' => 'users#withdraw'
+  # アイテム
+    resources :items, only: [:index,:show]
+    get '/search' => 'items#search', as: 'search'
+  # カートアイテム
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :create, :update, :destroy]
   end
 ## ここまで、カスタマー
 

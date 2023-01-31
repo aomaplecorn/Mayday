@@ -2,6 +2,8 @@ class Item < ApplicationRecord
 
   # モデルの関係
   belongs_to :artist
+  has_many :cart_items, dependent: :destroy
+
 
   # グッズの画像
   has_one_attached :item_image
