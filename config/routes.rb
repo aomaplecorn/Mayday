@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   root to: 'homes#top'
 
   # 以下、ユーザー認証(devise)
@@ -71,7 +70,16 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
   # オーダー
-  
+    resources :orders, only: [:new,:create,:index,:show]
+    get 'orders/complete' => 'orders#complete', as: 'order_complete'
+    post 'orders/confirm' => 'orders#confirm', as: 'order_confirm'
+
+# customer_orders GET       /customer/orders(.:format)                customer/orders#index
+# POST                      /customer/orders(.:format)                customer/orders#create
+# new_customer_order GET    /customer/orders/new(.:format)            customer/orders#new
+# customer_order GET        /customer/orders/:id(.:format)            customer/orders#show
+# customer_complete GET     /customer/orders/complete(.:format)       customer/orders#complete
+# customer_confirm POST     /customer/orders/confirm(.:format)        customer/orders#confirm
 
   end
 ## ここまで、カスタマー
