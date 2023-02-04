@@ -1,2 +1,71 @@
 <h1>Customer::Orders#show</h1>
-<p>Find me in app/views/customer/orders/show.html.erb</p>
+
+<div class="container p-0">
+  <div class="row">
+    <div class="col-1"></div>
+    <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴詳細</h4>
+  </div>
+
+<div class="row mt-3 mb-2">
+    <div  class="col-auto">
+    <table border="1">
+      <tbody>
+        <tr>
+            <td style="background-color: #EEEEEE;">注文日</td>
+            <td><%= @order.created_at.strftime(' %Y/%m/%d ') %></td>
+        </tr>
+        <tr>
+            <td style="background-color: #EEEEEE;">配送先</td>
+            <td><%= '〒' + @order.postal_code %></br>
+            <%= @order.address %></br>
+            <%= @order.name %></td>
+        </tr>
+        <tr>
+            <p>現在の配送状況</p>
+            <strong class="text-danger"><%= @order.status_i18n %></strong>
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="col-auto">
+    <table border="1">
+        <strong class="col-auto p-0">請求情報</strong>
+        <tr>
+            <td style="background-color: #EEEEEE;">商品合計</td>
+            <td><%= @total_price.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+            <td style="background-color: #EEEEEE;">配送料</td>
+            <td><%= @order.delivery_cost.round.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+            <td style="background-color: #EEEEEE;"><strong>ご請求額</strong></td>
+                <td><%= @order.total_payment.round.to_s(:delimited) %></td>
+        </tr>
+    </table>
+</div>
+</div>
+
+<div class="row mt-3 mb-2">
+    <div class="col-auto">
+        <table border="1">
+            <strong class="col-auto p-0">注文内容</strong>
+            <tr style="background-color: #EEEEEE;">
+                <th>商品</th>
+                <th>単価（税込）</th>
+                <th>個数</th>
+                <th>小計</th>
+            </tr>
+        <% @order_details.each do |order_detail| %>
+            <% if order_detail.order_id == @order.id %>
+            <tr>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.item.price.round.to_s(:delimited) %></td>
+                <td><%= order_detail.amount %></td>
+                <td><%= order_detail.subtotal.round.to_s(:delimited) %></td>
+            </tr>
+            <% end %>
+        <% end %>
+        </table>
+    </div>
+</div>

@@ -5,7 +5,6 @@ ja:
     # 以下、オーダー
     order:
       status:
-        payment_confirmation: "入金確認"
         preparing_delivery: "発送準備中"
         delivered: "発送済み"
     # ここまで、オーダー

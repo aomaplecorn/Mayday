@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   validates :postal_code, presence: true
   validates :address, presence: true
 
-  # enumの内訳 ０＝入金確認、１＝発送準備中、２＝発送済み
-  enum status: { payment_confirmation: 0, preparing_delivery: 1, delivered: 2}
+  # enumの内訳 ０＝発送準備中、１＝発送済み
+  enum status: { preparing_delivery: 0, delivered: 1}
 
 
 end

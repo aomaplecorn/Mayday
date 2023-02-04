@@ -28,7 +28,10 @@
 <div>
       <% if admin_signed_in? %>
         <%= button_to 'アドミンlog_out', destroy_admin_session_path, method: :delete %>
-        <%= link_to 'ユーザー管理一覧', admin_users_path %>
+        ユーザー関連
+        <%= link_to 'ユーザー一覧管理', admin_users_path %>
+        販売管理
+
       <% else %>
         <%= link_to 'アドミンlog_in', admin_session_path %>
       <% end %>
@@ -66,6 +69,8 @@
         <%= link_to 'カートアイテム', customer_cart_items_path %>
         アイテム関連
         <%= link_to '一覧', customer_items_path %>
+        オーダー関連
+        <%= link_to '一覧', customer_orders_path %>
 
 
         <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>

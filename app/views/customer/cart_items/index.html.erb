@@ -70,8 +70,8 @@
             <table class="table table-bordered" style="float:right;">
                 <tr>
                     <td class="align-middle" style="background-color: #EEEEEE;">合計金額</td>
-                    <% total_price = @total_item_price + @total_delivery_cost %>
-                    <td class="align-middle"><%= total_price.round.to_s(:delimited) %></td>
+                    <% total_payment = @total_item_price + @total_delivery_cost %>
+                    <td class="align-middle"><%= total_payment.round.to_s(:delimited) %></td>
                 </tr>
             </table>
         </div>
@@ -79,4 +79,9 @@
 
 </div>
 
-<div class="text-center"><%= link_to "購入に進む", new_customer_order_path, class: "btn btn-success" %></div>
+<div class="text-center">
+    <!--カート内にアイテムがない場合は「購入に進む」ボタンを表示しない-->
+    <% if @cart_items.count != 0 %>
+        <%= link_to "購入に進む", new_customer_order_path, class: "btn btn-success" %>
+    <% end %>
+</div>

@@ -70,8 +70,8 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
     resources :cart_items, only: [:index, :create, :update, :destroy]
   # オーダー
-    resources :orders, only: [:new,:create,:index,:show]
     get 'orders/complete' => 'orders#complete', as: 'order_complete'
+    resources :orders, only: [:new,:create,:index,:show]
     post 'orders/confirm' => 'orders#confirm', as: 'order_confirm'
 
 # customer_orders GET       /customer/orders(.:format)                customer/orders#index

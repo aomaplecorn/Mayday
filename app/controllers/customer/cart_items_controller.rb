@@ -4,7 +4,6 @@ class Customer::CartItemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items
     @cart_item = CartItem.new
-
     # 商品の合計金額
     @total_item_price = @cart_items.inject(0) { |total, item| total }
     # 配送料合計

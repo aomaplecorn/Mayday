@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   # モデルの関係
   belongs_to :artist
   has_many :cart_items, dependent: :destroy
-
+  has_many :order_details
 
   # グッズの画像
   has_one_attached :item_image
@@ -21,6 +21,13 @@ class Item < ApplicationRecord
     end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  # 商品小計
+  def subtotal
+    item * amount
+  end
+
+
 
 
 
