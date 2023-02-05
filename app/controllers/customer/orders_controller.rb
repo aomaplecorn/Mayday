@@ -74,11 +74,11 @@ class Customer::OrdersController < ApplicationController
         order_detail.price = cart_item.item.price
         order_detail.amount = cart_item.amount
         order_detail.save
-        # @item = Item.find(cart_item.item_id)
-        # @item.amount - cart_item.amount
-        # @item.update
+        # アイテムIDを取得し、アイテムモデルから各アイテムの在庫（amount）を減少させる。
+        @item = Item.find(cart_item.item_id)
+        @item.amount -= cart_item.amount
+        @item.save
 
-        # ーーーーーーーーアイテムIDを取得し、アイテムモデルから各アイテムの在庫（amount）を減少させる。
       end
       cart_items.destroy_all
       redirect_to customer_order_complete_path
@@ -105,9 +105,5 @@ class Customer::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:customer_id, :postal_code, :address, :name, :delivery_cost, :total_payment, :status)
   end
-
-  # def order_detail_params
-  #   params.require(:order_details).permit(:item_id,:album_id,:music_id,:order_id,:price,:amount)
-  # end
 
 end

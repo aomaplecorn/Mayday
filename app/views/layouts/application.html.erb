@@ -29,9 +29,9 @@
       <% if admin_signed_in? %>
         <%= button_to 'アドミンlog_out', destroy_admin_session_path, method: :delete %>
         ユーザー関連
-        <%= link_to 'ユーザー一覧管理', admin_users_path %>
+        <%= link_to '一覧管理', admin_users_path %>
         販売管理
-
+        <%= link_to '一覧管理', admin_products_path %>
       <% else %>
         <%= link_to 'アドミンlog_in', admin_session_path %>
       <% end %>

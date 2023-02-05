@@ -1,0 +1,75 @@
+<h1>Admin::Products#index</h1>
+
+
+<!--以下、各商品を管理するタブ本体-->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a href="#contents1" class="nav-link active" data-toggle="tab">グッズ</a>
+  </li>
+  <li class="nav-item">
+    <a href="#contents2" class="nav-link" data-toggle="tab">楽曲（アルバム）</a>
+  </li>
+</ul>
+<!--ここまで、各商品を管理するタブ本体-->
+
+<!--以下、アイテム一覧-->
+<div class="tab-content">
+  <div id="contents1" class="tab-pane active">
+    <h2 class="bg-info pl-3">アイテム</h2>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <td><h4>商品名</h4></td>
+            <td><h4>説明</h4></td>
+            <td><h4>値段</h4></td>
+            <td><h4>在庫</h4></td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.introduction %></td>
+          <td><%= item.price %></td>
+          <td><%= item.amount %></td>
+          <td><%= link_to '詳細へ', admin_item_path(item.id) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<!--ここまで、アイテム一覧-->
+
+<!--以下、アルバム一覧-->
+  <div id="contents2" class="tab-pane">
+    <h2 class="bg-info pl-3">楽曲（アルバム）</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td><h4>アルバム名</h4></td>
+          <td><h4>製作者</h4></td>
+          <td><h4>値段</h4></td>
+          <td><h4>リリース状況</h4></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @albums.each do |album| %>
+        <tr>
+          <td><%= album.name %></td>
+          <% @artist = Artist.find(album.editor_id) %>
+          <td><%= @artist.name %></td>
+          <td><%= album.price %></td>
+          <% if album.released == true %>
+            <td><%= '販売中' %></td>
+          <% else %>
+            <td><%= '販売停止中' %></td>
+          <% end %>
+          <td><%= link_to '詳細へ', admin_album_path(album.id) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

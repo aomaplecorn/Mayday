@@ -30,3 +30,19 @@
   <%= link_to 'ゲストログイン（カスタマー）', customers_guest_sign_in_path, method: :post, class: "login" %>
 <% end %>
 </div>
+
+
+<!--以下、Payjpテスト-->
+
+
+  <!--Payjpカード保存-->
+  <!--<a%= form_with url: homes_purchase_path do %>-->
+  <!--  <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_751e71893edfeddc9c4dd96f" data-submit-text="カードを保存する"-->
+  <!--    data-partial="true"></script>-->
+  <!--<a% end %>-->
+
+<!--Payjpカード支払い-->
+    <%= form_with url: homes_purchase_path do %>
+<script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_751e71893edfeddc9c4dd96f" ></script>
+  <% end %>
+

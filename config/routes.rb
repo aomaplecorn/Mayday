@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+
+
   root to: 'homes#top'
+  post 'homes/purchase' => 'homes#purchase'
 
   # 以下、ユーザー認証(devise)
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -33,9 +36,20 @@ Rails.application.routes.draw do
 
 ## 以下、アドミン
   namespace :admin, path:"" do
+    # ユーザー
     get 'users' => 'users#index'
     patch 'artist_user/:id' => 'users#artist_update', as: 'artist_user'
     patch 'customer_user/:id' => 'users#customer_update', as: 'customer_user'
+    # プロダクト（音楽・グッズ全て）
+    resources :products, only: [:index]
+    get 'item/:id' => 'products#item_show', as: 'item'
+    get 'album/:id' => 'products#album_show', as: 'album'
+    delete 'item/:id' => 'products#item_destroy'
+    delete 'album/:id' => 'products#album_destroy'
+# admin_products GET    /products(.:format)             admin/products#index
+# DELETE                /products/:id(.:format)         admin/products#destroy
+# admin_item GET        /item/:id(.:format)             admin/products#item_show
+# admin_album GET       /album/:id(.:format)            admin/products#album_show
   end
 ## ここまで、アドミン
 
@@ -73,16 +87,9 @@ Rails.application.routes.draw do
     get 'orders/complete' => 'orders#complete', as: 'order_complete'
     resources :orders, only: [:new,:create,:index,:show]
     post 'orders/confirm' => 'orders#confirm', as: 'order_confirm'
-
-# customer_orders GET       /customer/orders(.:format)                customer/orders#index
-# POST                      /customer/orders(.:format)                customer/orders#create
-# new_customer_order GET    /customer/orders/new(.:format)            customer/orders#new
-# customer_order GET        /customer/orders/:id(.:format)            customer/orders#show
-# customer_complete GET     /customer/orders/complete(.:format)       customer/orders#complete
-# customer_confirm POST     /customer/orders/confirm(.:format)        customer/orders#confirm
-
   end
 ## ここまで、カスタマー
+
 
 
 end
