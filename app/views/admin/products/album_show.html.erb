@@ -47,7 +47,7 @@
       <td class="align-middle"><%= image_tag @album.get_jacket_image(50,50) %></td>
       <td class="align-middle"><%= music.name %></td>
       <td class="align-middle">¥<%= music.price.to_s(:delimited)%></td>
-      <td class="align-middle"><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %></td>
+      <td class="align-middle"><%= audio_tag(polymorphic_path(music.get_audio), loop: "loop", controls: true ,controlslist: "nodownload") %></td>
     </tr>
     <% end %>
   </tbody>

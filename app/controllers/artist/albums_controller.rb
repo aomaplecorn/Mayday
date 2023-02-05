@@ -7,8 +7,11 @@ class Artist::AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_params)
-    @album.save
-    redirect_to edit_artist_album_path(@album.id)
+    if @album.save
+      redirect_to edit_artist_album_path(@album.id)
+    else
+      render :new
+    end
   end
 
   def index
@@ -41,7 +44,7 @@ class Artist::AlbumsController < ApplicationController
 
   private
   def album_params
-    params.require(:album).permit(:name,:price,:released,:editor_id,:jacket_image)
+    params.require(:album).permit(:name,:price,:released,:artist_id,:jacket_image)
   end
 
 end

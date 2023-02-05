@@ -17,10 +17,13 @@
     <%= form_with model: [:artist,music] do |f| %>
     <tr>
       <td class="align-middle text-center"><%= f.number_field :track %></td>
-      <td class="align-middle text-center"><%= image_tag @album.get_jacket_image(50,50) %></td>
+      <td class="align-middle text-center"><%= image_tag @album.get_jacket_image(100,100) %></td>
       <td class="align-middle text-center"><%= f.text_field :name  %></td>
       <td class="align-middle text-center">¥<%= f.number_field :price %></td>
-      <td class="align-middle text-start"><%= audio_tag(polymorphic_path(music.get_audio), controls: true ,controlslist: "nodownload") %><%= f.file_field :audio, accept: 'audio/*', class: "d-flex jusitfy-content-center" %></td>
+      <td class="align-middle text-start">
+        <%= audio_tag(polymorphic_path(music.get_audio),loop: "loop", controls: true ,controlslist: "nodownload") %><%= f.file_field :audio, accept: 'audio/*', class: "d-flex" %>
+        <%= audio_tag(polymorphic_path(music.get_test_audio),controls: true ,controlslist: "nodownload") %><%= f.file_field :test_audio, accept: 'audio/*', class: "d-flex" %>
+      </td>
       <td class="align-middle text-center"><%= f.submit '更新する',class: "btn btn-primary" %></td>
     </tr>
     <% end %>

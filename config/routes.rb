@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-
   root to: 'homes#top'
   post 'homes/purchase' => 'homes#purchase'
 
@@ -46,10 +45,6 @@ Rails.application.routes.draw do
     get 'album/:id' => 'products#album_show', as: 'album'
     delete 'item/:id' => 'products#item_destroy'
     delete 'album/:id' => 'products#album_destroy'
-# admin_products GET    /products(.:format)             admin/products#index
-# DELETE                /products/:id(.:format)         admin/products#destroy
-# admin_item GET        /item/:id(.:format)             admin/products#item_show
-# admin_album GET       /album/:id(.:format)            admin/products#album_show
   end
 ## ここまで、アドミン
 
@@ -87,6 +82,10 @@ Rails.application.routes.draw do
     get 'orders/complete' => 'orders#complete', as: 'order_complete'
     resources :orders, only: [:new,:create,:index,:show]
     post 'orders/confirm' => 'orders#confirm', as: 'order_confirm'
+  # アルバム（音楽関連）
+    resources :albums, only: [:index,:show]
+# customer_albums GET     /customer/albums(.:format)        customer/albums#index
+# customer_album GET      /customer/albums/:id(.:format)    customer/albums#show
   end
 ## ここまで、カスタマー
 

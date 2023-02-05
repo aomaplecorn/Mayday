@@ -19,16 +19,22 @@
     <%= f.number_field :price, min: 100, class: 'form-control', placeholder: '値段' %>
   </div>
 
+  <div>
   <label>音楽ファイル</label>
   <%= f.file_field :audio, class: 'form-control', accept: 'audio/*'%>
+  <label>
+    デモファイル　※購入前に聴けるデモファイル。こちらにはフルバージョンの登録をしないようにしてください。
+  </label>
+  <%= f.file_field :test_audio, class: 'form-control', accept: 'audio/*'%>
+  </div>
 
   <div>
-    <%= f.text_area :index_info, class: 'form-control text-nowrap ',rows:"10", placeholder:"歌詞など" %>
+    <%= f.text_area :index_info, class: 'form-control text-nowrap ',rows:"10", placeholder:"歌詞などを記載してください" %>
   </div>
 </div>
   <%= f.hidden_field :artist_id, :value => current_artist.id %>
   <%= f.hidden_field :album_id, :value => @album.id %>
-  <%= f.submit '作成' %>
+  <%= f.submit '作成', class: "btn btn-success" %>
   <% end %>
 
 

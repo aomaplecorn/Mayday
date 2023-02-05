@@ -6,6 +6,7 @@ class Artist < ApplicationRecord
 
   has_many :musics, dependent: :destroy
   has_many :items, dependent: :destroy
+  has_many :albums, dependent: :destroy
 
   # マイページの背景画像と紹介画像を設定
   has_one_attached :background_image

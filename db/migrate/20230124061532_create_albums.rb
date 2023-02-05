@@ -5,7 +5,7 @@ class CreateAlbums < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.integer :price, null: false
       t.boolean :released, default: false
-      t.integer :editor_id
+      t.integer :artist_id
 
 
       t.timestamps

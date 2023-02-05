@@ -71,8 +71,8 @@
         <%= link_to '一覧', customer_items_path %>
         オーダー関連
         <%= link_to '一覧', customer_orders_path %>
-
-
+        アルバム（音楽）関連
+        <%= link_to '一覧', customer_albums_path %>
         <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
       <% else %>
         <%= link_to 'カスタマーlog_in', customer_session_path %>

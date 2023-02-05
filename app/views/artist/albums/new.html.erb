@@ -16,7 +16,7 @@
   <label class="m-2">アルバム価格</label>
   <%= f.number_field :price, placeholder: "100", class: "form-control"%>
 </div>
-  <%= f.hidden_field :editor_id, :value => current_artist.id %>
+  <%= f.hidden_field :artist_id, :value => current_artist.id %>
 <div>
 　<%= f.submit 'アルバム作成', class: "btn btn-primary mr-3 mt-3" %>
 </div>

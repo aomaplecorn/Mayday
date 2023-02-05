@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2023_02_04_133929) do
     t.string "name", null: false
     t.integer "price", null: false
     t.boolean "released", default: false
-    t.integer "editor_id"
+    t.integer "artist_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,4 +1,4 @@
-<h1>Artist::Albums#show</h1>
+<h1>Customer::Albums#show</h1>
 
 <h2>アルバム詳細画面</h2>
 <div class="row d-flex justify-content-center">
@@ -14,15 +14,8 @@
       ¥<%= @album.price.to_s(:delimited) %>-
     </div>
     <div class="d-flex justify-content-end">
-      <%= link_to 'アルバム・楽曲の編集', edit_artist_album_path(@album.id), class: "btn btn-primary" %>
+      購入ボタン<!--<a%= link_to 'アルバム・楽曲の編集', edit_artist_album_path(@album.id), class: "btn btn-primary" %>-->
     </div>
-  </div>
-  <div>
-  <% if @album.released == true %>
-    <p >このアルバムは公開されています</p>
-    <% else %>
-    <p>このアルバムは公開されていません</p>
-  <% end %>
   </div>
 </div>
 
@@ -34,7 +27,7 @@
       <td></td>
       <td>楽曲名</td>
       <td>値段</td>
-      <td>楽曲ファイル</td>
+      <td>試聴</td>
     </tr>
   </thead>
   <tbody>
@@ -45,16 +38,9 @@
       <td class="align-middle"><%= music.name %></td>
       <td class="align-middle text-center">¥<%= music.price.to_s(:delimited)%></td>
       <td class="align-middle text-start">
-        <%= audio_tag(polymorphic_path(music.get_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
         <%= audio_tag(polymorphic_path(music.get_test_audio),controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
       </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-
-
-
-
-
-
