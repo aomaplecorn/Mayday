@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   root to: 'homes#top'
   post 'homes/purchase' => 'homes#purchase'
   get '/search' => 'homes#search',as: 'search'

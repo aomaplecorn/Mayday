@@ -21,9 +21,15 @@ class Customer::CartItemsController < ApplicationController
       redirect_to customer_cart_items_path
     # カート内に同じアイテムがある場合、レコードの"数量"を更新する
     elsif @cart_item.amount != nil
-      @existing_cart_item.amount += @cart_item.amount
-      @existing_cart_item.save
-      redirect_to customer_cart_items_path
+      ## アイテムの個数が在庫を超えた場合、アイテム画面へリダイレクトする条件分岐。
+      if @existing_cart_item.amount > @cart_item.item.amount
+        @existing_cart_item.amount += @cart_item.amount
+        @existing_cart_item.save
+        redirect_to customer_cart_items_path
+      else
+        flash[:notice_stock_error] = "在庫以上のご注文はできません"
+        redirect_to customer_item_path(@cart_item.item_id)
+      end
     else
     # 選択肢を間違えた時＋「個数選択」を選択した場合
       redirect_to customer_item_path(@cart_item.item_id)
@@ -61,3 +67,4 @@ class Customer::CartItemsController < ApplicationController
     params.require(:cart_item).permit(:item_id, :customer_id, :amount)
   end
 end
+

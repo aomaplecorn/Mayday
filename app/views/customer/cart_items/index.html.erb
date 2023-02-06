@@ -8,7 +8,7 @@
 
 <% @cart_items.each do |cart_item| %>
 <div class="align-middle">
-    <%= cart_item.item.artist.name %>
+    <strong><%= cart_item.item.artist.name %></strong>の商品
 </div>
 <table class="table table-bordered">
     <thead style="background-color: #EEEEEE;">
@@ -37,11 +37,11 @@
             <!--個数選択-->
         <%= form_with model: @cart_item, url: customer_cart_item_path(cart_item.id), method: :patch do |f| %>
             <td class="align-middle">
-                <%= f.select :amount, *[1..10], prompt: "#{cart_item.amount}" %>
+                <%= f.select :amount, *[1..cart_item.item.amount], prompt: "#{cart_item.amount}" %>
                 <%= f.submit "変更", class: "btn btn-success float-right" %>
             </td>
         <% end %>
-            <!---->
+            <!--小計-->
             <td class="align-middle">
                 <%= cart_item.subtotal.to_s(:delimited) %>
                 <% @total_item_price += cart_item.subtotal %>
@@ -85,3 +85,5 @@
         <%= link_to "購入に進む", new_customer_order_path, class: "btn btn-success" %>
     <% end %>
 </div>
+
+

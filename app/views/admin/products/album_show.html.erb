@@ -1,7 +1,7 @@
 <h1>Admin::Products#album_show</h1>
 
 <h2>アルバム詳細画面</h2>
-<div class="row">
+<div class="row d-flex justify-content-center">
   <div class="col-2 ml-3">
     <%= image_tag @album.get_jacket_image(350,350) %>
   </div>
@@ -38,6 +38,7 @@
       <td>楽曲名</td>
       <td>値段</td>
       <td>楽曲ファイル</td>
+      <td></td>
     </tr>
   </thead>
   <tbody>
@@ -47,7 +48,26 @@
       <td class="align-middle"><%= image_tag @album.get_jacket_image(50,50) %></td>
       <td class="align-middle"><%= music.name %></td>
       <td class="align-middle">¥<%= music.price.to_s(:delimited)%></td>
-      <td class="align-middle"><%= audio_tag(polymorphic_path(music.get_audio), loop: "loop", controls: true ,controlslist: "nodownload") %></td>
+      <td class="align-middle">
+        <%= audio_tag(polymorphic_path(music.get_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
+        <%= audio_tag(polymorphic_path(music.get_test_audio),controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
+      </td>
+      <td class="align-middle text-center">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">詳細</a>
+              </h6>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+              <div class="panel-body" style="white-space: pre-line;">
+                <%= music.index_info %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
     </tr>
     <% end %>
   </tbody>

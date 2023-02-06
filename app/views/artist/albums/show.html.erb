@@ -17,7 +17,7 @@
       <%= link_to 'アルバム・楽曲の編集', edit_artist_album_path(@album.id), class: "btn btn-primary" %>
     </div>
   </div>
-  <div>
+  <div class="offset-1">
   <% if @album.released == true %>
     <p >このアルバムは公開されています</p>
     <% else %>

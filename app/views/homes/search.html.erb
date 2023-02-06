@@ -1,4 +1,6 @@
 <div class="container">
+
+<!--アイテムの検索結果-->
   <div class="row">
     <div class="col-10">
       <div class="search-list">
@@ -7,13 +9,15 @@
           <tbody>
             <tr class="d-flex align-content-between flex-wrap">
               <% @search_items.each do |item| %>
-              <td class="d-flex justify-content-center m-3">
-                <%= link_to customer_item_path(item.id) do %>
-                  <%= image_tag item.get_item_image(400,200) %></br>
-                  <%= item.name %></br>
-                  ¥<%= item.price.to_s(:delimited) %>
+                <% if item.is_active == true %>
+                  <td class="d-flex justify-content-center m-3">
+                    <%= link_to customer_item_path(item.id) do %>
+                      <%= image_tag item.get_item_image(400,200) %></br>
+                      <%= item.name %></br>
+                      ¥<%= item.price.to_s(:delimited) %>
+                    <% end %>
+                  </td>
                 <% end %>
-              </td>
               <% end %>
             </tr>
           </tbody>
@@ -22,7 +26,7 @@
     </div>
   </div>
 
-
+<!--アルバムの検索結果-->
   <div class="row">
     <div class="col-10">
       <div class="search-list">
@@ -30,13 +34,15 @@
           <tbody>
             <tr class="d-flex align-content-between flex-wrap">
               <% @search_albums.each do |album| %>
-              <td class="d-flex justify-content-center m-3">
-                <%= link_to customer_album_path(album.id) do %>
-                  <%= image_tag album.get_jacket_image(400,200) %></br>
-                  <%= album.name %></br>
-                  ¥<%= album.price.to_s(:delimited) %>
+                <% if album.released == true %>
+                  <td class="d-flex justify-content-center m-3">
+                    <%= link_to customer_album_path(album.id) do %>
+                      <%= image_tag album.get_jacket_image(400,200) %></br>
+                      <%= album.name %></br>
+                      ¥<%= album.price.to_s(:delimited) %>
+                    <% end %>
+                  </td>
                 <% end %>
-              </td>
               <% end %>
             </tr>
           </tbody>
@@ -45,6 +51,7 @@
     </div>
   </div>
 
+<!--アーティストの検索結果-->
   <div class="row">
     <div class="col-10">
       <div class="search-list">
@@ -52,12 +59,14 @@
           <tbody>
             <tr class="d-flex align-content-between flex-wrap">
               <% @search_artists.each do |artist| %>
-              <td class="d-flex justify-content-center m-3">
-                <%= link_to artist_mypage_path(artist.id) do %>
-                  <%= image_tag artist.get_introduction_image(400,200) %></br>
-                  <%= artist.name %></br>
+                <% if artist.is_deleted == false %>
+                  <td class="d-flex justify-content-center m-3">
+                    <%= link_to artist_mypage_path(artist.id) do %>
+                      <%= image_tag artist.get_introduction_image(400,200) %></br>
+                      <%= artist.name %></br>
+                    <% end %>
+                  </td>
                 <% end %>
-              </td>
               <% end %>
             </tr>
           </tbody>

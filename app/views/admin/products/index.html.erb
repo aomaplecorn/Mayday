@@ -58,7 +58,7 @@
         <% @albums.each do |album| %>
         <tr>
           <td><%= album.name %></td>
-          <% @artist = Artist.find(album.editor_id) %>
+          <% @artist = Artist.find(album.artist_id) %>
           <td><%= @artist.name %></td>
           <td><%= album.price %></td>
           <% if album.released == true %>

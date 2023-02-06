@@ -1,5 +1,10 @@
 <h1>Customer::Items#show</h1>
-
+<!--MSG："在庫以上のご注文はできません"-->
+<% if flash[:notice_stock_error] %>
+    <p id="notice" class="text-center text-danger">
+      <%= flash[:notice_stock_error] %>
+    </p>
+<% end %>
 
 <div class="container">
   <div class="row">
@@ -16,10 +21,23 @@
       <div class="mt-3">
         <%= form_with model: [:customer,@cart_item] do |f| %>
           <%= f.hidden_field :item_id, :value => @item.id %>
-          <%= f.select :amount, *[1..10], prompt: "個数選択" %>
-          在庫<%= @item.amount %>個
+          <!--アイテムの在庫が１０以下の場合は、セレクトで選択できる個数を１０以下（最大値を在庫分のみ）とする-->
+          <% if @item.amount < 10 %>
+            <%= f.select :amount, *[1..@item.amount], prompt: "個数選択" %>
+          <% else %>
+            <%= f.select :amount, *[1..10], prompt: "個数選択" %>
+          <% end %>
+          <!--在庫が０の場合、在庫切れと表示される-->
+          <% if @item.amount == 0 %>
+            <span class="text-danger ml-1">在庫切れ</span>
+          <% else %>
+            <span class="ml-1">在庫<%= @item.amount %>個</span>
+          <% end %>
           <div class="d-flex justify-content-end">
-          <%= f.submit "カートに入れる", class: "btn btn-success" %>
+            <!--在庫が０のものをカートに入れられないようにする-->
+            <% if @item.amount != 0 %>
+              <%= f.submit "カートに入れる", class: "btn btn-success" %>
+            <% end %>
           </div>
         <% end %>
       </div>

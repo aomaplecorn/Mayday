@@ -22,10 +22,10 @@ class Admin::UsersController < ApplicationController
 
   private
   def artist_params
-    params.require(:artist).permit(:name,:telephone_number,:is_deleted)
+    params.require(:artist).permit(:is_deleted)
   end
 
   def customer_params
-    params.require(:customer).permit(:name,:name_kana,:postal_code,:address,:telephone_number,:is_deleted)
+    params.require(:customer).permit(:is_deleted)
   end
 end
