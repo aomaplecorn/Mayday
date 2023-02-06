@@ -1,6 +1,5 @@
 <!--music作成フォーム-->
 
-
 <%= form_with model: [:artist,@music] do |f| %>
 
 <div>
@@ -20,12 +19,12 @@
   </div>
 
   <div>
-  <label>音楽ファイル</label>
-  <%= f.file_field :audio, class: 'form-control', accept: 'audio/*'%>
-  <label>
-    デモファイル　※購入前に聴けるデモファイル。こちらにはフルバージョンの登録をしないようにしてください。
-  </label>
-  <%= f.file_field :test_audio, class: 'form-control', accept: 'audio/*'%>
+    <label>音楽ファイル</label>
+    <%= f.file_field :audio, class: 'form-control p-0', accept: 'audio/*', style: "height:32px;"%>
+    <label>
+      デモファイル　※購入前に聴けるデモファイル。こちらにはフルバージョンの登録をしないようにしてください。
+    </label>
+    <%= f.file_field :test_audio, class: 'form-control p-0', accept: 'audio/*', style: "height:32px;"%>
   </div>
 
   <div>

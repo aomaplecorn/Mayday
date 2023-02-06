@@ -23,6 +23,9 @@
   <body>
     <header>
       <div>ヘッダー</div>
+      <!--検索テンプレ（対象：アイテム、アルバム、アーティスト）-->
+      <%= render '/homes/search_list' %>
+
       <div><%= link_to 'top', root_path %></div>
 <!--以下、adminのログイン確認-->
 <div>

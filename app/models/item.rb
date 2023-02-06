@@ -27,7 +27,10 @@ class Item < ApplicationRecord
     item * amount
   end
 
-
+  # Item内の検索機能
+  def self.search(keyword)
+    where(["name like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])
+  end
 
 
 

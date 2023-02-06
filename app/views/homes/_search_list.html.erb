@@ -1,0 +1,6 @@
+<div class="search-form" style="bottom: 5px; right: 5px;">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword, placeholder: "検索" %>
+    <%= f.submit "検索", class: "btn btn-primary"%>
+  <% end %>
+</div>

@@ -35,6 +35,7 @@
       <td>楽曲名</td>
       <td>値段</td>
       <td>楽曲ファイル</td>
+      <td></td>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +48,22 @@
       <td class="align-middle text-start">
         <%= audio_tag(polymorphic_path(music.get_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
         <%= audio_tag(polymorphic_path(music.get_test_audio),controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
+      </td>
+      <td class="align-middle text-center">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h6 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">詳細</a>
+              </h6>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+              <div class="panel-body" style="white-space: pre-line;">
+                <%= music.index_info %>
+              </div>
+            </div>
+          </div>
+        </div>
       </td>
     </tr>
     <% end %>

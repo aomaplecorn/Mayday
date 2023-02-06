@@ -12,7 +12,19 @@ class HomesController < ApplicationController
       card: params['payjp-token'], # フォームを送信すると作成・送信されてくるトークン
       currency: 'jpy'
     )
-    binding.pry
+    # binding.pry
+  end
+
+  # 検索機能（対象：アイテム・アルバム・アーティスト）
+  def search
+    @items = Item.search(params[:keyword])
+    @albums = Album.search(params[:keyword])
+    @artists = Artist.search(params[:keyword])
+    @search_items = @items.page(params[:page]).per(8)
+    @search_albums = @albums.page(params[:page]).per(8)
+    @search_artists = @artists.page(params[:page]).per(8)
+    @keyword = params[:keyword]
+    render :search
   end
 
 

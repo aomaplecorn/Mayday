@@ -48,5 +48,10 @@ class Artist < ApplicationRecord
     end
   end
 
+  # Artist内の検索機能
+  def self.search(keyword)
+    where(["name like?", "%#{keyword}%"])
+  end
+
 
 end

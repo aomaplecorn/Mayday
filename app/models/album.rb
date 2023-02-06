@@ -11,6 +11,7 @@ class Album < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
+
   # ジャケット写真の確認
   def get_jacket_image(width,height)
     unless jacket_image.attached?
@@ -18,6 +19,11 @@ class Album < ApplicationRecord
       jacket_image.attach(io: File.open(file_path),filename: 'default-image.jpeg',content_type: 'image/jpeg' 'image/png')
     end
     jacket_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  # Album内の検索機能
+  def self.search(keyword)
+    where(["name like?", "%#{keyword}%"])
   end
 
 end
