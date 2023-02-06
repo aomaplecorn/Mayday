@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2023_02_04_133929) do
   end
 
   create_table "order_details", force: :cascade do |t|
+    t.string "charge_id", null: false
     t.integer "item_id"
     t.integer "album_id"
     t.integer "music_id"

@@ -64,21 +64,30 @@ class Customer::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
 
     if @order.save
-  # ユーザーのカートアイテムをcart_itemsへ格納
+    # 決済処理（Payjpを使用）
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+        @charge = Payjp::Charge.create(
+          # 決済する値段
+          amount: @order.total_payment,
+          # フォームを送信すると作成・送信されてくるトークン
+          card: params['payjp-token'],
+          currency: 'jpy'
+        )
+    # ユーザーのカートアイテムをcart_itemsへ格納
       cart_items = current_customer.cart_items.all
-  # カート情報をもとに、注文詳細（OrderDetail）を作成し保存
+    # カート情報をもとに、注文詳細（OrderDetail）を作成し保存
       cart_items.each do |cart_item|
         order_detail = OrderDetail.new
         order_detail.item_id = cart_item.item_id
         order_detail.order_id = @order.id
         order_detail.price = cart_item.item.price
         order_detail.amount = cart_item.amount
+        order_detail.charge_id = @charge.id
         order_detail.save
         # アイテムIDを取得し、アイテムモデルから各アイテムの在庫（amount）を減少させる。
         @item = Item.find(cart_item.item_id)
         @item.amount -= cart_item.amount
         @item.save
-
       end
       cart_items.destroy_all
       redirect_to customer_order_complete_path
