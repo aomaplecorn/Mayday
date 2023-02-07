@@ -31,22 +31,3 @@
 <% end %>
 </div>
 
-
-<!--以下、Payjpテスト-->
-
-
-  <!--Payjpカード保存-->
-  <%= form_with url: homes_purchase_path do %>
-    <script type="text/javascript" src="https://checkout.pay.jp"
-    class="payjp-button" data-key="pk_test_751e71893edfeddc9c4dd96f"
-    data-submit-text="カード情報を入力し、注文を確定する" data-partial="false"></script>
-  <% end %>
-
-
-
-
-<!--Payjpカード支払い-->
-<!--    <a%= form_with url: homes_purchase_path do %>-->
-<!--<script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_751e71893edfeddc9c4dd96f" ></script>-->
-<!--  <a% end %>-->
-

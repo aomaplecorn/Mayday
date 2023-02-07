@@ -7,7 +7,6 @@ class CreateMusics < ActiveRecord::Migration[6.1]
       t.string :name, null: false
       t.integer :track, default: 0
       t.text :index_info
-      t.integer :price, null: false
 
       t.timestamps
     end

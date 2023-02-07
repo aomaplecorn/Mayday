@@ -118,10 +118,9 @@ ActiveRecord::Schema.define(version: 2023_02_04_133929) do
   create_table "musics", force: :cascade do |t|
     t.integer "artist_id"
     t.integer "album_id"
-    t.string "name"
+    t.string "name", null: false
     t.integer "track", default: 0
     t.text "index_info"
-    t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -130,7 +129,6 @@ ActiveRecord::Schema.define(version: 2023_02_04_133929) do
     t.string "charge_id", null: false
     t.integer "item_id"
     t.integer "album_id"
-    t.integer "music_id"
     t.integer "order_id"
     t.integer "price", null: false
     t.integer "amount"

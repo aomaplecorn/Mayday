@@ -1,5 +1,6 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
+  require 'payjp'
 
   def new
     @order = Order.new
@@ -10,7 +11,7 @@ class Customer::OrdersController < ApplicationController
   end
 
   def confirm
-    # 以下、カートアイテムが　有る　場合の処理
+  ## 以下、カートアイテムが　有る　場合の処理
     if current_customer.cart_items != nil
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
@@ -18,13 +19,14 @@ class Customer::OrdersController < ApplicationController
       @cart_items = current_customer.cart_items
       # カート内の合計金額を格納
       @total_item_price = @cart_items.inject(0) { |total, item| total + item.subtotal }
-      # 送料を@total_delivery_costへ格納
-      ## total_delivery_costの数値を０にしておく
+    ## 以下、送料合計を@total_delivery_costへ格納
+      # total_delivery_costの数値を０にしておく
       @total_delivery_cost = 0
       @cart_items.each do |cart_item|
         # カートアイテムに入っているアイテムに設定された各送料を@total_delivery_costへ格納
         @total_delivery_cost += cart_item.item.artist.delivery_cost
       end
+    ## ここまで、送料合計を@total_delivery_costへ格納
       # オーダーのdelivery_costに格納
       @order.delivery_cost = @total_delivery_cost
       # カート内のアイテム＋送料の総額を、請求金額(total_payment)へ格納
@@ -42,7 +44,7 @@ class Customer::OrdersController < ApplicationController
         @order.postal_code = @order.postal_code.strip
         @order.address = @order.address.strip
         @order.name = @order.name.strip
-        # 郵便番号、住所、宛名に何も入っていない場合は戻る
+        # 郵便番号、住所、宛名に何も入っていない場合はオーダー作成へ戻る
         if @order.postal_code == "" || @order.address == "" || @order.name == ""
           flash[:notice_2] = "お届け先に必要な情報を入力してください"
           redirect_to new_customer_order_path
@@ -52,17 +54,17 @@ class Customer::OrdersController < ApplicationController
         flash[:notice_1] = 'お届け先を選択してください'
         redirect_to new_customer_order_path
       end
-    # ここまで、カートアイテムが　有る　場合の処理
-    # 以下、カートアイテムが　無い 場合の処理（カートへ戻る）
+  ## ここまで、カートアイテムが　有る　場合の処理
+  ## 以下、カートアイテムが　無い 場合の処理（カートへ戻る）
     else
       redirect_to customer_cart_items_path
     end
   end
 
+  # アイテム購入処理
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-
     if @order.save
     # 決済処理（Payjpを使用）
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
@@ -71,18 +73,19 @@ class Customer::OrdersController < ApplicationController
           amount: @order.total_payment,
           # フォームを送信すると作成・送信されてくるトークン
           card: params['payjp-token'],
-          currency: 'jpy'
-        )
+          currency: 'jpy',
+          )
     # ユーザーのカートアイテムをcart_itemsへ格納
       cart_items = current_customer.cart_items.all
     # カート情報をもとに、注文詳細（OrderDetail）を作成し保存
       cart_items.each do |cart_item|
         order_detail = OrderDetail.new
-        order_detail.item_id = cart_item.item_id
+        # 支払いIDを注文詳細に持たせて、決済番号を控えさせる。
+        order_detail.charge_id = @charge.id
         order_detail.order_id = @order.id
+        order_detail.item_id = cart_item.item_id
         order_detail.price = cart_item.item.price
         order_detail.amount = cart_item.amount
-        order_detail.charge_id = @charge.id
         order_detail.save
         # アイテムIDを取得し、アイテムモデルから各アイテムの在庫（amount）を減少させる。
         @item = Item.find(cart_item.item_id)
@@ -98,8 +101,9 @@ class Customer::OrdersController < ApplicationController
 
   # 注文履歴一覧
   def index
-    # 一覧は降順（最新が一番上）として表示
+    # カスタマー1人の一覧を降順（最新が一番上）で取得
     @orders = current_customer.orders.order(created_at: :desc)
+    @order_details = OrderDetail.all
   end
 
   # 注文履歴詳細

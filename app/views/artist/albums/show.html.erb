@@ -14,7 +14,7 @@
       ¥<%= @album.price.to_s(:delimited) %>-
     </div>
     <div class="d-flex justify-content-end">
-      <%= link_to 'アルバム・楽曲の編集', edit_artist_album_path(@album.id), class: "btn btn-primary" %>
+      <%= link_to 'アルバム・楽曲の編集/追加', edit_artist_album_path(@album.id), class: "btn btn-primary" %>
     </div>
   </div>
   <div class="offset-1">
@@ -33,7 +33,6 @@
       <td>track</td>
       <td></td>
       <td>楽曲名</td>
-      <td>値段</td>
       <td>楽曲ファイル</td>
       <td></td>
     </tr>
@@ -44,7 +43,6 @@
       <td class="align-middle"><%= music.track %></td>
       <td class="align-middle"><%= image_tag music.album.get_jacket_image(100,100) %></td>
       <td class="align-middle"><%= music.name %></td>
-      <td class="align-middle text-center">¥<%= music.price.to_s(:delimited)%></td>
       <td class="align-middle text-start">
         <%= audio_tag(polymorphic_path(music.get_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>
         <%= audio_tag(polymorphic_path(music.get_test_audio),controls: true ,controlslist: "nodownload", class: "d-flex jusitfy-content-center") %>

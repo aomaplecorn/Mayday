@@ -10,7 +10,6 @@ class Music < ApplicationRecord
 
   # バリデーション
   validates :name, presence: true
-  validates :price, presence: true
 
   # 音楽ファイルの確認
   def get_audio

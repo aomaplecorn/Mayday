@@ -1,8 +1,9 @@
 class Album < ApplicationRecord
 
-  # モデルの関係、trackが昇順に並び替える
-  has_many :musics, -> { order(track: :asc) }, dependent: :destroy
+  # モデルの関係
   belongs_to :artist
+  # trackが昇順に並び替える
+  has_many :musics, -> { order(track: :asc) }, dependent: :destroy
 
   # ジャケット画像
   has_one_attached :jacket_image

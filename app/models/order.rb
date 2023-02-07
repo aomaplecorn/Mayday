@@ -2,6 +2,7 @@ class Order < ApplicationRecord
 
   # モデルの関係
   belongs_to :customer
+  has_many :order_details, dependent: :destroy
 
   # バリデーション
   validates :name, presence: true
