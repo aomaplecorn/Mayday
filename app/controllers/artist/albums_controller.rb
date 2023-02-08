@@ -31,8 +31,13 @@ class Artist::AlbumsController < ApplicationController
 
   def update
     @album = Album.find(params[:id])
-    @album.update(album_params)
-    redirect_to artist_album_path(@album.id)
+    if @album.update(album_params)
+      redirect_to artist_album_path(@album.id)
+    else
+      @musics = @album.musics
+      @music = Music.new
+      render :edit
+    end
   end
 
   def destroy

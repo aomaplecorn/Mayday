@@ -1,4 +1,12 @@
-
+<% if @music.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @music.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <!--以下、楽曲編集フォーム-->
 <table class="table table-striped">
@@ -40,7 +48,7 @@
         </div>
       </td>
       <td class="align-middle text-center">
-        <%= f.submit '更新する',class: "btn btn-primary" %>
+        <%= f.submit '更新する',class: "btn btn-success" %>
       </td>
     </tr>
     <% end %>

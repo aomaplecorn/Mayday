@@ -104,6 +104,10 @@ class Customer::OrdersController < ApplicationController
     # カスタマー1人の一覧を降順（最新が一番上）で取得
     @orders = current_customer.orders.order(created_at: :desc)
     @order_details = OrderDetail.all
+    # アイテムの注文詳細を全て取得
+    @item_order_details = OrderDetail.where(album_id: nil)
+    # アルバムの注文詳細を全て取得
+    @album_order_details = OrderDetail.where(album_id: !nil)
   end
 
   # 注文履歴詳細

@@ -2,38 +2,51 @@
 
 <!--以下、アルバム編集画面-->
 <h2>アルバム編集画面</h2>
-<%= form_with model: [:artist,@album] do |f| %>
-<div class="row d-flex justify-content-center">
-  <div class="col-3 ml-3">
-    <%= image_tag @album.get_jacket_image(350,350) %>
-    <%= f.file_field :jacket_image, accept: 'image/*' %>
-  </div>
-  <div class="col-xl-8">
-    <h2>
-      タイトル：<%= f.text_field :name %>
-    </h2>
-    <div>
-      <%= @album.artist.name %>
-    </div>
-    <div>
-      販売価格：<%= f.number_field :price %>円
-    </div>
-    <div>
-      <% if @album.released == true %>
-        <%= f.check_box :released %>
-        このアルバムを非公開にする。
-      <% else %>
-        <%= f.check_box :released %>
-        このアルバムをリリースする。<br>
-        ※チェックをつけて「アルバムを更新」を押した場合、アルバムは公開されます。
+<!--以下、エラーメッセージ-->
+<% if @album.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @album.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
+    </ul>
+  </div>
+<% end %>
+<!--ここまで、エラーメッセージ-->
+
+
+<%= form_with model: [:artist,@album] do |f| %>
+  <div class="row d-flex justify-content-center">
+    <div class="col-3 ml-3">
+      <%= image_tag @album.get_jacket_image(350,350) %>
+      <%= f.file_field :jacket_image, accept: 'image/*' %>
+    </div>
+    <div class="col-xl-8">
+      <h2>
+        タイトル：<%= f.text_field :name %>
+      </h2>
+      <div>
+        <%= @album.artist.name %>
+      </div>
+      <div>
+        販売価格：<%= f.number_field :price %>円
+      </div>
+      <div>
+        <% if @album.released == true %>
+          <%= f.check_box :released %>
+          このアルバムを非公開にする。
+        <% else %>
+          <%= f.check_box :released %>
+          このアルバムをリリースする。<br>
+          ※チェックをつけて「アルバムを更新」を押した場合、アルバムは公開されます。
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xl-9 d-flex justify-content-end">
+      <%= link_to '戻る', artist_album_path(@album.id), class: 'btn btn-secondary' %>
+      <%= f.submit 'アルバムの情報を更新する', class: 'btn btn-success' %>
     </div>
   </div>
-  <div class="col-xl-9 d-flex justify-content-end">
-    <%= link_to '戻る', artist_album_path(@album.id), class: 'btn btn-secondary' %>
-    <%= f.submit 'アルバムの情報を更新する', class: 'btn btn-success' %>
-  </div>
-</div>
 <% end %>
 <!--ここまで、アルバム編集画面-->
 
@@ -50,62 +63,21 @@
 
 <!--以下、タブの中身-->
 <div class="tab-content" id="myTabContent">
-<!--以下、タブ１　楽曲一覧-->
+  <!--タブ１　楽曲一覧-->
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <table class="table table-striped text-center">
-      <thead>
-        <tr class="bg-info text-white ">
-          <td>track</td>
-          <td></td>
-          <td>楽曲名</td>
-          <td>楽曲ファイル</td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% @musics.each do |music| %>
-        <tr>
-          <td class="align-middle"><%= music.track %></td>
-          <td class="align-middle"><%= image_tag music.album.get_jacket_image(100,100) %></td>
-          <td class="align-middle"><%= music.name %></td>
-          <td class="align-middle">
-            <%= audio_tag(polymorphic_path(music.get_audio), loop: "loop", controls: true ,controlslist: "nodownload", class: "d-flex") %>
-            <%= audio_tag(polymorphic_path(music.get_test_audio),controls: true ,controlslist: "nodownload", class: "d-flex") %>
-          </td>
-          <td class="align-middle text-center">
-            <div class="panel-group">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h6 class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1" class="btn btn-primary">詳細</a>
-                  </h6>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse">
-                  <div class="panel-body" style="white-space: pre-line;">
-                    <%= music.index_info %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render 'artist/musics/index', album: @album, music: @music %>
   </div>
-<!--ここまで、タブ１　楽曲一覧-->
-<!--以下、タブ２　楽曲編集の部分テンプレート-->
+  <!--タブ２　楽曲編集の部分テンプレート-->
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <%= render 'artist/musics/edit-form', album: @album, music: @music %>
+    <%= render 'artist/musics/edit_form', album: @album, music: @music %>
   </div>
-<!--ここまで、タブ２　楽曲編集の部分テンプレート-->
 </div>
 <!--ここまで、タブの中身-->
 
-<!--以下、音楽登録フォーム-->
+<!--音楽登録フォーム-->
 <%= render 'artist/musics/form', album: @album, music: @musics %>
 
-<!--以下、アルバム削除ボタン-->
+<!--アルバム削除ボタン-->
   <div class=" d-flex justify-content-end m-3">
     <%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除したデータは二度と復元", class: "btn btn-danger"  %>
   </div>

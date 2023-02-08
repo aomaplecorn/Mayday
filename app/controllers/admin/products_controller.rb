@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+
   def index
     @items = Item.all
     @albums = Album.all

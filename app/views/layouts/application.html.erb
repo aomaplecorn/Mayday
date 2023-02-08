@@ -43,8 +43,9 @@
 <!--以下、artistのログイン確認-->
 <div>
       <% if artist_signed_in? %>
-        <%= link_to 'アーティストmypage', artist_mypage_path %>
-        <%= link_to 'アーティストedit_mypage', artist_edit_mypage_path %>
+          ユーザー関連
+            <%= link_to 'マイページ', artist_mypage_path %>
+            <%= link_to 'ページ編集', artist_edit_mypage_path %>
 
           アルバム関連
             <%= link_to '作成', new_artist_album_path %>

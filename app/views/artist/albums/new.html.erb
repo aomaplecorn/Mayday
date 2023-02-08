@@ -1,25 +1,72 @@
 <h1>Artist::Albums#new</h1>
 
-<%= form_with model: [:artist,@album] do |f| %>
-
-<div>
-  <label class="m-2">ジャケット写真</label>
-  <%= f.file_field :jacket_image, accept: "image/*", class: "form-control" %>
-</div>
-
-<div>
-  <label class="m-2">アルバム名</label>
-  <%= f.text_field :name, placeholder: "アルバム名", class: "form-control" %>
-</div>
-
-<div>
-  <label class="m-2">アルバム価格</label>
-  <%= f.number_field :price, placeholder: "100", class: "form-control"%>
-</div>
-  <%= f.hidden_field :artist_id, :value => current_artist.id %>
-<div>
-　<%= f.submit 'アルバム作成', class: "btn btn-primary mr-3 mt-3" %>
-</div>
-
+<!--以下、エラーメッセージ-->
+<% if @album.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @album.errors.full_messages.each do |message| %>
+        <li><%= message%></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
+<!--ここまで、エラーメッセージ-->
+
+<div class="container">
+  <div class="row">
+    <h4 class="m-3" style="background-color: #EEEEEE;">アルバム新規登録</h4>
+  </div>
+  <div class="row">
+    <p class="my-auto mx-auto">
+      こちらではアルバムの登録を行えます。<br>
+      登録項目：ジャケット写真、アルバムのタイトル、アルバムの販売価格<br>
+      ※楽曲の追加は、アルバムを作成した後に行えるようになります。
+    </p>
+  </div>
+
+
+  <table class="my-auto mx-auto">
+    <div>
+      <%= form_with model: [:artist,@album] do |f| %>
+      <tr>
+        <th colspan="3"></th>
+      </tr>
+      <tr>
+        <td class="form_control pt-3 mt-3">
+          <label>ジャケット写真</label>
+        </td>
+        <td class="form_control pt-3 mt-3">
+          <%= f.file_field :jacket_image, accept: "image/*", class: "form-control p-0", style: "height:32px;"%>
+          <p>※使用可能な画像ファイル種別：『jpeg(jpg)』『png』</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="form_control pt-3 mt-3">
+          <label>タイトル</label>
+        </td>
+        <td class="form_control pt-3 mt-3">
+          <%= f.text_field :name, placeholder: "アルバム名", class: "form-control" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="form_control pt-3 mt-3">
+          <label class="m-2">販売価格</label>
+        </td>
+        <td class="form_control pt-3 mt-3 text-nowrap">
+          <%= f.number_field :price, placeholder: "値段を入力　例：1500", class: "form-control"%>
+        </td>
+      </tr>
+      </tr>
+      <tr>
+        <td class="form_control pt-3 mt-3">
+          <%= f.hidden_field :artist_id, :value => current_artist.id %>
+          <%= f.submit 'アルバム作成', class: "btn btn-primary mr-3 mt-3" %>
+        </td>
+      </tr>
+      <% end %>
+    </div>
+  </table>
+</div>
+
+
 

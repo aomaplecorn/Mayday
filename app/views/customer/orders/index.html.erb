@@ -10,16 +10,71 @@
 </ul>
 <!--ここまで、購入商品の種類（タブ本体）-->
 
-<div class="tab-content">
-    <div id="contents1" class="tab-pane active">
-        <% @order_details.each do |order_detail| %>
-            <!--アルバムIDが存在していた場合、アルバムの購入履歴を表示する-->
-            <% if order_detail.album_id != nil %>
-                <%= order_detail.album_id %>
-            <% end %>
-        <% end %>
-    </div>
 
+<div class="tab-content">
+<!--以下、アルバムの注文詳細タブ-->
+    <div id="contents1" class="tab-pane active">
+        <div class="container">
+          <div class="row">
+            <div class="col-1"></div>
+            <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴一覧（グッズ）</h4>
+          </div>
+
+        　<table class="table" border="1">
+            <thead style="background-color: #EEEEEE;">
+                <tr>
+                    <td>注文日</td>
+                    <td>配送先</td>
+                    <td>注文商品</td>
+                    <td>支払金額</td>
+                    <td>ステータス</td>
+                    <td>注文詳細</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% @album_order_details.each do |order_detail| %>
+                <tr>
+                    <!--注文日-->
+                    <td class="align-middle">
+                        <%= order_detail.order.created_at.strftime( '%Y/%m/%d') %>
+                    </td>
+                    <!--配送先-->
+                    <td class="align-middle">
+                        <%= '〒' + order_detail.order.postal_code %></br>
+                        <%= order_detail.order.address %>
+                    </td>
+                    <!--注文商品-->
+                    <td class="align-middle">
+                        <% @order_details.each do |order_detail| %>
+                        <!--各顧客が注文したもののみ表示-->
+                            <!--各顧客が注文情報＝全てのorder_detailに紐づいた注文IDレコードを引っ張り出し、orderに格納する-->
+                            <!--<a% order = current_customer.orders.find_by(id: order_detail.order_id) %>-->
+                            <!--<a% if order_detail.order_id == order.id %>-->
+                            <!--<a% album = Album.find_by(id: order_detail.album_id %>-->
+                                <%= order_detail.album_id %></br>
+                            <!--<a% end %>-->
+                        <% end %>
+                    </td>
+                    <!--「支払金額」合計を表示-->
+                    <td class="align-middle">
+                        <%= order_detail.order.total_payment.to_s(:delimited) %>円
+                    </td>
+                    <!--現在のステータス（入金・発送など）を表示-->
+                    <td class="align-middle">
+                        <%= order_detail.order.status_i18n %>
+                    </td>
+                    <td class="align-middle">
+                        <%= link_to "表示する", customer_order_path(order_detail.order.id), class: "btn btn-primary" %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        　</table>
+        </div>
+    </div>
+<!--ここまで、アルバムの注文詳細タブ-->
+
+<!--以下、アイテムの注文詳細タブ-->
     <div id="contents2" class="tab-pane">
         <div class="container">
           <div class="row">
@@ -39,33 +94,44 @@
                 </tr>
             </thead>
             <tbody>
-                <% @order_details.each do |order_detail| %>
-                    <% if order_detail.order.customer_id == current_customer.id %>
-                    <% if order_detail.album_id == nil %>
-                    <!--アルバムIDが存在していた場合、アルバムの購入履歴を表示する-->
+                <% @orders.each do |order| %>
                 <tr>
                     <!--注文日-->
-                    <td><% order_detail.album_id %></td>
-                    <td class="align-middle"><%= order_detail.order.created_at.strftime( '%Y/%m/%d') %></td>
+                    <td class="align-middle">
+                        <%= order.created_at.strftime( '%Y/%m/%d') %>
+                    </td>
                     <!--配送先-->
-                    <td class="align-middle"><%= '〒' + order_detail.order.postal_code %></br>
-                        <%= order_detail.order.address %></br>
-                        <%= order_detail.order.name %></td>
+                    <td class="align-middle">
+                        <%= '〒' + order.postal_code %></br>
+                        <%= order.address %>
+                    </td>
                     <!--注文商品-->
                     <td class="align-middle">
-                        <%= order_detail.item.name %></br>
+                        <% @order_details.each do |order_detail| %>
+                            <!--自分が注文したもののみ表示-->
+                            <% if order_detail.order_id == order.id %>
+                                <%= order_detail.item.name %></br>
+                            <% end %>
+                        <% end %>
                     </td>
                     <!--「支払金額」合計を表示-->
-                    <td class="align-middle"><%= order_detail.order.total_payment.to_s(:delimited) %>円</td>
+                    <td class="align-middle">
+                        <%= order.total_payment.to_s(:delimited) %>円
+                    </td>
                     <!--現在のステータス（入金・発送など）を表示-->
-                    <td class="align-middle"><%= order_detail.order.status_i18n %></td>
-                    <td class="align-middle"><%= link_to "表示する", customer_order_path(order_detail.order.id), class: "btn btn-primary" %></td>
+                    <td class="align-middle">
+                        <%= order.status_i18n %>
+                    </td>
+                    <td class="align-middle">
+                        <%= link_to "表示する", customer_order_path(order.id), class: "btn btn-primary" %>
+                    </td>
                 </tr>
-                <% end %>
-                <% end %>
                 <% end %>
             </tbody>
         　</table>
         </div>
     </div>
+<!--ここまで、アイテムの注文詳細タブ-->
 </div>
+
+

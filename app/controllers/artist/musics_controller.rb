@@ -3,8 +3,13 @@ class Artist::MusicsController < ApplicationController
 
   def create
     @music = Music.new(music_params)
-    @music.save
-    redirect_to edit_artist_album_path(@music.album_id)
+    if @music.save
+      redirect_to edit_artist_album_path(@music.album_id)
+    else
+      @album = @music.album
+      @musics = @album.musics
+      render '/artist/albums/edit'
+    end
   end
 
   def update
@@ -13,14 +18,15 @@ class Artist::MusicsController < ApplicationController
     # アルバム編集画面へ戻る
       redirect_to edit_artist_album_path(@music.album_id)
     else
-      redirect_to artist_album_path(@music.album_id)
+      @album = @music.album
+      @musics = @album.musics
+      render '/artist/albums/edit'
     end
   end
 
   def destroy
     @music = Music.find(params[:id])
     @music.destroy
-    # アルバム編集画面へ戻る
     redirect_to edit_artist_album_path(@music.album_id)
   end
 
