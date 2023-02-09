@@ -40,8 +40,6 @@ class Customer::AlbumsController < ApplicationController
       order_detail.order_id = @order.id
       order_detail.album_id = @album.id
       order_detail.price = @album.price
-      # やむなくアイテムIDを登録（FKキー化してしまっているため）
-      order_detail.item_id = 1
       order_detail.save
       redirect_to customer_order_complete_path
     else

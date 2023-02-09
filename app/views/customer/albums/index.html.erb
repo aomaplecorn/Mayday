@@ -1,20 +1,29 @@
 <h1>Customer::Albums#index</h1>
 
-<h4 class="ml-3">リリース中</h4>
-<table class="table">
-    <tbody>
-        <tr>
-            <% @albums.order(created_at: :desc).each do |album| %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <h1>アルバム一覧</h1>
+      <table>
+        <tbody>
+          <div>
+            <tr class="d-flex align-content-between flex-wrap">
+              <% @albums.order(created_at: :desc).each do |album| %>
                 <% if album.released == true %>
-                    <td>
-                        <%= link_to customer_album_path(album.id) do %>
-                            <%= image_tag album.get_jacket_image(200,200) %><br>
-                            <%= album.name %><br>
-                            <%= album.artist.name %>
-                        <% end %>
-                    </td>
+                <td class="m-3">
+                  <%= link_to customer_album_path(album.id) do %>
+                    <%= image_tag album.get_jacket_image(200,200) %><br>
+                    <%= album.name %><br>
+                    <%= album.artist.name %>
+                　<% end %>
+                </td>
                 <% end %>
-            <% end %>
-        </tr>
-    </tbody>
-</table>
+              <% end %>
+            </tr>
+          </div>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

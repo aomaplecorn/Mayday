@@ -12,6 +12,7 @@
 <% end %>
 <!--ここまで、エラーメッセージ-->
 
+
 <div class="container">
   <div class="row">
     <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">アーティスト情報の変更</h4>
@@ -19,7 +20,7 @@
 
 <table class="table d-flex align-items-center justify-content-center my-auto mx-auto">
   <tbody>
-<%= form_with model: @artist, url: artist_users_path(current_artist.id), method: :patch do |f| %>
+    <%= form_with model: @artist, url: artist_users_path(current_artist.id), method: :patch do |f| %>
     <tr>
       <th colspan="3"></th>
     </tr>
@@ -58,8 +59,8 @@
       <td colspan="4"></td>
       <td><%= link_to "退会する", artist_check_path, class: "btn btn-danger m-3" %></td>
     </tr>
+    <% end %>
   </tbody>
-  <% end %>
 </table>
 
 </div>

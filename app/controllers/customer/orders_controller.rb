@@ -101,13 +101,12 @@ class Customer::OrdersController < ApplicationController
 
   # 注文履歴一覧
   def index
-    # カスタマー1人の一覧を降順（最新が一番上）で取得
-    @orders = current_customer.orders.order(created_at: :desc)
-    @order_details = OrderDetail.all
-    # アイテムの注文詳細を全て取得
-    @item_order_details = OrderDetail.where(album_id: nil)
-    # アルバムの注文詳細を全て取得
-    @album_order_details = OrderDetail.where(album_id: !nil)
+    # カスタマー1人のアルバムの注文を全て取得（降順（最新が一番上））
+    @album_order = current_customer.orders.left_joins(:order_details).where(order_details: {item_id: nil}).order(created_at: :desc)
+    # アイテムの注文を全て取得（降順（最新が一番上））
+    item_order = current_customer.orders.left_joins(:order_details).where(order_details: {album_id: nil}).order(created_at: :desc)
+    # アイテムの重複したレコードをdistinctで削除し、一意のレコードとする。
+    @item_order = item_order.distinct
   end
 
   # 注文履歴詳細

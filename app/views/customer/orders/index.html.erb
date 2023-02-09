@@ -17,54 +17,37 @@
         <div class="container">
           <div class="row">
             <div class="col-1"></div>
-            <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴一覧（グッズ）</h4>
+            <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴一覧（音楽）</h4>
           </div>
 
         　<table class="table" border="1">
             <thead style="background-color: #EEEEEE;">
                 <tr>
-                    <td>注文日</td>
-                    <td>配送先</td>
-                    <td>注文商品</td>
+                    <td>購入日</td>
+                    <td>購入したアルバム</td>
                     <td>支払金額</td>
-                    <td>ステータス</td>
-                    <td>注文詳細</td>
+                    <td>購入情報詳細</td>
                 </tr>
             </thead>
             <tbody>
-                <% @album_order_details.each do |order_detail| %>
+                <% @album_order.each do |order| %>
                 <tr>
-                    <!--注文日-->
+                    <!--購入日-->
                     <td class="align-middle">
-                        <%= order_detail.order.created_at.strftime( '%Y/%m/%d') %>
+                        <%= order.created_at.strftime( '%Y/%m/%d') %>
                     </td>
-                    <!--配送先-->
+                    <!--購入したアルバム-->
                     <td class="align-middle">
-                        <%= '〒' + order_detail.order.postal_code %></br>
-                        <%= order_detail.order.address %>
-                    </td>
-                    <!--注文商品-->
-                    <td class="align-middle">
-                        <% @order_details.each do |order_detail| %>
-                        <!--各顧客が注文したもののみ表示-->
-                            <!--各顧客が注文情報＝全てのorder_detailに紐づいた注文IDレコードを引っ張り出し、orderに格納する-->
-                            <!--<a% order = current_customer.orders.find_by(id: order_detail.order_id) %>-->
-                            <!--<a% if order_detail.order_id == order.id %>-->
-                            <!--<a% album = Album.find_by(id: order_detail.album_id %>-->
-                                <%= order_detail.album_id %></br>
-                            <!--<a% end %>-->
+                        <% order.order_details.each do |order_detail| %>
+                            <%= order_detail.album.name %>
                         <% end %>
                     </td>
                     <!--「支払金額」合計を表示-->
                     <td class="align-middle">
-                        <%= order_detail.order.total_payment.to_s(:delimited) %>円
-                    </td>
-                    <!--現在のステータス（入金・発送など）を表示-->
-                    <td class="align-middle">
-                        <%= order_detail.order.status_i18n %>
+                        <%= order.total_payment.to_s(:delimited) %>円
                     </td>
                     <td class="align-middle">
-                        <%= link_to "表示する", customer_order_path(order_detail.order.id), class: "btn btn-primary" %>
+                        <%= link_to "表示する", customer_order_path(order.id), class: "btn btn-primary" %>
                     </td>
                 </tr>
                 <% end %>
@@ -94,7 +77,8 @@
                 </tr>
             </thead>
             <tbody>
-                <% @orders.each do |order| %>
+
+                <% @item_order.each do |order| %>
                 <tr>
                     <!--注文日-->
                     <td class="align-middle">
@@ -107,11 +91,8 @@
                     </td>
                     <!--注文商品-->
                     <td class="align-middle">
-                        <% @order_details.each do |order_detail| %>
-                            <!--自分が注文したもののみ表示-->
-                            <% if order_detail.order_id == order.id %>
-                                <%= order_detail.item.name %></br>
-                            <% end %>
+                        <% order.order_details.each do |order_detail| %>
+                            <%= order_detail.item.name %></br>
                         <% end %>
                     </td>
                     <!--「支払金額」合計を表示-->

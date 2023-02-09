@@ -4,6 +4,7 @@ class Album < ApplicationRecord
   belongs_to :artist
   # trackが昇順に並び替える
   has_many :musics, -> { order(track: :asc) }, dependent: :destroy
+  has_many :order_details
 
   # ジャケット画像
   has_one_attached :jacket_image
