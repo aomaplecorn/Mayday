@@ -26,7 +26,7 @@ class Customer::UsersController < ApplicationController
   def withdraw
     @customer = current_customer
     if @customer.update(is_deleted: true)
-      reset_session
+      # reset_session
       redirect_to "/"
     else
       render :check

@@ -10,8 +10,9 @@ class Artist::MusicsController < ApplicationController
       @musics = @album.musics
       render '/artist/albums/edit'
     end
-  end
 
+  end
+# <div style="width: 100%; height: 100vh; background-image: url(<%= url_for(@artist.get_background_image) %>); background-size: cover;">
   def update
     @music = Music.find(params[:id])
     if @music.update(music_params)

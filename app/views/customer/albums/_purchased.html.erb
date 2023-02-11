@@ -1,0 +1,18 @@
+
+
+<div class="row d-flex justify-content-center">
+  <div class="col-2 ml-3">
+    <%= image_tag @album.get_jacket_image(350,350) %>
+  </div>
+  <div class="col-xl-8 offset-xl-1">
+    <h2><%= @album.name %></h2>
+    <div>
+      <%= @album.artist.name %>
+    </div>
+  </div>
+</div>
+
+<!--以下、楽曲一覧-->
+<%= render 'customer/musics/index' %>
+
+

@@ -102,19 +102,26 @@ class Customer::OrdersController < ApplicationController
   # 注文履歴一覧
   def index
     # カスタマー1人のアルバムの注文を全て取得（降順（最新が一番上））
-    @album_order = current_customer.orders.left_joins(:order_details).where(order_details: {item_id: nil}).order(created_at: :desc)
-    # アイテムの注文を全て取得（降順（最新が一番上））
-    item_order = current_customer.orders.left_joins(:order_details).where(order_details: {album_id: nil}).order(created_at: :desc)
-    # アイテムの重複したレコードをdistinctで削除し、一意のレコードとする。
-    @item_order = item_order.distinct
+    @album_orders = current_customer.orders.left_joins(:order_details).where(order_details: {item_id: nil}).order(created_at: :desc)
+    # カスタマー1人のアイテムの注文を全て取得（降順（最新が一番上））
+    item_orders = current_customer.orders.left_joins(:order_details).where(order_details: {album_id: nil}).order(created_at: :desc)
+    # アイテムの重複したレコードをdistinctで削除する。
+    @item_orders = item_orders.distinct
   end
 
   # 注文履歴詳細
   def show
     @order = Order.find(params[:id])
     @order_details = OrderDetail.all
-  # 商品合計を逆算
-    @total_price = @order.total_payment - @order.delivery_cost
+    # @orderにアルバムIDがあるかどうか判定
+    if @order.order_details.where(album_id: nil).count <= 0
+      # アルバム情報の変数を作る
+      @order.order_details.each do |order_detail|
+        @album = order_detail.album
+        @musics = @album.musics
+      end
+    end
+
   end
 
   private

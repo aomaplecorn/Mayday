@@ -10,7 +10,6 @@
 </ul>
 <!--ここまで、購入商品の種類（タブ本体）-->
 
-
 <div class="tab-content">
 <!--以下、アルバムの注文詳細タブ-->
     <div id="contents1" class="tab-pane active">
@@ -30,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% @album_order.each do |order| %>
+                <% @album_orders.each do |order| %>
                 <tr>
                     <!--購入日-->
                     <td class="align-middle">
@@ -78,7 +77,7 @@
             </thead>
             <tbody>
 
-                <% @item_order.each do |order| %>
+                <% @item_orders.each do |order| %>
                 <tr>
                     <!--注文日-->
                     <td class="align-middle">
