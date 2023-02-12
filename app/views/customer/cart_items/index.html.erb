@@ -6,10 +6,11 @@
         <div class="text-right m-3"><%= link_to "カートを空にする", customer_cart_items_destroy_all_path, method: :delete, class: "btn btn-danger" %></div>
     </div>
 
-<% @cart_items.each do |cart_item| %>
+
 <div class="align-middle">
-    <strong><%= cart_item.item.artist.name %></strong>の商品
+    <!--<strong><あ%= cart_item.item.artist.name %></strong>の商品-->
 </div>
+
 <table class="table table-bordered">
     <thead style="background-color: #EEEEEE;">
         <tr>
@@ -21,6 +22,7 @@
         </tr>
     </thead>
     <tbody>
+        <% @cart_items.each do |cart_item| %>
         <tr>
             <!--商品画像・商品名-->
             <td class="align-middle">
@@ -43,24 +45,18 @@
         <% end %>
             <!--小計-->
             <td class="align-middle">
-                <%= cart_item.subtotal.to_s(:delimited) %>
-                <% @total_item_price += cart_item.subtotal %>
+                <%= cart_item.subtotal.to_s(:delimited) %>円
+                <% @total_price += cart_item.subtotal %>
             </td>
             <td class="align-middle">
                 <%= link_to "削除する", customer_cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
             </td>
         </tr>
-        <tr>
-            <td colspan="4"></td>
-            <td>
-                <% delivery_cost = cart_item.item.artist.delivery_cost %>
-                配送料：<%= delivery_cost.to_s(:delimited) %>円
-                <% @total_delivery_cost += delivery_cost %>
-            </td>
-        </tr>
+        <!--アーティストが設定した配送料を@delivery_costへ格納しておく-->
+        <% @delivery_cost = cart_item.item.artist.delivery_cost %>
+        <% end %>
     </tbody>
 </table>
-<% end %>
 
     <div class="row">
         <div class="col-9">
@@ -69,9 +65,22 @@
         <div class="col-3 d-flex align-items-end justify-content-end">
             <table class="table table-bordered" style="float:right;">
                 <tr>
-                    <td class="align-middle" style="background-color: #EEEEEE;">合計金額</td>
-                    <% total_payment = @total_item_price + @total_delivery_cost %>
-                    <td class="align-middle"><%= total_payment.round.to_s(:delimited) %></td>
+                    <td class="align-middle" style="background-color: #EEEEEE;">
+                        配送料
+                    </td>
+                    <td class="align-middle">
+                        <%= @delivery_cost.to_s(:delimited) %>円
+                    </td>
+                </tr>
+                <tr>
+                    <td class="align-middle" style="background-color: #EEEEEE;">
+                        合計金額
+                    </td>
+                    <td class="align-middle">
+                        <!--合計金額を計算-->
+                        <% total_payment = @total_price + @delivery_cost %>
+                        <%= total_payment.round.to_s(:delimited) %>円
+                    </td>
                 </tr>
             </table>
         </div>
@@ -80,9 +89,11 @@
 </div>
 
 <div class="text-center">
-    <!--カート内にアイテムがない場合は「購入に進む」ボタンを表示しない-->
+    <!--カート内にアイテムがない場合は「購入に進む」ボタンを押せない-->
     <% if @cart_items.count != 0 %>
         <%= link_to "購入に進む", new_customer_order_path, class: "btn btn-success" %>
+    <% else %>
+        <%= link_to "購入に進む", new_customer_order_path, class: "btn btn-success disabled" %>
     <% end %>
 </div>
 

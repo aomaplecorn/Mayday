@@ -2,38 +2,57 @@ class Customer::CartItemsController < ApplicationController
   before_action :authenticate_customer!
 
   def index
-    @cart_items = current_customer.cart_items
     @cart_item = CartItem.new
+    @cart_items = current_customer.cart_items
+    if @cart_items.count == 0
+      @delivery_cost = 0
+    end
     # 商品の合計金額
-    @total_item_price = @cart_items.inject(0) { |total, item| total }
-    # 配送料合計
-    @total_delivery_cost = @cart_items.inject(0) { |total, item| total }
+    @total_price = @cart_items.inject(0) { |total, item| total }
   end
 
   def create
     @cart_item = CartItem.new(cart_item_params)
     @cart_item.customer_id = current_customer.id
-    # カート内にある同じアイテムのレコードを取得し、既存のカートアイテム（existing_cart_item）へ格納
+  # 以下、カート内のアイテム有無判定
+    ## カート内にある同じアイテムのレコードを取得し、既存のカートアイテム（existing_cart_item）へ格納
     @existing_cart_item = current_customer.cart_items.find_by(item_id: @cart_item.item_id)
-    # カート内に同じアイテムがない場合、レコードを新規作成する
+    ## 条件１、カート内に同じアイテムがない場合、レコードを新規作成する
     if @existing_cart_item == nil
-      @cart_item.save
-      redirect_to customer_cart_items_path
-    # カート内に同じアイテムがある場合、レコードの"数量"を更新する
+      ### 条件１−１、カート内にレコードがない場合
+      if current_customer.cart_items.count == 0
+        @cart_item.save
+        redirect_to customer_cart_items_path
+      ### 条件１−２、カート内にレコードがある場合
+      else
+        #### 条件１−２−１、カートのレコードが同じアーティストのものである場合
+        if @cart_item.item.artist_id == current_customer.cart_items.first.item.artist_id
+          @cart_item.save
+          redirect_to customer_cart_items_path
+        #### 条件１−２−２、カートのレコードが同じアーティストのものではない場合
+        else
+            flash[:notice] = "他のアーティストの商品がカートに入っています。カート内にある商品の購入処理を済ませてからお買い求めください。"
+            redirect_to customer_item_path(@cart_item.item_id)
+        end
+    ## 条件２、カート内に同じアイテムがある場合、レコードの"数量"を更新する
+      end
     elsif @cart_item.amount != nil
-      ## アイテムの個数が在庫を超えた場合、アイテム画面へリダイレクトする条件分岐。
-      if @existing_cart_item.amount > @cart_item.item.amount
-        @existing_cart_item.amount += @cart_item.amount
+      @existing_cart_item.amount += @cart_item.amount
+      ### 条件２−１、アイテムの個数が　在庫以下＝保存。
+      if @existing_cart_item.amount <= @cart_item.item.amount
         @existing_cart_item.save
         redirect_to customer_cart_items_path
+      ### 条件２−２、アイテムの個数が　在庫以上＝アイテム画面へ戻る。
       else
-        flash[:notice_stock_error] = "在庫以上のご注文はできません"
+        flash[:notice] = "在庫以上のご注文はできません"
         redirect_to customer_item_path(@cart_item.item_id)
       end
+    ## 条件３、「個数選択」を選択した場合の処理
     else
-    # 選択肢を間違えた時＋「個数選択」を選択した場合
+      flash[:notice] = "数量を選択してください"
       redirect_to customer_item_path(@cart_item.item_id)
     end
+  # ここまで、カート内のアイテム有無判定
   end
 
   def update

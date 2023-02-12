@@ -3,6 +3,8 @@ class Artist::UsersController < ApplicationController
 
   def show
     @artist = current_artist
+    @albums = @artist.albums
+    @items = @artist.items
   end
 
   def edit
