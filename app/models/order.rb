@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
 
   # モデルの関係
+  belongs_to :artist
   belongs_to :customer
   has_many :order_details, dependent: :destroy
 

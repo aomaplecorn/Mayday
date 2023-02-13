@@ -50,8 +50,6 @@
                 <%= link_to "削除する", customer_cart_item_path(cart_item.id), method: :delete, class: "btn btn-danger" %>
             </td>
         </tr>
-        <!--アーティストが設定した配送料を@delivery_costへ格納しておく-->
-        <% @delivery_cost = cart_item.item.artist.delivery_cost %>
         <% end %>
     </tbody>
 </table>

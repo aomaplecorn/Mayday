@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root to: 'homes#top'
   post 'homes/purchase' => 'homes#purchase'
   get '/search' => 'homes#search',as: 'search'
@@ -60,7 +61,10 @@ Rails.application.routes.draw do
     resources :musics, only: [:create,:update,:destroy]
   # グッズ
     resources :items, except: [:show]
+  # 注文
+    resources :orders, only: [:index,:show,:update]
   end
+
 ## ここまで、アーティスト
 
 ## 以下、カスタマー

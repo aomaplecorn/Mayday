@@ -18,19 +18,12 @@ class Customer::OrdersController < ApplicationController
     ## 以下、confirm画面で表示する金額を用意する処理
       @cart_items = current_customer.cart_items
       # カート内の合計金額を格納
-      @total_item_price = @cart_items.inject(0) { |total, item| total + item.subtotal }
-    ## 以下、送料合計を@total_delivery_costへ格納
-      # total_delivery_costの数値を０にしておく
-      @total_delivery_cost = 0
-      @cart_items.each do |cart_item|
-        # カートアイテムに入っているアイテムに設定された各送料を@total_delivery_costへ格納
-        @total_delivery_cost += cart_item.item.artist.delivery_cost
-      end
-    ## ここまで、送料合計を@total_delivery_costへ格納
+      @total_price = @cart_items.inject(0) { |total, item| total + item.subtotal }
       # オーダーのdelivery_costに格納
-      @order.delivery_cost = @total_delivery_cost
+      @delivery_cost = @cart_items.first.item.artist.delivery_cost
+      @order.delivery_cost = @delivery_cost
       # カート内のアイテム＋送料の総額を、請求金額(total_payment)へ格納
-      @order.total_payment = @total_item_price + @order.delivery_cost
+      @order.total_payment = @total_price + @order.delivery_cost
     ## ここまで、confirm画面で表示する金額を用意する処理
 
     ## 以下、view/new　で定義した address_number（１）＝「ご自身の住所」　の処理
@@ -65,6 +58,7 @@ class Customer::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
+    @order.artist_id = current_customer.cart_items.first.item.artist_id
     if @order.save
     # 決済処理（Payjpを使用）
       Payjp.api_key = ENV['PAYJP_SECRET_KEY']
@@ -126,7 +120,7 @@ class Customer::OrdersController < ApplicationController
 
   private
   def order_params
-    params.require(:order).permit(:customer_id, :postal_code, :address, :name, :delivery_cost, :total_payment, :status)
+    params.require(:order).permit(:customer_id,:artist_id, :postal_code, :address, :name, :delivery_cost, :total_payment, :status)
   end
 
 end

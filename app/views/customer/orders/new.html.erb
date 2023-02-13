@@ -29,10 +29,10 @@
         <%= f.label :address_number_1, "ご自身の住所" %>
     </div>
     <div class="offset-1 col-auto">
-        <%= current_customer.my_address %>
+        ご住所：<%= current_customer.my_address %>
     </div>
     <div class="offset-1 col-auto">
-        <%= current_customer.name %>
+        宛名　：<%= current_customer.name %>
     </div>
 <!--ここまで、住所選択１「ユーザー本人の住所」-->
 <!--以下、住所選択２「新しい住所へ配送」-->
@@ -62,8 +62,9 @@
         <span class="col-auto"><%= f.text_field :name, placeholder: "宛名" %></span>
     </div>
 <!--ここまで、住所選択２「新しい住所へ配送」-->
-
-<div class=" d-flex align-items-center justify-content-center text-center mt-3"><%= f.submit "確認画面へ進む", class: "btn btn-primary" %></div>
+<div class=" d-flex align-items-center justify-content-center text-center mt-3">
+    <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+</div>
 
 <% end %>
 

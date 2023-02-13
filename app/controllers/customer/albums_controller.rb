@@ -13,11 +13,11 @@ class Customer::AlbumsController < ApplicationController
 
 # アルバム購入処理
   def create
-    # binding.pry1
     @album = Album.new(album_params)
     # 注文詳細を表示するためにオーダーを作成し保存する。
     @order = Order.new
     @order.customer_id = current_customer.id
+    @order.artist_id = @album.artist_id
     @order.delivery_cost = 0
     @order.postal_code = current_customer.postal_code
     @order.address = current_customer.address
@@ -50,7 +50,7 @@ class Customer::AlbumsController < ApplicationController
 
   private
   def album_params
-    params.require(:album).permit(:id,:price)
+    params.require(:album).permit(:id,:price,:artist_id)
   end
 
 end

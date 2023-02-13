@@ -6,6 +6,8 @@ class Customer::CartItemsController < ApplicationController
     @cart_items = current_customer.cart_items
     if @cart_items.count == 0
       @delivery_cost = 0
+    else
+      @delivery_cost = @cart_items.first.item.artist.delivery_cost
     end
     # 商品の合計金額
     @total_price = @cart_items.inject(0) { |total, item| total }

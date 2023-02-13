@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <!--以下、adminで使うタブ用にBootstrapをCDNから参照-->
+    <!--以下、タブ分けとして使うBootstrapをCDNから参照-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-jJ2L/Ujk8jWEwtIXPFEk3X+f20QKnj4IIscn+JZzxqkbAUC79idDdiAhAi2E7czT" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-K09cMhJkkwNoZK1BRIJX6fQk06LqHSs8LdWAE24M/18F4NlePaltFx1cnB9wKwQX" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <!--ここまで、adminで使うタブ用にBootstrapをCDNから参照-->
+    <!--ここまで、タブ分けとして使うBootstrapをCDNから参照-->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -32,7 +32,7 @@
 
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-          <!--以下、アドミンのヘッダーリンク-->
+          <!--以下、アドミン（ログイン済み）のヘッダーリンク-->
             <% if admin_signed_in? %>
               <li class="nav-item">
                 <%= link_to 'ユーザ管理一覧', admin_users_path, class: "nav-link text-light" %>
@@ -44,8 +44,8 @@
                 <%= link_to 'ログアウト（管理者）', destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
             <% end %>
-          <!--ここまで、アドミンのヘッダーリンク-->
-          <!--以下、アーティストのヘッダーリンク-->
+          <!--ここまで、アドミン（ログイン済み）のヘッダーリンク-->
+          <!--以下、アーティスト（ログイン済み）のヘッダーリンク-->
             <% if artist_signed_in? %>
               <li class="nav-item">
                 <%= link_to 'マイページ', artist_user_path(current_artist.id), class: "nav-link text-light" %>
@@ -66,11 +66,14 @@
                 <%= link_to 'グッズ一覧', artist_items_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
+                <%= link_to '注文一覧', artist_orders_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to 'ログアウト（アーティスト）', destroy_artist_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
             <% end %>
-          <!--ここまで、アーティストのヘッダーリンク-->
-          <!--以下、カスタマーのヘッダーリンク-->
+          <!--ここまで、アーティスト（ログイン済み）のヘッダーリンク-->
+          <!--以下、カスタマー（ログイン済み）のヘッダーリンク-->
             <% if customer_signed_in? %>
               <li class="nav-item">
                 <%= link_to 'マイページ（カスタマー）', customer_mypage_path, class: "nav-link text-light" %>
@@ -91,15 +94,9 @@
                 <%= link_to 'ログアウト（カスタマー）', destroy_customer_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
             <% end %>
-          <!--ここまで、カスタマーのヘッダーリンク-->
+          <!--ここまで、カスタマー（ログイン済み）のヘッダーリンク-->
           <!--以下、アーティスト・カスタマー・アドミンのいずれにもログインしていない場合のヘッダー-->
             <% if !artist_signed_in? && !customer_signed_in? && !admin_signed_in?%>
-              <li class="nav-item">
-                <%= link_to '音楽一覧', customer_albums_path, class: "nav-link text-light" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'アイテム一覧', customer_items_path, class: "nav-link text-light" %>
-              </li>
               <li class="nav-item">
                 <%= link_to 'ログイン（アーティストの方はこちらから）', artist_session_path, class: "nav-link text-light" %>
               </li>
@@ -118,7 +115,7 @@
         </div>
       </nav>
     </header>
-    <main class="mb-auto">
+    <main>
       <%= yield %>
     </main>
   </body>

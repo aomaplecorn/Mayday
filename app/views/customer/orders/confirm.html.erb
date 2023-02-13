@@ -6,7 +6,6 @@
 
 　<div class="row">
     <div class="col-sm-8">
-      <% @cart_items.each do |cart_item| %>
         <table class="table table-bordered">
             <thead style="background-color: #EEEEEE;">
                 <tr>
@@ -18,6 +17,7 @@
             </thead>
             <tbody>
             <!--画像＋商品名、単価、数量、小計　を表示-->
+                <% @cart_items.each do |cart_item| %>
                 <tr>
                     <td class="align-middle">
                         <%= image_tag cart_item.item.get_item_image(60,40) %>
@@ -27,16 +27,10 @@
                     <td class="align-middle"><%= cart_item.amount %></td>
                     <td class="align-middle"><%= cart_item.subtotal.to_s(:delimited) %></td>
                 </tr>
-                <tr>
-                    <td colspan="3"></td>
-                    <td>
-                        <% delivery_cost = cart_item.item.artist.delivery_cost %>
-                        配送料：<%= delivery_cost.to_s(:delimited) %>円
-                    </td>
-                </tr>
+                <% @delivery_cost = cart_item.item.artist.delivery_cost %>
+                <% end %>
             </tbody>
         </table>
-    　<% end %>
     </div>
 
     <div class="offset-sm-1 col-sm-3">
@@ -44,13 +38,12 @@
         <table class="table table-bordered">
             <tr>
                 <td style="background-color: #EEEEEE;">商品合計</td>
-                <td><%= @total_item_price.round.to_s(:delimited) %></td>
+                <td><%= @total_price.round.to_s(:delimited) %></td>
             </tr>
             <tr>
-                <td style="background-color: #EEEEEE;">送料合計</td>
-                <td><%= @total_delivery_cost.to_s(:delimited) %></td>
+                <td style="background-color: #EEEEEE;">送料</td>
+                <td><%= @delivery_cost.to_s(:delimited) %></td>
             </tr>
-            <tr>
                 <td style="background-color: #EEEEEE;">ご請求金額</td>
                 <td><%= @order.total_payment.to_s(:delimited) %></td>
             </tr>
@@ -72,8 +65,8 @@
 
 　<div class="row mt-3 ml-3">
     <strong>お届け先</strong>
-    <span class="ml-3"><%= '〒' + @order.postal_code + '' + @order.address %></span>
-　</div>
+    <span class="ml-3"><%= '〒' + @order.postal_code %><br><%= @order.address %></span>
+  </div>
 　<div class="row ml-3">
     <strong>宛名　　</strong>
     <span class="ml-3"><%= @order.name %></span>
