@@ -14,79 +14,107 @@
     <!--ここまで、adminで使うタブ用にBootstrapをCDNから参照-->
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <style>
-      /*bodyの画面の高さの最低値を100vhに設定*/
-      body { min-height: 100vh; }
-    </style>
   </head>
 
-  <body>
-    <header>
-      <div>ヘッダー</div>
-      <!--検索テンプレ（対象：アイテム、アルバム、アーティスト）-->
-      <%= render '/homes/search_list' %>
+  <body class="d-flex flex-column" style="min-height: 100vh;">
+    <header class="shadow-sm bg-dark">
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/"><h3>Mayday</h3></a>
+          <span class="ml-auto">
+            <!--検索テンプレ（対象：アイテム、アルバム、アーティスト）-->
+            <%= render '/homes/search_list'%>
+          </span>
+          <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-      <div><%= link_to 'top', root_path %></div>
-<!--以下、adminのログイン確認-->
-<div>
-      <% if admin_signed_in? %>
-        <%= button_to 'アドミンlog_out', destroy_admin_session_path, method: :delete %>
-        ユーザー関連
-        <%= link_to '一覧管理', admin_users_path %>
-        販売管理
-        <%= link_to '一覧管理', admin_products_path %>
-      <% else %>
-        <%= link_to 'アドミンlog_in', admin_session_path %>
-      <% end %>
-</div>
-<!--ここまで、adminのログイン確認-->
-<!--以下、artistのログイン確認-->
-<div>
-      <% if artist_signed_in? %>
-          ユーザー関連
-            <%= link_to 'マイページ', artist_mypage_path %>
-            <%= link_to 'ページ編集', artist_edit_mypage_path %>
-
-          アルバム関連
-            <%= link_to '作成', new_artist_album_path %>
-            <%= link_to '一覧', artist_albums_path %>
-
-          グッズ関連
-            <%= link_to '作成', new_artist_item_path %>
-            <%= link_to '一覧', artist_items_path %>
-
-        <%= button_to 'アーティストlog_out', destroy_artist_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'アーティストlog_in', artist_session_path %>
-        <%= link_to 'アーティストsign_up', new_artist_registration_path %>
-      <% end %>
-</div>
-<!--ここまで、artistのログイン確認-->
-
-<!--以下、userのログイン確認-->
-<div>
-      <% if customer_signed_in? %>
-        カスタマー情報
-        <%= link_to 'カスタマーmypage', customer_mypage_path %>
-        <%= link_to 'カスタマーedit_mypage', customer_edit_mypage_path %>
-        カートアイテム関連
-        <%= link_to 'カートアイテム', customer_cart_items_path %>
-        アイテム関連
-        <%= link_to '一覧', customer_items_path %>
-        オーダー関連
-        <%= link_to '一覧', customer_orders_path %>
-        アルバム（音楽）関連
-        <%= link_to '一覧', customer_albums_path %>
-        <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'カスタマーlog_in', customer_session_path %>
-        <%= link_to 'カスタマーsign_up', new_customer_registration_path %>
-      <% end %>
-</div>
-<!--ここまで、userのログイン確認-->
-
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+          <!--以下、アドミンのヘッダーリンク-->
+            <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'ユーザ管理一覧', admin_users_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '販売管理一覧', admin_products_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト（管理者）', destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+              </li>
+            <% end %>
+          <!--ここまで、アドミンのヘッダーリンク-->
+          <!--以下、アーティストのヘッダーリンク-->
+            <% if artist_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'マイページ', artist_user_path(current_artist.id), class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'マイページ編集', edit_artist_user_path(current_artist.id), class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アルバム作成', new_artist_album_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アルバム一覧', artist_albums_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'グッズ作成', new_artist_item_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'グッズ一覧', artist_items_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト（アーティスト）', destroy_artist_session_path, method: :delete, class: "nav-link text-light" %>
+              </li>
+            <% end %>
+          <!--ここまで、アーティストのヘッダーリンク-->
+          <!--以下、カスタマーのヘッダーリンク-->
+            <% if customer_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'マイページ（カスタマー）', customer_mypage_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'カート', customer_cart_items_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '注文履歴一覧', customer_orders_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '楽曲一覧', customer_albums_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アイテム一覧', customer_items_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト（カスタマー）', destroy_customer_session_path, method: :delete, class: "nav-link text-light" %>
+              </li>
+            <% end %>
+          <!--ここまで、カスタマーのヘッダーリンク-->
+          <!--以下、アーティスト・カスタマーどちらにもログインしていない場合のヘッダー-->
+            <% if !artist_signed_in? && !customer_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'ログイン（アーティストの方はこちらから）', artist_session_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アカウント新規作成（アーティストの方はこちらから）', new_artist_registration_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログイン（一般のお客様はこちらから）', customer_session_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アカウント新規作成（一般のお客様はこちらから）', new_customer_registration_path, class: "nav-link text-light" %>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
-
-    <%= yield %>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
   </body>
 </html>
+

@@ -6,7 +6,7 @@ class Artist::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     flash[:notice] = 'ログインしました。'
-    artist_mypage_path
+    artist_user_path(@artist.id)
   end
 
   def after_sign_out_path_for(resource)
@@ -19,7 +19,7 @@ class Artist::SessionsController < Devise::SessionsController
     artist = Artist.guest
     sign_in artist
     flash[:notice] = 'ゲストアーティストとしてログインしました。'
-    redirect_to artist_mypage_path
+    redirect_to artist_user_path(artist.id)
   end
 
 
@@ -41,7 +41,7 @@ class Artist::SessionsController < Devise::SessionsController
 
   protected
 
-  ## 以下、退会処理
+  # 以下、退会処理
   def artist_state
     # 入力されたemailからアカウントを１件取得
     @artist = Artist.find_by(email: params[:artist][:email])
@@ -52,7 +52,7 @@ class Artist::SessionsController < Devise::SessionsController
       redirect_to new_artist_registration_path
     end
   end
-  ## ここまで、退会処理
+  # ここまで、退会処理
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

@@ -1,7 +1,4 @@
 <!--music作成フォーム-->
-
-
-
 <%= form_with model: [:artist,@music] do |f| %>
 <div class="container">
   <div class="row">
@@ -23,6 +20,11 @@
       <% end %>
     </ul>
   </div>
+<% end %>
+<% if flash[:notice_create] %>
+    <p id="notice" class="alert alert-warning">
+      <%= flash[:notice_create] %>
+    </p>
 <% end %>
 <!--ここまで、エラーメッセージ-->
 

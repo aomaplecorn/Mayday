@@ -1,4 +1,5 @@
 class Customer::AlbumsController < ApplicationController
+  before_action :authenticate_customer!, only: [:create]
 
   def index
     @albums = Album.all

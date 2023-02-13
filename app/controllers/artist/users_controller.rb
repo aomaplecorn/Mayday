@@ -1,10 +1,11 @@
 class Artist::UsersController < ApplicationController
-  before_action :authenticate_artist!
+  before_action :authenticate_artist!, except: [:show]
 
   def show
-    @artist = current_artist
-    @albums = @artist.albums
-    @items = @artist.items
+    @artist = Artist.find(params[:id])
+    # アルバム・アイテムの販売中になっている最新３件を取得
+    @albums = @artist.albums.where(released: true).last(4)
+    @items = @artist.items.where(is_active: true).last(4)
   end
 
   def edit
@@ -14,7 +15,7 @@ class Artist::UsersController < ApplicationController
   def update
     @artist = current_artist
     if @artist.update(artist_params)
-      redirect_to artist_mypage_path
+      redirect_to artist_user_path(@artist.id)
     else
       render :edit
     end

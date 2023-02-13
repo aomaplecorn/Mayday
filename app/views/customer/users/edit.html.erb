@@ -1,5 +1,3 @@
-<h1>Customer::Users#edit</h1>
-
 <!--以下、エラーメッセージ-->
 <% if @customer.errors.any? %>
   <div class="alert alert-warning">
@@ -37,7 +35,7 @@
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">ご住所</td>
-        <td class="form_control pt-3 mt-3"><%= f.text_field :address %></td>
+        <td class="form_control pt-3 mt-3"><%= f.text_area :address %></td>
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">ご連絡先</td>

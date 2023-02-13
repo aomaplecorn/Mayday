@@ -1,24 +1,89 @@
-<h1>Artist::Users#show</h1>
 
-<!--背景画像を表示-->
-<div style="width: 100%; height: 100vh; background-image: url(<%= url_for(@artist.get_background_image) %>); background-size: cover;">
-　<div class="d-flex justify-content-center">
-    <p class="display-4 bg-white text-center">
-    　<%= @artist.name%>
-    </p>
+<!--背景画像-->
+<div style="width: 100%; height: 1500px; background-image: url(<%= url_for(@artist.get_background_image) %>); background-size: cover;">
+　<!--ど真ん中のアーティスト名-->
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto">
+        <p class="display-4 bg-white mt-5">
+          <%= @artist.name %>
+        </p>
+    　</div>
+    </div>
 　</div>
-　<div class="bg-white row p-3">
-    <span class="col-4 offset-2"><%= image_tag @artist.get_introduction_image(500,500) %></span>
-    <span style="white-space: pre-line;"  class="col-5 offset-1 lead"><%= @artist.introduction %></span>
+  <!--中央の自己紹介（画像＆文）-->
+　<div class="bg-white row p-3 mb-5">
+    <span class="mx-auto"><%= image_tag @artist.get_introduction_image(600,500) %></span>
+    <span style="white-space: pre-line;"  class="ml-1 mr-auto"><%= @artist.introduction %></span>
 　</div>
-  <div>
 
-　</div>
-アルバムとアイテムをタブで表示していく
+<!--以下、販売商品の種類（タブ本体）-->
+  <div class="bg-white row p-3">
+  　<ul class="nav nav-tabs">
+      <li class="nav-item">
+      　<a href="#contents1" class="nav-link active" data-toggle="tab">最新アルバム</a>
+      </li>
+      <li class="nav-item">
+      　<a href="#contents2" class="nav-link" data-toggle="tab">販売中のグッズ</a>
+      </li>
+  　</ul>
+  </div>
+<!--ここまで、販売商品の種類（タブ本体）-->
 
+  <div class="tab-content bg-white">
+  <!--以下、タブ１「最新アルバム」の中身-->
+  　<div id="contents1" class="tab-pane active">
+      <div class="bg-white mx-3">
+        <div class="d-flex justify-content-start text-start my-auto mx-auto">
+          <% @albums.each do |album| %>
+            <div class="d-flex flex-column">
+              <%= link_to customer_album_path(album.id) do %>
+                <%= image_tag album.get_jacket_image(300,300) %><br>
+                  <span class="ml-3 text-dark">
+                    <%= album.name %>
+                  </span>
+                  <span class="ml-3 text-dark">
+                    <%= album.price.to_s(:delimited) %>円<br>
+                  </span>
+                <% end %>
+                  <p>※登録しているうちの３曲のみ表示されます。</p>
+                <% album.musics.first(3).each do |music| %>
+                <table class="table form-inline">
+                  <td class="align-middle">
+                    <%= music.name %><br>
+                  </td>
+                  <td class="align-middle">
+                    <%= audio_tag(polymorphic_path(music.get_test_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "align-middle") %><br>
+                  </td>
+                </table>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+  　  </div>
+    </div>
 
-
-
+  <!--以下、タブ２「販売中のグッズ」の中身-->
+    <div id="contents2" class="tab-pane">
+      <div class="bg-white mx-3">
+        <div class="d-flex justify-content-start text-start">
+          <% @items.each do |item| %>
+            <div class="d-flex flex-column ml-3">
+              <%= link_to customer_item_path(item.id) do %>
+                <%= image_tag item.get_item_image(300,300) %><br>
+                <span class="ml-3 text-dark">
+                  <%= item.name %>
+                </span>
+                <span class="ml-3 text-dark">
+                  <%= item.price.to_s(:delimited) %>円<br>
+                </span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

@@ -1,5 +1,3 @@
-<h1>Artist::Users#edit</h1>
-
 <!--以下、エラーメッセージ-->
 <% if @artist.errors.any? %>
   <div class="alert alert-warning">
@@ -20,7 +18,7 @@
 
 <table class="table d-flex align-items-center justify-content-center my-auto mx-auto">
   <tbody>
-    <%= form_with model: @artist, url: artist_users_path(current_artist.id), method: :patch do |f| %>
+    <%= form_with model: @artist, url: artist_user_path(current_artist.id), method: :patch do |f| %>
     <tr>
       <th colspan="3"></th>
     </tr>
@@ -29,15 +27,15 @@
       <td class="form_control pt-3 mt-3"><%= f.text_field :name %></td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">BIOGRAPHY</td>
-      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction, rows: "5", placeholder: "自己紹介" %></td>
+      <td class="form_control pt-3 mt-3">紹介文</td>
+      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction, rows: "5", placeholder: "例：2023年2月結成の岡山のバンドです！普段はREDBOXでライブしています！" %></td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">ご連絡先<br><h6>※この情報はサイトに表示されません</h6></td>
+      <td class="form_control pt-3 mt-3">ご連絡先<br><span>※この情報はサイトに表示されません</span></td>
       <td class="form_control pt-3 mt-3"><%= f.number_field :telephone_number %></td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">配送費用<br><h6>※グッズの配送にかかる費用です</h6></td>
+      <td class="form_control pt-3 mt-3">配送費用<br><span>※グッズの配送にかかる費用です</span></td>
       <td class="form_control pt-3 mt-3"><%= f.number_field :delivery_cost %></td>
     </tr>
     <tr>
@@ -54,7 +52,7 @@
         <%= f.submit 'アーティスト情報を更新', class: "btn btn-success mt-3" %>
       </td>
       <td colspan="3"></td>
-      <td><%= link_to "マイページへ戻る", artist_mypage_path, class: "btn btn-secondary m-3" %></td>
+      <td><%= link_to "マイページへ戻る", artist_user_path(@artist.id), class: "btn btn-secondary m-3" %></td>
     <tr>
       <td colspan="4"></td>
       <td><%= link_to "退会する", artist_check_path, class: "btn btn-danger m-3" %></td>
