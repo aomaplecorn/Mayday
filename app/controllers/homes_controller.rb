@@ -1,5 +1,13 @@
 class HomesController < ApplicationController
+  before_action :authenticate_customer!, only: [:search]
+
   def top
+  end
+
+  def home
+    @artists = Artist.where(is_deleted: false)
+    @albums = Album.where(released: true)
+    @items = Item.where(is_active: true)
   end
 
   # 検索機能（対象：アイテム・アルバム・アーティスト）

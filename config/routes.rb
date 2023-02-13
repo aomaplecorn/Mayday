@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-
   root to: 'homes#top'
-  post 'homes/purchase' => 'homes#purchase'
   get '/search' => 'homes#search',as: 'search'
+  get '/home' => 'homes#home', as: 'home'
 
 # 以下、ユーザー認証(devise)
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {

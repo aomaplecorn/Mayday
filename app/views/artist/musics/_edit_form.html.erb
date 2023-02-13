@@ -23,8 +23,7 @@
       <td></td>
       <td>楽曲名</td>
       <td>楽曲ファイル</td>
-      <td></td>
-      <td></td>
+      <td colspan="3"></td>
     </tr>
   </thead>
   <tbody>
@@ -56,6 +55,9 @@
       </td>
       <td class="align-middle text-center">
         <%= f.submit '更新する',class: "btn btn-success" %>
+      </td>
+      <td class="align-middle text-center">
+        <%= link_to '削除', artist_music_path(music.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
       </td>
     </tr>
     <% end %>

@@ -4,87 +4,52 @@
     </p>
 <% end %>
 
-<!--アドミン-->
-<div>
-<% if admin_signed_in? %>
-  <%= button_to 'ログアウト（管理者）', destroy_admin_session_path, method: :delete, class: "logout" %></li>
-<% else %>
-  <%= link_to 'ゲストログイン（管理者）', admins_guest_sign_in_path, method: :post, class: "login" %>
-<% end %>
+<h3 class="text-center">Mayday</h3>
+<div class="container d-flex align-items-center justify-content-center my-auto mx-auto">
+  <div class="row">
+    <p class="text-start my-auto mx-auto">
+      このサイトでは、アーティストは音楽やグッズの登録・販売ができます。<br>
+      一般のお客様は欲しい音楽やグッズを自由に購入することができます。
+    </p>
+  </div>
 </div>
-<!--アーティスト-->
-<div>
-<% if artist_signed_in? %>
-  <%= button_to 'ログアウト（アーティスト）', destroy_artist_session_path, method: :delete, class: "logout" %></li>
-<% else %>
-  <%= link_to 'ゲストログイン（アーティスト）', artists_guest_sign_in_path, method: :post, class: "login" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="d-flex align-items-center justify-content-center my-auto mx-auto" style="height:300px;">
+      <div class="col-6">
+        <p class="text-center">↓一般のお客様はこちら↓</p>
+        <div>
+          <%= link_to 'ログイン（一般のお客様）', customer_session_path, class: "btn btn-primary m-3", style: "width: 300px;" %>
+        </div>
+        <div>
+          <%= link_to '新規登録（一般のお客様）', new_customer_registration_path, class: "btn btn-success m-3", style: "width: 300px;" %>
+        </div>
+        <div>
+          <%= link_to 'ゲストログイン（一般のお客様）', customers_guest_sign_in_path, method: :post, class: "login btn btn-warning m-3", style: "width: 300px;" %>
+        </div>
+      </div>
+      <div class="col-6">
+        <p class="text-center">↓アーティストの方はこちら↓</p>
+        <div>
+          <%= link_to 'ログイン（アーティスト）', artist_session_path, class: "btn btn-primary m-3", style: "width: 300px;" %>
+        </div>
+        <div>
+          <%= link_to '新規登録（アーティスト）', new_artist_registration_path, class: "btn btn-success m-3", style: "width: 300px;" %>
+        </div>
+        <div>
+          <%= link_to 'ゲストログイン（アーティスト）', artists_guest_sign_in_path, method: :post, class: "login btn btn-warning m-3", style: "width: 300px;" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!--カスタマー-->
-<div>
-<% if customer_signed_in? %>
-  <%= button_to 'ログアウト（カスタマー）', destroy_customer_session_path, method: :delete, class: "logout" %></li>
-<% else %>
-  <%= link_to 'ゲストログイン（カスタマー）', customers_guest_sign_in_path, method: :post, class: "login" %>
-<% end %>
+
+
+<div class="d-flex justify-content-center">
+  <%= link_to 'ログイン（管理者）', admin_session_path, class: "btn btn-primary m-3", style: "width: 230px;" %>
+</div>
+<div class="d-flex justify-content-center">
+  <%= link_to 'ゲストログイン（管理者）', admins_guest_sign_in_path, method: :post, class: "login btn btn-warning m-3", style: "width: 230px;" %>
 </div>
 
 
-
-<!--以下、adminのログイン確認-->
-<div>
-      <% if admin_signed_in? %>
-        <%= button_to 'アドミンlog_out', destroy_admin_session_path, method: :delete %>
-        ユーザー関連
-        <%= link_to '一覧管理', admin_users_path %>
-        販売管理
-        <%= link_to '一覧管理', admin_products_path %>
-      <% else %>
-        <%= link_to 'アドミンlog_in', admin_session_path %>
-      <% end %>
-</div>
-<!--ここまで、adminのログイン確認-->
-
-<!--以下、artistのログイン確認-->
-<div>
-      <% if artist_signed_in? %>
-          ユーザー関連
-            <%= link_to 'マイページ', artist_user_path(current_artist.id) %>
-            <%= link_to 'ページ編集', edit_artist_user_path(current_artist.id) %>
-
-          アルバム関連
-            <%= link_to '作成', new_artist_album_path %>
-            <%= link_to '一覧', artist_albums_path %>
-
-          グッズ関連
-            <%= link_to '作成', new_artist_item_path %>
-            <%= link_to '一覧', artist_items_path %>
-
-        <%= button_to 'アーティストlog_out', destroy_artist_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'アーティストlog_in', artist_session_path %>
-        <%= link_to 'アーティストsign_up', new_artist_registration_path %>
-      <% end %>
-</div>
-<!--ここまで、artistのログイン確認-->
-
-<!--以下、userのログイン確認-->
-<div>
-      <% if customer_signed_in? %>
-        カスタマー情報
-        <%= link_to 'カスタマーmypage', customer_mypage_path %>
-        <%= link_to 'カスタマーedit_mypage', customer_edit_mypage_path %>
-        カートアイテム関連
-        <%= link_to 'カートアイテム', customer_cart_items_path %>
-        アイテム関連
-        <%= link_to '一覧', customer_items_path %>
-        オーダー関連
-        <%= link_to '一覧', customer_orders_path %>
-        アルバム（音楽）関連
-        <%= link_to '一覧', customer_albums_path %>
-        <%= button_to 'カスタマーlog_out', destroy_customer_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'カスタマーlog_in', customer_session_path %>
-        <%= link_to 'カスタマーsign_up', new_customer_registration_path %>
-      <% end %>
-</div>

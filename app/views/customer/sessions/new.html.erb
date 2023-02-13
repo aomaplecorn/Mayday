@@ -21,11 +21,9 @@
           <td><%= f.password_field :password, autocomplete: "current-password" %></td>
         </div>
       </tr>
-      <tr>
+      <tr class="actions">
         <td></td>
-        <td><div class="actions pt-4">
-          <%= f.submit "ログイン", class: "btn btn-primary" %>
-        </div></td>
+        <td><%= f.submit "ログイン", class: "btn btn-primary mt-4" %></td>
       </tr>
       <% end %>
     </table>
@@ -37,7 +35,7 @@
   <p class="d-flex align-items-center justify-content-center my-auto mx-auto">
     こちらから<%= link_to "新規会員登録", '/customer/sign_up' %>を行なってください
   </p>
-  
+
   <div class="row">
     <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">アーティストの方はこちら</h6>
   </div>

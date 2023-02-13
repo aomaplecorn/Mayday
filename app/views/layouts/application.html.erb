@@ -54,13 +54,13 @@
                 <%= link_to 'マイページ編集', edit_artist_user_path(current_artist.id), class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'アルバム作成', new_artist_album_path, class: "nav-link text-light" %>
+                <%= link_to 'アルバム（楽曲）登録', new_artist_album_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'アルバム一覧', artist_albums_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'グッズ作成', new_artist_item_path, class: "nav-link text-light" %>
+                <%= link_to 'グッズ登録', new_artist_item_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'グッズ一覧', artist_items_path, class: "nav-link text-light" %>
@@ -115,7 +115,7 @@
         </div>
       </nav>
     </header>
-    <main>
+    <main style="min-height: 100vh;">
       <%= yield %>
     </main>
   </body>

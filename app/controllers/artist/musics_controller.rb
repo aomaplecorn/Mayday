@@ -11,6 +11,7 @@ class Artist::MusicsController < ApplicationController
       else
         @album = @music.album
         @musics = @album.musics
+        flash[:notice_create] = "新規作成できませんでした"
         render '/artist/albums/edit'
       end
     else
@@ -23,17 +24,19 @@ class Artist::MusicsController < ApplicationController
 
   def update
     @music = Music.find(params[:id])
-    # パラムス内のtrackを引き出し変数へ格納。
-    @params_track_check  = Music.new(music_params)
-    @music_track_check = @music.album.musics.find_by(track: @params_track_check.track)
-    # 同じトラック番号がないか確認。
-    if @music_track_check == nil || @music_track_check.track != @params_track_check.track
+    # パラムス内のtrackを変数へ格納
+    @music_params  = Music.new(music_params)
+
+    @track_check = @music.album.musics.find_by(track: @music_params.track)
+    # 「同じトラック番号がないか＋IDが同じであること」を確認
+    if @track_check == nil || @track_check.track != @music_params.track || @track_check.id == @music.id
       if @music.update(music_params)
       # アルバム編集画面へ戻る
         redirect_to edit_artist_album_path(@music.album_id)
       else
         @album = @music.album
         @musics = @album.musics
+        flash[:notice_update] = "変更が行えませんでした"
         render '/artist/albums/edit'
       end
     else

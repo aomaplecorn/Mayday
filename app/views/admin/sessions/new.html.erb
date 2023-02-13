@@ -18,11 +18,9 @@
           <td><%= f.password_field :password, autocomplete: "current-password" %></td>
         </div>
       </tr>
-      <tr>
+      <tr class="actions">
         <td></td>
-        <td><div class="actions pt-4">
-          <%= f.submit "ログイン", class: "btn btn-primary" %>
-        </div></td>
+        <td><%= f.submit "ログイン", class: "btn btn-primary mt-4" %></td>
       </tr>
       <% end %>
     </table>

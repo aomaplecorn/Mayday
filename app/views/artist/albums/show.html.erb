@@ -1,27 +1,29 @@
-<h2>アルバム詳細画面</h2>
-<div class="row d-flex justify-content-center">
-  <div class="col-2 ml-3">
+
+<div class="row d-flex justify-content-center m-5">
+  <div class="col-2">
     <%= image_tag @album.get_jacket_image(350,350) %>
   </div>
   <div class="col-xl-8 offset-xl-1">
-    <h2><%= @album.name %></h2>
+    <h2 class="mx-auto my-auto"><%= @album.name %></h2>
     <div>
       <%= @album.artist.name %>
     </div>
     <div>
       ¥<%= @album.price.to_s(:delimited) %>-
     </div>
-    <div class="d-flex justify-content-end">
-      <%= link_to 'アルバム・楽曲の編集/追加', edit_artist_album_path(@album.id), class: "btn btn-success" %>
-    </div>
   </div>
   <div class="offset-1">
   <% if @album.released == true %>
-    <p >このアルバムは公開されています</p>
+    <p class="mx-auto my-auto">このアルバムは公開されています</p>
     <% else %>
-    <p>このアルバムは公開されていません</p>
+    <p class="mx-auto my-auto">このアルバムは公開されていません</p>
   <% end %>
   </div>
+  <div class="col-xl-9 d-flex justify-content-end">
+    <%= link_to 'アルバム・楽曲の編集/追加', edit_artist_album_path(@album.id), class: "btn btn-success" %>
+  </div>
+
+
 </div>
 
 <!--以下、楽曲一覧-->
