@@ -52,14 +52,8 @@ Rails.application.routes.draw do
   namespace :artist do
   # ユーザー
     resources :users, only: [:show,:edit,:update]
-    # get 'users/:id' => 'users#show', as: 'mypage'
-    # get 'users/edit' => 'users#edit', as: 'edit_mypage'
-    # patch 'users' => 'users#update'
-    # edit_artist_user GET    /artist/users/:id/edit(.:format)    artist/users#edit
-    # artist_user GET         /artist/users/:id(.:format)         artist/users#show
-    # PATCH                   /artist/users/:id(.:format)         artist/users#update
-    get 'users/check' => 'users#check', as: 'check'
-    patch 'users/withdraw' => 'users#withdraw'
+    get 'users/:id/check' => 'users#check', as: 'check'
+    patch 'users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
   # アルバム
     resources :albums
   # 音楽

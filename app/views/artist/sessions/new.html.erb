@@ -1,9 +1,6 @@
-<h2>アーティスト　Log in</h2>
-
-
 <div class="container">
   <div class="row">
-    <h4 class="d-flex align-items-center m-5" style="background-color: #EEEEEE;">ログイン</h4>
+    <h4 class="d-flex align-items-center m-5" style="background-color: #EEEEEE;">ログイン（アーティスト）</h4>
   </div>
   <div class="row">
     <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員の方はこちらからログイン</h6>
@@ -34,9 +31,20 @@
     </table>
   </div>
 
-<div class="row">
-  <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員登録がお済みでない方</h6>
+  <div class="row">
+    <h4 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">会員登録がお済みでない方</h4>
+  </div>
+  <p class="d-flex justify-content-center my-auto mx-auto">
+    こちらから<%= link_to "新規会員登録", '/artist/sign_up' %>を行なってください
+  </p>
+
+  <div class="row">
+    <h6 class="d-flex align-items-center m-3 ml-5" style="background-color: #EEEEEE;">一般のお客様はこちら</h6>
+  </div>
+  <p class="d-flex justify-content-center my-auto mx-auto">
+    こちらから<%= link_to "新規会員登録", '/customer/sign_up' %>、
+  </p>
+  <p class="d-flex justify-content-center my-auto mx-auto">
+    もしくは<%= link_to "ログイン", '/customer/sign_in' %>を行なってください。
+  </p>
 </div>
-<p class="d-flex align-items-center justify-content-center my-auto mx-auto">
-  <%= link_to "こちら", '/customers/sign_up' %>から新規登録を行ってください
-</p>

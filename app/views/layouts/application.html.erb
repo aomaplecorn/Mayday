@@ -82,7 +82,7 @@
                 <%= link_to '注文履歴一覧', customer_orders_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to '楽曲一覧', customer_albums_path, class: "nav-link text-light" %>
+                <%= link_to '音楽一覧', customer_albums_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'アイテム一覧', customer_items_path, class: "nav-link text-light" %>
@@ -92,8 +92,14 @@
               </li>
             <% end %>
           <!--ここまで、カスタマーのヘッダーリンク-->
-          <!--以下、アーティスト・カスタマーどちらにもログインしていない場合のヘッダー-->
-            <% if !artist_signed_in? && !customer_signed_in? %>
+          <!--以下、アーティスト・カスタマー・アドミンのいずれにもログインしていない場合のヘッダー-->
+            <% if !artist_signed_in? && !customer_signed_in? && !admin_signed_in?%>
+              <li class="nav-item">
+                <%= link_to '音楽一覧', customer_albums_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アイテム一覧', customer_items_path, class: "nav-link text-light" %>
+              </li>
               <li class="nav-item">
                 <%= link_to 'ログイン（アーティストの方はこちらから）', artist_session_path, class: "nav-link text-light" %>
               </li>
