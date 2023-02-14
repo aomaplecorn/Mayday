@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 ## 以下、アーティスト
   namespace :artist do
   # ユーザー
-    resources :users, only: [:show,:edit,:update]
+    resources :users, only: [:index,:show,:edit,:update]
     get 'users/:id/check' => 'users#check', as: 'check'
     patch 'users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
   # アルバム

@@ -41,7 +41,7 @@
                 <%= link_to '販売管理一覧', admin_products_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'ログアウト（管理者）', destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
             <% end %>
           <!--ここまで、アドミン（ログイン済み）のヘッダーリンク-->
@@ -69,7 +69,7 @@
                 <%= link_to '注文一覧', artist_orders_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'ログアウト（アーティスト）', destroy_artist_session_path, method: :delete, class: "nav-link text-light" %>
+                <%= link_to 'ログアウト', destroy_artist_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
             <% end %>
           <!--ここまで、アーティスト（ログイン済み）のヘッダーリンク-->
@@ -79,22 +79,25 @@
                 <%= link_to 'ホーム', home_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'マイページ（カスタマー）', customer_mypage_path, class: "nav-link text-light" %>
+                <%= link_to 'マイページ', customer_mypage_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'カート', customer_cart_items_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
+                <%= link_to 'アーティスト一覧', artist_users_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'アルバム（音楽）一覧', customer_albums_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'グッズ一覧', customer_items_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to '注文履歴一覧', customer_orders_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to '音楽一覧', customer_albums_path, class: "nav-link text-light" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'アイテム一覧', customer_items_path, class: "nav-link text-light" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to 'ログアウト（カスタマー）', destroy_customer_session_path, method: :delete, class: "nav-link text-light" %>
+                <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "nav-link text-light" %>
               </li>
             <% end %>
           <!--ここまで、カスタマー（ログイン済み）のヘッダーリンク-->

@@ -15,7 +15,7 @@ class Artist::ItemsController < ApplicationController
   end
 
   def index
-    @items = Item.all
+    @items = current_artist.items.all
   end
 
   def edit

@@ -15,7 +15,7 @@ class Artist::AlbumsController < ApplicationController
   end
 
   def index
-    @albums = Album.all
+    @albums = current_artist.albums.all.order(created_at: :desc)
   end
 
   def show

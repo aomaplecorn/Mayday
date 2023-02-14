@@ -5,45 +5,42 @@
   </div>
   <div class="d-flex align-items-center justify-content-end"><%= link_to "新規追加", new_artist_item_path, class: "btn btn-primary" %></div>
 
-<div class="row">
-<table class="table text-center">
-  <thead>
-    <tr style="background-color: #EEEEEE;">
-      <th>写真</th>
-      <th>商品名</th>
-      <th>販売価格</th>
-      <th>在庫</th>
-      <th>販売状況</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<% @items.each do |item| %>
-　<% if item.artist_id == current_artist.id %>
-  <tr>
-    <td  class="align-middle"><%= image_tag item.get_item_image(150,150) %></td>
-    <td class="align-middle"><%= item.name %></td>
-    <td class="align-middle"><%= item.price.to_s(:delimited) %></td>
-    <td class="align-middle"><%= item.amount %></td>
-    <td class="align-middle">
-      <% if item.is_active == true %>
-        <div class="text-success">
-          <%= "販売中" %>
-        </div>
-      <% else %>
-        <div class="text-secondary">
-          <%= "販売停止中" %>
-        </div>
-      <% end %>
-    </td>
-    <td class="align-middle">
-      <%= link_to '商品の編集はこちら', edit_artist_item_path(item.id) %>
-    </td>
-  </tr>
-  <% end %>
-<% end %>
-  </tbody>
-</table>
-
-</div>
+  <div class="row">
+    <table class="table text-center">
+      <thead>
+        <tr style="background-color: #EEEEEE;">
+          <th>写真</th>
+          <th>商品名</th>
+          <th>販売価格</th>
+          <th>在庫</th>
+          <th>販売状況</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td  class="align-middle"><%= image_tag item.get_item_image(150,150) %></td>
+            <td class="align-middle"><%= item.name %></td>
+            <td class="align-middle"><%= item.price.to_s(:delimited) %></td>
+            <td class="align-middle"><%= item.amount %></td>
+            <td class="align-middle">
+              <% if item.is_active == true %>
+                <div class="text-success">
+                  <%= "販売中" %>
+                </div>
+              <% else %>
+                <div class="text-secondary">
+                  <%= "販売停止中" %>
+                </div>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= link_to '商品の編集はこちら', edit_artist_item_path(item.id) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

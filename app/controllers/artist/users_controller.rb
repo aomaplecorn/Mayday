@@ -1,5 +1,9 @@
 class Artist::UsersController < ApplicationController
-  before_action :authenticate_artist!, except: [:show]
+  before_action :authenticate_artist!, except: [:index,:show]
+
+  def index
+    @artists = Artist.where(is_deleted: false).page(params[:page]).per(8).order(created_at: :desc)
+  end
 
   def show
     @artist = Artist.find(params[:id])

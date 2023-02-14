@@ -12,13 +12,9 @@ class HomesController < ApplicationController
 
   # 検索機能（対象：アイテム・アルバム・アーティスト）
   def search
-    @items = Item.search(params[:keyword])
-    @albums = Album.search(params[:keyword])
-    @artists = Artist.search(params[:keyword])
-    @search_items = @items.page(params[:page]).per(8)
-    @search_albums = @albums.page(params[:page]).per(8)
-    @search_artists = @artists.page(params[:page]).per(8)
-    @keyword = params[:keyword]
+    @items = Item.search(params[:keyword]).where(is_active: true).page(params[:page]).per(8).order(created_at: :desc)
+    @albums = Album.search(params[:keyword]).where(released: true).page(params[:page]).per(8).order(created_at: :desc)
+    @artists = Artist.search(params[:keyword]).where(is_deleted: false).page(params[:page]).per(8).order(created_at: :desc)
     render :search
   end
 

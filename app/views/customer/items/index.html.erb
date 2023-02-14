@@ -1,28 +1,3 @@
-<div class="container">
-  <div class="row">
-    <div class="col-10">
-      <h1>商品一覧</h1>
-      <table>
-        <tbody>
-          <div>
-            <tr class="d-flex align-content-between flex-wrap">
-              <% @items.each do |item| %>
-                <% if item.is_active == true %>
-                <td class="m-3">
-                  <%= link_to customer_item_path(item.id) do %>
-                    <%= image_tag item.get_item_image(400,200) %>
-                  <% end %></br>
-                    <%= item.name %></br>
-                    ¥<%= item.price.to_s(:delimited) %>
-                </td>
-                <% end %>
-              <% end %>
-            </tr>
-          </div>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
+<%= render 'customer/items/list', items: @items %>
 
 <div class="d-flex align-items-center justify-content-center" ><%= paginate @items %></div>

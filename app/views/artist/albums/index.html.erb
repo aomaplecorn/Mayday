@@ -3,8 +3,8 @@
     <h2>登録しているアルバム一覧</h2>
     <p>
         こちらでは登録しているアルバム一覧が閲覧できます。<br>
-        リリース中 ＝ <strong>発売（公開）</strong>しているもの<br>
-        未公開 ＝ <strong>未発売/発売停止</strong>しているもの
+        リリース中 ＝ <strong>販売（公開）</strong>しているもの<br>
+        未公開 ＝ <strong>未販売/販売停止</strong>しているもの
     </p>
 </div>
 
@@ -12,9 +12,8 @@
 <table class="table d-flex flex-nowrap">
 　<tbody>
     <tr>
-    　<% @albums.order(created_at: :desc).each do |album| %>
-    　  <!--自身が登録したもの＋公開済-->
-        <% if album.artist_id == current_artist.id && album.released == true %>
+    　<% @albums.each do |album| %>
+        <% if album.released == true %>
         　<td>
             <%= link_to artist_album_path(album.id) do %>
             　<%= image_tag album.get_jacket_image(200,200) %><br>
@@ -35,7 +34,7 @@
 　<tbody>
     <tr>
     　<% @albums.order(created_at: :desc).each do |album| %>
-        <% if album.artist_id == current_artist.id && album.released == false %>
+        <% if album.released == false %>
         　<td>
             <%= link_to artist_album_path(album.id) do %>
             　<%= image_tag album.get_jacket_image(200,200) %><br>

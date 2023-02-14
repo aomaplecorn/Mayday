@@ -3,11 +3,11 @@ class Artist::OrdersController < ApplicationController
 
   def index
     # アーティスト1人のアルバムの注文を全て取得（降順（最新が一番上））
-    @album_order_details = current_artist.orders.left_joins(:order_details).where(order_details: {item_id: nil}).order(created_at: :desc)
+    @album_orders = current_artist.orders.left_joins(:order_details).where(order_details: {item_id: nil}).order(created_at: :desc)
     # アーティスト1人のアイテムの注文を全て取得（降順（最新が一番上））
-    item_order_details = current_artist.orders.left_joins(:order_details).where(order_details: {album_id: nil}).order(created_at: :desc)
+    item_orders = current_artist.orders.left_joins(:order_details).where(order_details: {album_id: nil}).order(created_at: :desc)
     # アイテムの重複したレコードをdistinctで削除する。
-    @item_order_details = item_order_details.distinct
+    @item_orders = item_orders.distinct
   end
 
   def show

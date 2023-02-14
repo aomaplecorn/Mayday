@@ -4,68 +4,65 @@
     <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文情報入力</h4>
   </div>
 
+　<strong class="col-auto">支払方法</strong>
+　<div class="offset-1">
+　</div>
+　<div class="offset-1">
+　  ※クレジットカードのみとなります。
+　</div>
 
-<strong class="col-auto">支払方法</strong>
-<div class="offset-1">
-
-</div>
-<div class="offset-1">
-  ※クレジットカードのみとなります。
-</div>
-
-<strong class="col-auto">お届け先</strong>
-<!--住所のラジオボタン未選択時に進むと出るメッセージ-->
-<div class="offset-1 col-auto text-danger">
+　<strong class="col-auto">お届け先</strong>
+　<!--住所のラジオボタン未選択時に進むと出るメッセージ-->
+　<div class="offset-1 col-auto text-danger">
     <% if flash[:notice_1] %>
-        <p id="notice">
-          <%= flash[:notice_1] %>
-        </p>
+    　<p id="notice">
+        <%= flash[:notice_1] %>
+    　</p>
     <% end %>
-</div>
-<%= form_with model: @order, url: customer_order_confirm_path, method: :post do |f| %>
-<!--以下、住所選択１「ユーザー本人の住所」-->
+　</div>
+　<%= form_with model: @order, url: customer_order_confirm_path, method: :post do |f| %>
+　<!--以下、住所選択１「ユーザー本人の住所」-->
     <div class="offset-1">
-        <%= f.radio_button :address_number, 1 %>
-        <%= f.label :address_number_1, "ご自身の住所" %>
+    　<%= f.radio_button :address_number, 1 %>
+    　<%= f.label :address_number_1, "ご自身の住所" %>
     </div>
     <div class="offset-1 col-auto">
-        ご住所：<%= current_customer.my_address %>
+    　ご住所：<%= current_customer.my_address %>
     </div>
     <div class="offset-1 col-auto">
-        宛名　：<%= current_customer.name %>
+    　宛名　：<%= current_customer.name %>
     </div>
-<!--ここまで、住所選択１「ユーザー本人の住所」-->
-<!--以下、住所選択２「新しい住所へ配送」-->
+　<!--ここまで、住所選択１「ユーザー本人の住所」-->
+　<!--以下、住所選択２「新しい住所へ配送」-->
     <div class="offset-1">
-        <%= f.radio_button :address_number, 2 %>
-        <%= f.label :address_number_2, "新しく住所を入力する" %>
+    　<%= f.radio_button :address_number, 2 %>
+    　<%= f.label :address_number_2, "新しく住所を入力する" %>
     </div>
     <!--以下、新規住所の未入力時に出るメッセージ-->
     <div class="offset-1 col-auto text-danger">
-        <% if flash[:notice_2] %>
-            <p id="notice">
-          <%= flash[:notice_2] %>
-        </p>
-    <% end %>
+    　<% if flash[:notice_2] %>
+    　　<p id="notice">
+    　　  <%= flash[:notice_2] %>
+    　　</p>
+    　<% end %>
     </div>
     <!--ここまで新規住所の未入力時に出るメッセージ-->
     <div class="row">
-        <span class="col-sm-3 offset-sm-1"><%= f.label :postal_code, "郵便番号（ハイフンなし）" %></span>
-        <span class="col-auto"><%= f.text_field :postal_code, placeholder: "ご郵便番号"%></span>
+    　<span class="col-sm-3 offset-sm-1"><%= f.label :postal_code, "郵便番号（ハイフンなし）" %></span>
+    　<span class="col-auto"><%= f.text_field :postal_code, placeholder: "ご郵便番号"%></span>
     </div>
     <div  class="row">
-        <span class="col-sm-3 offset-sm-1"><%= f.label :address, "住所" %></span>
-        <span class="col-auto"><%= f.text_field :address, placeholder: "ご住所" %></span>
+    　<span class="col-sm-3 offset-sm-1"><%= f.label :address, "住所" %></span>
+    　<span class="col-auto"><%= f.text_field :address, placeholder: "ご住所" %></span>
     </div>
     <div class="row">
-        <span class="col-sm-3 offset-sm-1"><%= f.label :name, "宛名" %></span>
-        <span class="col-auto"><%= f.text_field :name, placeholder: "宛名" %></span>
+    　<span class="col-sm-3 offset-sm-1"><%= f.label :name, "宛名" %></span>
+    　<span class="col-auto"><%= f.text_field :name, placeholder: "宛名" %></span>
     </div>
-<!--ここまで、住所選択２「新しい住所へ配送」-->
-<div class=" d-flex align-items-center justify-content-center text-center mt-3">
-    <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+　<!--ここまで、住所選択２「新しい住所へ配送」-->
+　<div class=" d-flex align-items-center justify-content-center text-center mt-3">
+　  <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+　</div>
+　<% end %>
 </div>
-
-<% end %>
-
 

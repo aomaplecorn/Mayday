@@ -106,7 +106,6 @@ class Customer::OrdersController < ApplicationController
   # 注文履歴詳細
   def show
     @order = Order.find(params[:id])
-    @order_details = OrderDetail.all
     # @orderにアルバムIDがあるかどうか判定
     if @order.order_details.where(album_id: nil).count <= 0
       # アルバム情報の変数を作る

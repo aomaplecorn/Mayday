@@ -4,38 +4,38 @@
   </div>
 
   <div class="row">
-  <table class="table my-auto mx-auto">
-    <tbody>
-      <tr>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <td class="p-3 align-middle">氏名</td>
-        <td class="p-3 align-middle"><%= @customer.name %></td>
-      </tr>
-      <tr>
-        <td class="p-3 align-middle">フリガナ</td>
-        <td class="p-3 align-middle"><%= @customer.name_kana %></td>
-      </tr>
-      <tr>
-        <td class="p-3 align-middle">郵便番号</td>
-        <td class="p-3 align-middle"><%= @customer.postal_code %></td>
-      </tr>
-      <tr>
-        <td class="p-3 align-middle">ご住所</td>
-        <td class="p-3 align-middle"><%= @customer.address %></td>
-      </tr>
-      <tr>
-        <td class="p-3 align-middle">ご連絡先</td>
-        <td class="p-3 align-middle"><%= @customer.telephone_number %></td>
-        <td><%= link_to "お客様情報の編集はこちら", customer_edit_mypage_path, class: "btn btn-primary m-3 float-right" %></td>
-      </tr>
-      <tr>
-        <td colspan="3"></td>
-      <tr>
-    </tbody>
-  </table>
+    <table class="table my-auto mx-auto">
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td class="p-3 align-middle">氏名</td>
+          <td class="p-3 align-middle"><%= @customer.name %></td>
+        </tr>
+        <tr>
+          <td class="p-3 align-middle">フリガナ</td>
+          <td class="p-3 align-middle"><%= @customer.name_kana %></td>
+        </tr>
+        <tr>
+          <td class="p-3 align-middle">郵便番号</td>
+          <td class="p-3 align-middle"><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <td class="p-3 align-middle">ご住所</td>
+          <td class="p-3 align-middle"><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <td class="p-3 align-middle">ご連絡先</td>
+          <td class="p-3 align-middle"><%= @customer.telephone_number %></td>
+          <td><%= link_to "お客様情報の編集はこちら", customer_edit_mypage_path, class: "btn btn-primary m-3 float-right" %></td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+        <tr>
+      </tbody>
+    </table>
   </div>
 </div>
 

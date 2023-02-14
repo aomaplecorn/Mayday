@@ -1,69 +1,20 @@
 
-<!--以下、アーティスト-->
-<h2 class="m-3">最新アーティスト</h2>
-<div class="card-deck">
-  <% @artists.each do |artist| %>
-  <div class="card">
-    <%= link_to artist_user_path(artist.id) do %>
-    <div class="bd-placeholder-img card-img-top" width="100%" height="200">
-      <%= image_tag artist.get_introduction_image(600,500), class: "img-fluid" %>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title text-dark"><%= artist.name %></h5>
-    <% end %>
-      <p class="card-text" style="white-space: pre-line;"><%= artist.introduction %></p>
-      <p class="card-text"><small class="text-muted">Last updated <%= artist.updated_at.strftime( '%Y/%m/%d') %></small></p>
-    </div>
-  </div>
-  <% end %>
-</div>
-<!--ここまで、アーティスト-->
-<!--以下、アルバム-->
-<h2 class="m-3">最新アルバム</h2>
-<div class="card-deck">
-  <% @albums.each do |album| %>
-  <div class="card">
-    <%= link_to customer_album_path(album.id) do %>
-    <div class="bd-placeholder-img card-img-top" width="100%" height="200">
-      <%= image_tag album.get_jacket_image(600,500), class: "img-fluid" %>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title text-dark"><%= album.name %></h5>
-    <% end %>
-      <p class="card-text">¥<%= album.price.to_s(:delimited) %>-</p>
-      <% album.musics.first(3).each do |music| %>
-      <p class="card-text align-middle">
-        <%= music.name %>
-        <%= audio_tag(polymorphic_path(music.get_test_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "align-middle") %>
-      </p>
-      <% end %>
-      <p class="card-text"><small class="text-muted">updated date<%= album.updated_at.strftime( '%Y/%m/%d' ) %></small></p>
-    </div>
-  </div>
-  <% end %>
-</div>
-<!--ここまで、アルバム-->
-<!--以下、アイテム-->
-<h2 class="m-3">最新グッズ</h2>
-<div class="card-deck">
-  <% @items.each do |item| %>
-  <div class="card">
-    <%= link_to customer_item_path(item.id) do %>
-    <div class="bd-placeholder-img card-img-top" width="100%" height="200">
-      <%= image_tag item.get_item_image(600,500), class: "img-fluid" %>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title text-dark"><%= item.name %></h5>
-    <% end %>
-      <p class="card-text">¥<%= item.price.to_s(:delimited) %>-</p>
-      <p class="card-text" style="white-space: pre-line;"><%= item.introduction %></p>
-      <p class="card-text"><small class="text-muted"><%= item.created_at.strftime( '%Y/%m/%d/' ) %></small></p>
-    </div>
-  </div>
-  <% end %>
+<!--アーティスト一覧-->
+<%= render 'artist/users/list', artists: @artists %>
+<div class="d-flex justify-content-end m-3">
+  <h5>アーティスト一覧は<%= link_to 'こちら➡︎', artist_users_path %></h5>
 </div>
 
-<!--ここまで、アイテム-->
+<!--アルバム一覧-->
+<%= render 'customer/albums/list', albums: @albums %>
+<div class="d-flex justify-content-end m-3">
+  <h5>アルバム一覧は<%= link_to 'こちら➡︎', customer_albums_path %></h5>
+</div>
 
+<!--アイテム一覧-->
+<%= render 'customer/items/list', items: @items %>
+<div class="d-flex justify-content-end m-3">
+  <h5>グッズ一覧は<%= link_to 'こちら➡︎', customer_items_path %></h5>
+</div>
 
 

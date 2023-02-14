@@ -2,7 +2,7 @@ class Customer::AlbumsController < ApplicationController
   before_action :authenticate_customer!, only: [:create]
 
   def index
-    @albums = Album.all
+    @albums = Album.where(released: true).page(params[:page]).per(8).order(created_at: :desc)
   end
 
   def show

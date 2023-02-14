@@ -1,10 +1,10 @@
 
-<div class="row d-flex justify-content-center">
-  <div class="col-2 mx-auto my-auto p-3">
+<div class="row d-flex justify-content-center m-5">
+  <div class="col-2">
     <%= image_tag @album.get_jacket_image(350,350) %>
   </div>
-  <div class="col-lg-8 offset-lg-1 mx-auto my-auto p-3">
-    <h2><%= @album.name %></h2>
+  <div class="col-xl-8 offset-xl-1">
+    <h2 class="mx-auto my-auto"><%= @album.name %></h2>
     <div>
       <%= @album.artist.name %>
     </div>
@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<!--以下、楽曲一覧-->
+<!--以下、楽曲一覧（デモ（試聴用）ファイルのみ聴ける）-->
 <table class="table table-striped text-center">
   <thead>
     <tr class="bg-info text-white">

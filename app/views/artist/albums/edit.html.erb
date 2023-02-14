@@ -28,12 +28,16 @@
       </div>
       <div>
         <% if @album.released == true %>
-          <%= f.check_box :released %>
-          このアルバムを非公開にする。
+          <p class="mx-auto my-auto">
+            このアルバムはリリースされています。
+          </p>
         <% else %>
-          <%= f.check_box :released %>
-          このアルバムをリリースする。<br>
-          ※チェックをつけて「アルバムを更新」を押した場合、アルバムは公開されます。
+          <%= f.check_box :released %>︎⬅︎リリース
+          <p class="mx-auto my-auto">
+            チェックをつけて「アルバムを更新」を押した場合、アルバムをリリースします。<br>
+            <span class="text-danger">※一度リリースしたアルバムをリリース前へ戻す（非公開にする）ことはできません。</span><br>
+            <span class="text-danger">※一度リリースしたアルバムに楽曲を追加することはできません。（編集は可能です）</span>
+          </p>
         <% end %>
       </div>
     </div>
@@ -49,8 +53,9 @@
 <%= render 'artist/musics/edit_form', album: @album, music: @music %>
 
 <!--音楽登録フォーム-->
+<% if @album.released == false %>
 <%= render 'artist/musics/form', album: @album, music: @musics %>
-
+<% end %>
 <!--アルバム削除ボタン-->
   <div class=" d-flex justify-content-end m-5">
     <%= link_to 'アルバムを削除する', artist_album_path(@album.id), method: :delete,"data-confirm" => "本当に削除しますか？　削除した場合、アルバムに登録した楽曲も削除されます", class: "btn btn-danger"  %>
