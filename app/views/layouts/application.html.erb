@@ -76,6 +76,9 @@
           <!--以下、カスタマー（ログイン済み）のヘッダーリンク-->
             <% if customer_signed_in? %>
               <li class="nav-item">
+                <%= link_to 'ホーム', home_path, class: "nav-link text-light" %>
+              </li>
+              <li class="nav-item">
                 <%= link_to 'マイページ（カスタマー）', customer_mypage_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
