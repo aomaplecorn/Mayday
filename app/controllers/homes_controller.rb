@@ -1,5 +1,4 @@
 class HomesController < ApplicationController
-  before_action :authenticate_customer!, only: [:search,:home]
 
   def top
   end
@@ -17,6 +16,4 @@ class HomesController < ApplicationController
     @artists = Artist.search(params[:keyword]).where(is_deleted: false).page(params[:page]).per(8).order(created_at: :desc)
     render :search
   end
-
-
 end
