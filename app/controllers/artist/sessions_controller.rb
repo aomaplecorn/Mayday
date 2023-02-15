@@ -6,7 +6,7 @@ class Artist::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     flash[:notice] = 'ログインしました。'
-    artist_user_path(@artist.id)
+    artist_user_path(current_artist.id)
   end
 
   def after_sign_out_path_for(resource)
@@ -19,7 +19,7 @@ class Artist::SessionsController < Devise::SessionsController
     artist = Artist.guest
     sign_in artist
     flash[:notice] = 'ゲストアーティストとしてログインしました。'
-    artist_user_path(@artist.id)
+    artist_user_path(current_artist.id)
   end
 
 
