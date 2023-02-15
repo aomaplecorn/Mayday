@@ -54,5 +54,4 @@ class Artist < ApplicationRecord
     where(["name like?", "%#{keyword}%"])
   end
 
-
 end
