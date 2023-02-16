@@ -1,17 +1,17 @@
 
-<!-- アーティスト一覧 -->
+<!--アーティスト一覧-->
 <%= render 'artist/users/list', artists: @artists %>
 <div class="d-flex justify-content-end m-3">
   <h5>アーティスト一覧は<%= link_to 'こちら➡︎', artist_users_path %></h5>
 </div>
 
-<!-- アルバム一覧 -->
+<!--アルバム一覧-->
 <%= render 'customer/albums/list', albums: @albums %>
 <div class="d-flex justify-content-end m-3">
   <h5>アルバム一覧は<%= link_to 'こちら➡︎', customer_albums_path %></h5>
 </div>
 
-<!-- アイテム一覧 -->
+<!--アイテム一覧-->
 <%= render 'customer/items/list', items: @items %>
 <div class="d-flex justify-content-end m-3">
   <h5>グッズ一覧は<%= link_to 'こちら➡︎', customer_items_path %></h5>
