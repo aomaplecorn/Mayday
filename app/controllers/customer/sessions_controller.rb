@@ -6,7 +6,7 @@ class Customer::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     flash[:notice] = 'ログインしました。'
-    redirect_to home_path
+    home_path
   end
 
   def after_sign_out_path_for(resource)
@@ -19,7 +19,7 @@ class Customer::SessionsController < Devise::SessionsController
     customer = Customer.guest
     sign_in customer
     flash[:notice] = 'ゲストカスタマーとしてログインしました。'
-    redirect_to home_path
+    home_path
   end
 
   # GET /resource/sign_in
