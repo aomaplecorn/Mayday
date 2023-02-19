@@ -3,7 +3,7 @@
   <div class="col-2">
     <%= image_tag @album.get_jacket_image(350,350) %>
   </div>
-  <div class="col-xl-8 offset-xl-1">
+  <div class="col-8 offset-1">
     <h2 class="mx-auto my-auto"><%= @album.name %></h2>
     <div>
       <%= @album.artist.name %>
@@ -19,15 +19,13 @@
     <p class="mx-auto my-auto">このアルバムは公開されていません</p>
   <% end %>
   </div>
-  <div class="col-xl-9 d-flex justify-content-end">
+  <div class="col-9 d-flex justify-content-end">
     <%= link_to 'アルバム・楽曲の編集/追加', edit_artist_album_path(@album.id), class: "btn btn-success" %>
   </div>
-
-
 </div>
 
 <!--以下、楽曲一覧-->
-<%= render 'artist/musics/index' %>
+<%= render 'artist/musics/list' %>
 
 
 

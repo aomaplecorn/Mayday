@@ -1,7 +1,7 @@
 class Customer::ItemsController < ApplicationController
 
   def index
-    @items = Item.where(is_active: true).page(params[:page]).per(8).order(created_at: :desc)
+    @items = Item.where(is_active: true).page(params[:page]).per(9).order(created_at: :desc)
   end
 
   def show

@@ -1,7 +1,6 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
   before_action :ensure_current_customer, only: [:show]
-
   require 'payjp'
 
   def new
@@ -41,12 +40,12 @@ class Customer::OrdersController < ApplicationController
         @order.name = @order.name.strip
         # 郵便番号、住所、宛名に何も入っていない場合はオーダー作成へ戻る
         if @order.postal_code == "" || @order.address == "" || @order.name == ""
-          flash[:notice_2] = "お届け先に必要な情報を入力してください"
+          flash[:notice] = "お届け先に必要な情報を入力してください"
           redirect_to new_customer_order_path
         end
     ## 以下、view/new　で定義した address_numberを選択しなかった場合　の処理
       else
-        flash[:notice_1] = 'お届け先を選択してください'
+        flash[:notice] = 'お届け先を選択してください'
         redirect_to new_customer_order_path
       end
   ## ここまで、カートアイテムが　有る　場合の処理

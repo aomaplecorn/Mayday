@@ -3,7 +3,7 @@ class Artist::UsersController < ApplicationController
   before_action :ensure_current_artist, only: [:edit, :update, :check, :withdraw]
 
   def index
-    @artists = Artist.where(is_deleted: false).page(params[:page]).per(8).order(created_at: :desc)
+    @artists = Artist.where(is_deleted: false).page(params[:page]).per(9).order(updated_at: :desc)
   end
 
   def show

@@ -20,7 +20,7 @@
       <tbody>
         <% @items.each do |item| %>
           <tr>
-            <td  class="align-middle"><%= image_tag item.get_item_image(150,150) %></td>
+            <td class="align-middle"><%= image_tag item.get_item_image(150,150) %></td>
             <td class="align-middle"><%= item.name %></td>
             <td class="align-middle"><%= item.price.to_s(:delimited) %></td>
             <td class="align-middle"><%= item.amount %></td>

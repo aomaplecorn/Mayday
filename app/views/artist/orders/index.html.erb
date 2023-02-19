@@ -1,10 +1,10 @@
 <!--以下、購入商品の種類（タブ本体）-->
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a href="#contents1" class="nav-link active" data-toggle="tab">購入された音楽</a>
+    <a href="#contents1" class="nav-link active" data-toggle="tab">販売履歴一覧（アルバム）</a>
   </li>
   <li class="nav-item">
-    <a href="#contents2" class="nav-link" data-toggle="tab">購入されたグッズ</a>
+    <a href="#contents2" class="nav-link" data-toggle="tab">注文履歴一覧（グッズ）</a>
   </li>
 </ul>
 <!--ここまで、購入商品の種類（タブ本体）-->
@@ -15,33 +15,52 @@
       <div class="container">
         <div class="row">
           <div class="col-1"></div>
-          <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴一覧（音楽）</h4>
+          <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">販売履歴一覧（アルバム）</h4>
         </div>
 
       　<table class="table" border="1">
           <thead style="background-color: #EEEEEE;">
             <tr>
-              <td>購入日</td>
-              <td>購入されたアルバム</td>
-              <td>支払金額</td>
+              <td>作成日</td>
+              <td>ジャケット</td>
+              <td>アルバム名</td>
+              <td>現在の販売価格</td>
+              <td>リリース状況</td>
+              <td>販売総数（DL数）</td>
             </tr>
           </thead>
           <tbody>
-            <% @album_orders.each do |order| %>
+            <% @albums.each do |album| %>
               <tr>
-                <!--購入された日-->
+                <!--作成日-->
                 <td class="align-middle">
-                    <%= order.created_at.strftime( '%Y/%m/%d') %>
+                  <%= album.created_at.strftime( '%Y/%m/%d') %>
                 </td>
-                <!--購入されたアルバム名-->
+                <!--アルバム画像-->
                 <td class="align-middle">
-                  <% order.order_details.each do |order_detail| %>
-                    <%= order_detail.album.name %>
+                  <%= link_to artist_album_path(album.id) do %>
+                    <%= image_tag album.get_jacket_image(200,200) %>
                   <% end %>
                 </td>
-                <!--「支払金額」合計を表示-->
+                <!--アルバム名-->
                 <td class="align-middle">
-                    <%= order.total_payment.to_s(:delimited) %>円
+                  <%= album.name %>
+                </td>
+                <!--販売価格-->
+                <td class="align-middle">
+                  <%= album.price.to_s(:delimited) %>円
+                </td>
+                <!--リリース状況-->
+                <td class="align-middle">
+                  <% if album.released == true %>
+                    <p class="text-success">販売中</p>
+                  <% else %>
+                    <p class="text-secondary">未販売</p>
+                  <% end %>
+                </td>
+                <!--購入（DL）数の合計-->
+                <td class="align-middle">
+                  <%= album.order_details.count %>
                 </td>
               </tr>
             <% end %>
@@ -65,7 +84,7 @@
             <td>注文日</td>
             <td>配送先</td>
             <td>注文商品</td>
-            <td>支払金額</td>
+            <td>売り上げ額</td>
             <td>ステータス</td>
             <td>注文詳細</td>
           </tr>

@@ -30,7 +30,7 @@
     　　<!--個数選択-->
     　　<%= form_with model: @cart_item, url: customer_cart_item_path(cart_item.id), method: :patch do |f| %>
     　　<td class="align-middle">
-    　    　<%= f.select :amount, *[1..cart_item.item.amount], prompt: "#{cart_item.amount}" %>
+        <%= f.select :amount, *[1..cart_item.item.amount], prompt: "#{cart_item.amount}" %>
     　    　<%= f.submit "変更", class: "btn btn-success float-right" %>
     　　</td>
     　　<% end %>
@@ -48,27 +48,26 @@
 　</table>
 
 　<div class="row">
-　　<div class="col-9">
+　　<div class="col-5">
 　    <%= link_to "買い物を続ける", customer_items_path, class: 'btn btn-sm btn-primary' %>
 　　</div>
-　　<div class="col-3 d-flex align-items-end justify-content-end">
+　　<div class="col-3 offset-3">
 　    <table class="table table-bordered" style="float:right;">
 　    　<tr>
 　        <td class="align-middle" style="background-color: #EEEEEE;">
-　        　配送料
+            <span>配送料</span>
 　        </td>
 　        <td class="align-middle">
-　        　<%= @delivery_cost.to_s(:delimited) %>円
-　        </td>
+            <%= @delivery_cost.to_s(:delimited) %>円
+          </td>
 　    　</tr>
 　    　<tr>
 　        <td class="align-middle" style="background-color: #EEEEEE;">
-　        　合計金額
+            <span>合計金額</span>
 　        </td>
 　        <td class="align-middle">
-　        　<!--合計金額を計算-->
-　        　<% total_payment = @total_price + @delivery_cost %>
-　        　<%= total_payment.round.to_s(:delimited) %>円
+            <% total_payment = @total_price + @delivery_cost %>
+            <span><%= total_payment.round.to_s(:delimited) %>円</span>
 　        </td>
 　    　</tr>
 　    </table>

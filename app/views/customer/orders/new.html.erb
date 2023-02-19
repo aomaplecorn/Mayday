@@ -6,20 +6,10 @@
 
 　<strong class="col-auto">支払方法</strong>
 　<div class="offset-1">
-　</div>
-　<div class="offset-1">
 　  ※クレジットカードのみとなります。
 　</div>
 
 　<strong class="col-auto">お届け先</strong>
-　<!--住所のラジオボタン未選択時に進むと出るメッセージ-->
-　<div class="offset-1 col-auto text-danger">
-    <% if flash[:notice_1] %>
-    　<p id="notice">
-        <%= flash[:notice_1] %>
-    　</p>
-    <% end %>
-　</div>
 　<%= form_with model: @order, url: customer_order_confirm_path, method: :post do |f| %>
 　<!--以下、住所選択１「ユーザー本人の住所」-->
     <div class="offset-1">
@@ -37,14 +27,6 @@
     <div class="offset-1">
     　<%= f.radio_button :address_number, 2 %>
     　<%= f.label :address_number_2, "新しく住所を入力する" %>
-    </div>
-    <!--以下、新規住所の未入力時に出るメッセージ-->
-    <div class="offset-1 col-auto text-danger">
-    　<% if flash[:notice_2] %>
-    　　<p id="notice">
-    　　  <%= flash[:notice_2] %>
-    　　</p>
-    　<% end %>
     </div>
     <!--ここまで新規住所の未入力時に出るメッセージ-->
     <div class="row">

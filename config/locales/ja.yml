@@ -1,5 +1,14 @@
 ---
 ja:
+  # 以下、kaminari日本語化
+  views:
+    pagination:
+      first: 最初
+      last: 最後
+      previous: 前
+      next: 次
+      truncate: ...
+  # ここまで、kaminari日本語化
   # 以下、enum
   enums:
     # 以下、オーダー

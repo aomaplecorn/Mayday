@@ -3,8 +3,10 @@ class Artist::OrdersController < ApplicationController
   before_action :ensure_current_artist, only: [:show, :update]
 
   def index
-    # アーティスト1人のアルバムの注文を全て取得（降順（最新が一番上））
-    @album_orders = current_artist.orders.left_joins(:order_details).where(order_details: {item_id: nil}).order(created_at: :desc)
+    # アルバムごとの注文詳細（売り上げなど）を取得
+    albums = current_artist.albums.left_joins(:order_details).order(created_at: :desc)
+    # アルバムの重複したレコードをdistinctで削除する。
+    @albums = albums.distinct
     # アーティスト1人のアイテムの注文を全て取得（降順（最新が一番上））
     item_orders = current_artist.orders.left_joins(:order_details).where(order_details: {album_id: nil}).order(created_at: :desc)
     # アイテムの重複したレコードをdistinctで削除する。

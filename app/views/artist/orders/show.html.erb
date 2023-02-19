@@ -64,23 +64,19 @@
         <tbody>
             <tr>
                 <td>
-                    <strong>配送料合計：</strong>
+                    <strong>配送費用：</strong>
                     <%= @order.delivery_cost.round.to_s(:delimited) %>円
                 </td>
             </tr>
             <tr>
                 <td style="background-color: #EEEEEE;">
-                    <strong>ご請求額：</strong>
+                    <strong>売り上げ総額：</strong>
                     <%= @order.total_payment.round.to_s(:delimited) %>円
                 </td>
             </tr>
         </tbody>
     </table>
   </div>
-
-
-
-
 
 <!--ステータス更新-->
 <% if @order.status == Order.statuses.key(0) %>

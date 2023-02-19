@@ -12,7 +12,7 @@
       ¥<%= @album.price.to_s(:delimited) %>
     </div>
     <div class="float-right">
-      <p>購入はこちら↓</p>
+      <p>アルバムの購入は<br>こちら↓</p>
       <%= form_with model: @album, url: customer_albums_path, method: :post do |f| %>
       <%= f.hidden_field :price, :value => @album.price %>
       <%= f.hidden_field :id, :value => @album.id %>
