@@ -9,6 +9,13 @@
   <div class="row">
     <table class="d-flex align-items-center justify-content-center my-auto mx-auto" style="height:200px;">
       <%= form_with model: @artist, url: artist_session_path do |f|%>
+      <% if flash[:alert] %>
+        <tr>
+          <td colspan="2">
+            <p class="alert text-danger"><%= alert %></p>
+          </td>
+        </tr>
+      <% end %>
       <tr>
         <div class="field">
           <td>メールアドレス</td>

@@ -13,39 +13,83 @@
 
 <div class="container">
   <div class="row">
-    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">アーティスト情報の変更</h4>
+    <h4 class="d-flex align-items-center m-3">アーティスト情報の変更</h4>
   </div>
 
 <table class="table d-flex align-items-center justify-content-center my-auto mx-auto">
   <tbody>
     <%= form_with model: @artist, url: artist_user_path(current_artist.id), method: :patch do |f| %>
     <tr>
-      <th colspan="3"></th>
+      <td colspan="3">
+        <p class="text-">
+          <strong>こちらでは公開しているアーティスト様のマイページを編集できます。編集できる項目は下記の通りです。</strong><br>
+          アーティスト名：お名前（グループ名など）<br>
+          BIOGRAPHY：自己紹介文<br>
+          ご連絡先：運営からグッズの配送や請求関連でご連絡を差し上げる場合があります。こちらは公開されません。<br>
+          配送費用：グッズの配送費用。<br>
+          <span class="text-danger">
+            ※注意※　<br>
+            配送費用を設定せずにグッズを登録した場合、配送費用は全額アーティスト様のご負担となってしまいますのでご注意ください。
+          </span><br>
+          背景画像：アーティスト様のHPの背景画像。ライブ風景などを撮った写真をアップできます。※jpeg・png形式ファイルのみ<br>
+          BIOGRAPHY画像：プロフィール画像。検索などで表示される際のアーティスト様のプロフィール画像になります。※jpeg・png形式ファイルのみ
+        </p>
+      </td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">グループ名</td>
-      <td class="form_control pt-3 mt-3"><%= f.text_field :name %></td>
+      <td class="form_control pt-3 mt-3">
+        グループ名
+      </td>
+      <td class="form_control pt-3 mt-3">
+        <%= f.text_field :name %>
+      </td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">紹介文</td>
-      <td class="form_control pt-3 mt-3"><%= f.text_area :introduction, rows: "5", placeholder: "例：2023年2月結成の岡山のバンドです！普段はREDBOXでライブしています！" %></td>
+      <td class="form_control pt-3 mt-3">
+        紹介文
+      </td>
+      <td class="form_control pt-3 mt-3">
+        <%= f.text_area :introduction, rows: "5", placeholder: "例：2023年2月結成の岡山のバンドです！普段はREDBOXでライブしています！" %>
+      </td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">ご連絡先<br><span>※この情報はサイトに表示されません</span></td>
-      <td class="form_control pt-3 mt-3"><%= f.number_field :telephone_number %></td>
+      <td class="form_control pt-3 mt-3">
+        ご連絡先<br>
+        ※この情報はサイトに表示されません
+      </td>
+      <td class="form_control pt-3 mt-3">
+        <%= f.number_field :telephone_number %>
+      </td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">配送費用<br><span>※グッズの配送にかかる費用です</span></td>
-      <td class="form_control pt-3 mt-3"><%= f.number_field :delivery_cost %></td>
+      <td class="form_control pt-3 mt-3">
+        配送費用<br>
+        ※グッズの配送にかかる費用です
+      </td>
+      <td class="form_control pt-3 mt-3">
+        <%= f.number_field :delivery_cost %>
+      </td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">背景画像</td>
-      <td><%= f.file_field :background_image, accept: "image/*" %></td>
+      <td class="form_control pt-3 mt-3">
+        背景画像<br>
+        ※jpeg・png形式ファイルのみ
+      </td>
+      <td>
+        <%= f.file_field :background_image, accept: "image/*" %>
+      </td>
     </tr>
     <tr>
-      <td class="form_control pt-3 mt-3">BIOGRAPHY画像</td>
-      <td><%= f.file_field :introduction_image, accept: "image/*" %></td>
-      <td class="form_control pt-3 mt-3"><%= image_tag @artist.get_introduction_image(150,150) %></td>
+      <td class="form_control pt-3 mt-3">
+        BIOGRAPHY画像<br>
+        ※jpeg・png形式ファイルのみ
+      </td>
+      <td>
+        <%= f.file_field :introduction_image, accept: "image/*" %>
+      </td>
+      <td class="form_control pt-3 mt-3">
+        <%= image_tag @artist.get_introduction_image(150,150) %>
+      </td>
     </tr>
     <tr>
       <td class="form_control pt-3" >
