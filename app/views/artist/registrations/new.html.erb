@@ -17,31 +17,31 @@
       <tr class="field">
         <td>グループ名</td>
         <td colspan="1"></td>
-        <td><%= f.text_field :name, autofocus: true, autocomplete: "name" %></td>
+        <td><%= f.text_field :name, size: "30", autofocus: true, autocomplete: "name" %></td>
       </tr>
 
       <tr class="field">
         <td>メールアドレス</td>
         <td colspan="1"></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+        <td><%= f.email_field :email, size: "30", autofocus: true, autocomplete: "email" %></td>
       </tr>
 
       <tr class="field">
         <td>電話番号（ハイフンなし）</td>
         <td colspan="1"></td>
-        <td><%= f.telephone_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %></td>
+        <td><%= f.telephone_field :telephone_number, size: "30", autofocus: true, autocomplete: "telephone_number" %></td>
       </tr>
 
       <tr class="field">
         <td>パスワード（６文字以上）</td>
         <td colspan="1"></td>
-        <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+        <td><%= f.password_field :password, size: "30", autocomplete: "new-password" %></td>
       </tr>
 
       <tr class="field">
         <td>パスワード（確認用）</td>
         <td colspan="1"></td>
-        <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+        <td><%= f.password_field :password_confirmation, size: "30", autocomplete: "new-password" %></td>
       </tr>
 
       <tr class="actions">

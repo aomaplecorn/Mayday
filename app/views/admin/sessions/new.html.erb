@@ -16,13 +16,13 @@
       <tr>
         <div class="field">
           <td>メールアドレス</td>
-          <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+          <td><%= f.email_field :email, size: "30", autofocus: true, autocomplete: "email" %></td>
         </div>
       </tr>
       <tr>
         <div class="field">
           <td>パスワード</td>
-          <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+          <td><%= f.password_field :password, size: "30", autocomplete: "current-password" %></td>
         </div>
       </tr>
       <tr class="actions">
