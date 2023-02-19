@@ -1,5 +1,6 @@
 class Artist::ItemsController < ApplicationController
   before_action :authenticate_artist!
+  before_action :ensure_current_artist, only: [:edit, :update, :destroy]
 
   def new
     @item = Item.new
@@ -43,6 +44,14 @@ class Artist::ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:name,:introduction,:amount,:price,:is_active,:artist_id,:item_image)
+  end
+
+  # アクセス制限（自分以外のアーティストがアクセスできないようにする）
+  def ensure_current_artist
+    if current_artist.id != Item.find(params[:id]).artist.id
+      flash[:notice] = "権限がありません"
+      redirect_to artist_items_path
+    end
   end
 
 end

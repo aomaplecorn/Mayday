@@ -1,5 +1,6 @@
 class Artist::OrdersController < ApplicationController
   before_action :authenticate_artist!
+  before_action :ensure_current_artist, only: [:show, :update]
 
   def index
     # アーティスト1人のアルバムの注文を全て取得（降順（最新が一番上））
@@ -29,4 +30,14 @@ class Artist::OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:status)
   end
+
+    # アクセス制限（自分以外のアーティストがアクセスできないようにする）
+  def ensure_current_artist
+    if current_artist.id != Order.find(params[:id]).artist.id
+      flash[:notice] = "権限がありません"
+      redirect_to artist_orders_path
+    end
+  end
+
+
 end

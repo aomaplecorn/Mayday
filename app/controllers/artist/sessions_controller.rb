@@ -19,7 +19,7 @@ class Artist::SessionsController < Devise::SessionsController
     artist = Artist.guest
     sign_in artist
     flash[:notice] = 'ゲストアーティストとしてログインしました。'
-    artist_user_path(current_artist.id)
+    redirect_to artist_user_path(current_artist.id)
   end
 
 

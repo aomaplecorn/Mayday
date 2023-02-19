@@ -9,7 +9,85 @@
 <!--注文詳細のレコードでアイテムIDがある件数をカウントし、０以下なら非表示-->
 <% if @order.order_details.where(item_id: nil).count <= 0 %>
 <div class="container">
-　<%= render 'customer/orders/item_detail', order: @order %>
+　<div class="row">
+    <div class="col-1"></div>
+    <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴詳細</h4>
+  </div>
+
+　<div class="row">
+    <div class="col-12 p-0">
+        <table class="table" border="2">
+            <tbody>
+                <div>
+                  <strong class="h4">ご注文内容</strong>
+                  <span class="mx-3">
+                    注文日：<%= @order.created_at.strftime(' %Y/%m/%d ') %>
+                  </span>
+                  <span class="float-right mr-3">
+                    現在の配送状況：
+                    <!--ステータスが配送完了済(key1)かどうか判定-->
+                    <% if @order.status == Order.statuses.key(1) %>
+                      <strong class="text-success">
+                        <%= @order.status_i18n %>
+                      </strong>
+                    <% else %>
+                      <strong class="text-danger">
+                        <%= @order.status_i18n %>
+                      </strong>
+                    <% end %>
+                  </span>
+                </div>
+                <tr style="background-color: #EEEEEE;">
+                    <th>商品</th>
+                    <th>単価（円）</th>
+                    <th>個数</th>
+                    <th>小計</th>
+                </tr>
+                <% @order.order_details.each do |order_detail| %>
+                  <tr>
+                    <td>
+                      <%= image_tag order_detail.item.get_item_image(60,40) %>
+                      <%= order_detail.item.name %>
+                    </td>
+                    <td><%= order_detail.item.price.round.to_s(:delimited) %>円</td>
+                    <td><%= order_detail.amount %></td>
+                    <td><%= order_detail.subtotal.round.to_s(:delimited) %>円</td>
+                  </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+　</div>
+
+　<div class="row">
+    <table class="table col-9" border="2">
+        <tr>
+            <td class="align-middle col-1" style="background-color: #EEEEEE;">配送先</td>
+            <td class="col-6">
+                <%= '〒' + @order.postal_code %></br>
+                <%= @order.address %></br>
+            </td>
+        </tr>
+    </table>
+    <table class="table offset-1 col-2" border="2">
+        <tbody>
+            <tr>
+                <td>
+                    <strong>配送料合計：</strong>
+                    <%= @order.delivery_cost.round.to_s(:delimited) %>円
+                </td>
+            </tr>
+            <tr>
+                <td style="background-color: #EEEEEE;">
+                    <strong>ご請求額：</strong>
+                    <%= @order.total_payment.round.to_s(:delimited) %>円
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+
+
 </div>
 <% end %>
 <!--ここまで、アイテム詳細-->

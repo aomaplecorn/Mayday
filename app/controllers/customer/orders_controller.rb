@@ -1,10 +1,12 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
+  before_action :ensure_current_customer, only: [:show]
+
   require 'payjp'
 
   def new
     @order = Order.new
-    # URL直接入力対策（カートにアイテムがない場合、カート画面に戻る）
+    # カートにアイテムがない場合、カート画面に戻る(URL直接入力対策）
     if current_customer.cart_items.count == 0
       redirect_to customer_cart_items_path
     end
@@ -120,6 +122,14 @@ class Customer::OrdersController < ApplicationController
   private
   def order_params
     params.require(:order).permit(:customer_id,:artist_id, :postal_code, :address, :name, :delivery_cost, :total_payment, :status)
+  end
+
+  # アクセス制限（自分以外のカスタマーがアクセスできないようにする）
+  def ensure_current_customer
+    if current_customer.id != Order.find(params[:id]).customer.id
+      flash[:notice] = "権限がありません"
+      redirect_to customer_orders_path
+    end
   end
 
 end

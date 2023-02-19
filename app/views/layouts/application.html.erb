@@ -121,6 +121,14 @@
         </div>
       </nav>
     </header>
+    <!--ヘッダー下に表示させるメッセージ-->
+    <div class="text-center">
+      <% if flash[:notice] %>
+        <p id="notice" class="alert alert-warning">
+          <%= flash[:notice] %>
+        </p>
+      <% end %>
+    </div>
     <main style="min-height: 100vh;">
       <%= yield %>
     </main>

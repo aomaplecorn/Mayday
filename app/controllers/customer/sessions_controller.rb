@@ -19,7 +19,7 @@ class Customer::SessionsController < Devise::SessionsController
     customer = Customer.guest
     sign_in customer
     flash[:notice] = 'ゲストカスタマーとしてログインしました。'
-    home_path
+    redirect_to home_path
   end
 
   # GET /resource/sign_in

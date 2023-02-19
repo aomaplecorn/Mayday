@@ -1,5 +1,6 @@
 class Artist::UsersController < ApplicationController
   before_action :authenticate_artist!, except: [:index,:show]
+  before_action :ensure_current_artist, only: [:edit, :update, :check, :withdraw]
 
   def index
     @artists = Artist.where(is_deleted: false).page(params[:page]).per(8).order(created_at: :desc)
@@ -44,6 +45,14 @@ class Artist::UsersController < ApplicationController
   private
   def artist_params
     params.require(:artist).permit(:name,:introduction,:telephone_number,:background_image,:introduction_image,:delivery_cost)
+  end
+
+    # アクセス制限（自分以外のアーティストがアクセスできないようにする）
+  def ensure_current_artist
+    if current_artist.id != Artist.find(params[:id]).id
+      flash[:notice] = "権限がありません"
+      redirect_to artist_user_path(current_artist.id)
+    end
   end
 
 end

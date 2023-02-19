@@ -52,7 +52,59 @@
 <!--ここまで、アルバムの注文詳細タブ-->
 
 <!--以下、アイテムの注文詳細タブ-->
-  <%= render 'customer/orders/item_list', item_orders: @item_orders %>
+    <div id="contents2" class="tab-pane">
+    <div class="container">
+      <div class="row">
+        <div class="col-1"></div>
+        <h4 class="d-flex align-items-center m-4" style="background-color: #EEEEEE;">注文履歴一覧（グッズ）</h4>
+      </div>
+
+    　<table class="table" border="1">
+        <thead style="background-color: #EEEEEE;">
+          <tr>
+            <td>注文日</td>
+            <td>配送先</td>
+            <td>注文商品</td>
+            <td>支払金額</td>
+            <td>ステータス</td>
+            <td>注文詳細</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @item_orders.each do |order| %>
+            <tr>
+              <!--注文日-->
+              <td class="align-middle">
+                <%= order.created_at.strftime( '%Y/%m/%d') %>
+              </td>
+              <!--配送先-->
+              <td class="align-middle">
+                <%= '〒' + order.postal_code %></br>
+                <%= order.address %>
+              </td>
+              <!--注文商品-->
+              <td class="align-middle">
+                <% order.order_details.each do |order_detail| %>
+                  <%= order_detail.item.name %></br>
+                <% end %>
+              </td>
+              <!--「支払金額」合計を表示-->
+              <td class="align-middle">
+                <%= order.total_payment.to_s(:delimited) %>円
+              </td>
+              <!--現在のステータス（入金・発送など）を表示-->
+              <td class="align-middle">
+                <%= order.status_i18n %>
+              </td>
+              <td class="align-middle">
+                <%= link_to "表示する", artist_order_path(order.id), class: "btn btn-primary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+    　</table>
+    </div>
+  </div>
 
 </div>
 

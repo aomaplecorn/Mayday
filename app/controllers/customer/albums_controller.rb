@@ -53,4 +53,6 @@ class Customer::AlbumsController < ApplicationController
     params.require(:album).permit(:id,:price,:artist_id)
   end
 
+
+
 end

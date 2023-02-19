@@ -1,5 +1,6 @@
 class Artist::AlbumsController < ApplicationController
   before_action :authenticate_artist!
+  before_action :ensure_current_artist, only: [:show, :edit, :update, :destroy]
 
   def new
     @album = Album.new
@@ -50,6 +51,14 @@ class Artist::AlbumsController < ApplicationController
   private
   def album_params
     params.require(:album).permit(:name,:price,:released,:artist_id,:jacket_image)
+  end
+
+    # アクセス制限（自分以外のアーティストがアクセスできないようにする）
+  def ensure_current_artist
+    if current_artist.id != Album.find(params[:id]).artist.id
+      flash[:notice] = "権限がありません"
+      redirect_to artist_albums_path
+    end
   end
 
 end
