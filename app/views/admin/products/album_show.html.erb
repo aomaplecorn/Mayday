@@ -1,5 +1,5 @@
-<h2>アルバム詳細画面</h2>
-<div class="row d-flex justify-content-center">
+
+<div class="row d-flex justify-content-center mt-5">
   <div class="col-2 ml-3">
     <%= image_tag @album.get_jacket_image(350,350) %>
   </div>
@@ -28,4 +28,4 @@
 </div>
 
 <!--以下、楽曲一覧-->
-<%= render '/artist/musics/index' %>
+<%= render '/artist/musics/list' %>

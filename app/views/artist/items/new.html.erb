@@ -13,7 +13,14 @@
 <!--以下、商品登録-->
 <div class="container">
   <div class="row">
-    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">商品新規登録</h4>
+    <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">グッズ新規登録</h4>
+  </div>
+  <div class="row">
+    <p class="my-auto mx-auto">
+      こちらではグッズの登録を行えます。<br>
+      登録項目：グッズの画像、商品名、説明、販売価格、在庫<br>
+      ※販売ステータスは「販売中」を選択すると公開され、一般のお客様が購入できるようになります。
+    </p>
   </div>
 
 <table class="d-flex align-items-center justify-content-center my-auto mx-auto">
@@ -28,11 +35,11 @@
     </tr>
     <tr>
       <td class="form_control pt-3 mt-3">商品名</td>
-      <td class="form_control pt-3 mt-3"><%= f.text_field :name, placeholder: 'Tシャツ' %></td>
+      <td class="form_control pt-3 mt-3"><%= f.text_field :name, placeholder: 'Tシャツ', size: "30" %></td>
     </tr>
     <tr>
       <td class="form_control pt-3 mt-3">商品説明</td>
-      <td class="form_control pt-3 mt-3 text-nowrap"><%= f.text_area :introduction, rows: "5", placeholder: '流行りのオーバーサイズTシャツ！' %></td>
+      <td class="form_control pt-3 mt-3 text-nowrap"><%= f.text_area :introduction, size: "30x5", placeholder: '流行りのオーバーサイズTシャツ！' %></td>
     </tr>
     <tr>
       <td class="form_control pt-3 mt-3">販売価格</td>

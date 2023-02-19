@@ -11,6 +11,8 @@ class Music < ApplicationRecord
   # バリデーション
   validates :name, presence: true
   validates :track, presence: true
+  validates :audio, presence: true
+  validates :test_audio, presence: true
 
   # 音楽ファイルの確認
   def get_audio

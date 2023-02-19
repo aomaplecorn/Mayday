@@ -23,23 +23,23 @@
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">氏名</td>
-        <td class="form_control pt-3 mt-3"><%= f.text_field :name %></td>
+        <td class="form_control pt-3 mt-3"><%= f.text_field :name,size: "50" %></td>
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">フリガナ</td>
-        <td class="form_control pt-3 mt-3"><%= f.text_field :name_kana %></td>
+        <td class="form_control pt-3 mt-3"><%= f.text_field :name_kana,size: "50" %></td>
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">郵便番号（ハイフンなし）</td>
-        <td class="form_control pt-3 mt-3"><%= f.number_field :postal_code %></td>
+        <td class="form_control pt-3 mt-3"><%= f.text_field :postal_code,size: "50" %></td>
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">ご住所</td>
-        <td class="form_control pt-3 mt-3"><%= f.text_area :address %></td>
+        <td class="form_control pt-3 mt-3"><%= f.text_area :address,size: "50x2"  %></td>
       </tr>
       <tr>
         <td class="form_control pt-3 mt-3">ご連絡先</td>
-        <td class="form_control pt-3 mt-3"><%= f.number_field :telephone_number %></td>
+        <td class="form_control pt-3 mt-3"><%= f.text_field :telephone_number,size: "50" %></td>
       </tr>
       <tr>
         <td class="form_control pt-3" >

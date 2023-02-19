@@ -6,7 +6,7 @@ class Artist::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_in_path_for(resource)
     flash[:notice] = 'アカウントを作成しました。'
-    rtist_user_path(current_artist.id)
+    artist_user_path(current_artist.id)
   end
 
   # GET /resource/sign_up

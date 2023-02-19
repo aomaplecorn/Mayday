@@ -1,18 +1,18 @@
 <div class="container">
-    <div class="row mt-5 pt-5"></div>
-    <h3 class="d-flex align-items-center justify-content-center m-4">
-        <strong>本当に退会しますか？</strong>
-    </h3>
+  <h3 class="d-flex align-items-center justify-content-center m-4 mt-5 pt-5">
+    <strong>本当に退会しますか？</strong>
+  </h3>
 
-    <div class="d-flex align-items-center justify-content-center">
-        <p class="text-start">
-            退会すると、会員登録情報や</br>
-            これまでに登録した楽曲・グッズ・ライブの全てが閲覧できなくなります。</br>
-            退会する場合は、「退会する」をクリックしてください。
-        </p>
-    </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <p class="text-start">
+      退会すると、会員登録情報や</br>
+      これまでに登録した楽曲・グッズ・ライブの全てが閲覧できなくなります。</br>
+      退会する場合は、「退会する」をクリックしてください。
+    </p>
+  </div>
 
-    <div class=" d-flex align-items-center justify-content-center text-center">
-        <span class="m-3"><%= link_to "退会しない", artist_user_path(@artist.id), class: "btn btn-secondary" %></span>
-        <span class="m-3"><%= link_to "退会する", artist_withdraw_path(@artist.id),method: :patch, class: "btn btn-danger"  %></span>
-    </div>
+  <div class=" d-flex align-items-center justify-content-center text-center">
+    <span class="m-3"><%= link_to "退会しない", artist_user_path(@artist.id), class: "btn btn-secondary" %></span>
+    <span class="m-3"><%= link_to "退会する", artist_withdraw_path(@artist.id),method: :patch, class: "btn btn-danger"  %></span>
+  </div>
+</div>

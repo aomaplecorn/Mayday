@@ -44,7 +44,8 @@ class Artist < ApplicationRecord
     find_or_create_by!(email: 'aaa@aaa.com') do |artist|
       artist.password = SecureRandom.urlsafe_base64
       artist.password_confirmation = artist.password
-      artist.name = 'アーティスト'
+      artist.id = 1
+      artist.name = 'ゲスト（アーティスト）'
       artist.telephone_number = '08012345678'
     end
   end

@@ -53,6 +53,12 @@
 　<div class="row">
     <table class="table col-9" border="2">
         <tr>
+            <td class="align-middle col-1" style="background-color: #EEEEEE;">購入者</td>
+            <td class="col-6">
+              <%= @order.customer.name %>
+            </td>
+        </tr>
+        <tr>
             <td class="align-middle col-1" style="background-color: #EEEEEE;">配送先</td>
             <td class="col-6">
                 <%= '〒' + @order.postal_code %></br>
@@ -62,21 +68,26 @@
     </table>
     <table class="table offset-1 col-2" border="2">
         <tbody>
-            <tr>
-                <td>
-                    <strong>配送費用：</strong>
-                    <%= @order.delivery_cost.round.to_s(:delimited) %>円
-                </td>
-            </tr>
-            <tr>
-                <td style="background-color: #EEEEEE;">
-                    <strong>売り上げ総額：</strong>
-                    <%= @order.total_payment.round.to_s(:delimited) %>円
-                </td>
-            </tr>
+          <tr>
+            <td class="align-middle" style="background-color: #EEEEEE;">
+              <span>配送料</span>
+            </td>
+            <td class="align-middle">
+              <%= @order.delivery_cost.to_s(:delimited) %>円
+            </td>
+          </tr>
+          <tr>
+            <td class="align-middle" style="background-color: #EEEEEE;">
+              <span>合計金額</span>
+            </td>
+            <td class="align-middle">
+              <span><%= @order.total_payment.round.to_s(:delimited) %>円</span>
+            </td>
+          </tr>
         </tbody>
     </table>
   </div>
+
 
 <!--ステータス更新-->
 <% if @order.status == Order.statuses.key(0) %>

@@ -1,49 +1,50 @@
 <!--以下、公開されているもの-->
 <div class="ml-3">
-    <h2>登録しているアルバム一覧</h2>
-    <p>
-        こちらでは登録しているアルバム一覧が閲覧できます。<br>
-        リリース中 ＝ <strong>販売（公開）</strong>しているもの<br>
-        未公開 ＝ <strong>未販売/販売停止</strong>しているもの
-    </p>
+  <h2>登録しているアルバム一覧</h2>
+  <p>
+    こちらでは登録しているアルバム一覧が閲覧できます。<br>
+    リリース中 ＝ <strong>販売（公開）</strong>しているもの<br>
+    未公開 ＝ <strong>未販売/販売停止</strong>しているもの
+  </p>
 </div>
 
 <h4 class="ml-3 mb-0">リリース中</h4>
 <table class="table d-flex flex-nowrap">
-　<tbody>
+  <tbody>
     <tr>
-    　<% @albums.each do |album| %>
+      <% @albums.each do |album| %>
         <% if album.released == true %>
-        　<td>
+          <td>
             <%= link_to artist_album_path(album.id) do %>
-            　<%= image_tag album.get_jacket_image(200,200) %><br>
-            　<%= album.name %>
-            　¥<%= album.price.to_s(:delimited) %>-
+              <%= image_tag album.get_jacket_image(200,200) %><br>
+              <%= album.name %>
+              ¥<%= album.price.to_s(:delimited) %>-
             <% end %>
-        　</td>
+          </td>
         <% end %>
-    　<% end %>
+      <% end %>
     </tr>
-　</tbody>
+  </tbody>
 </table>
 <!--ここまで、公開されているもの-->
 
 <!--以下、未公開のもの-->
 <h4 class="ml-3 mb-0">未公開</h4>
 <table class="table d-flex flex-nowrap">
-　<tbody>
+  <tbody>
     <tr>
-    　<% @albums.order(created_at: :desc).each do |album| %>
+      <% @albums.order(created_at: :desc).each do |album| %>
         <% if album.released == false %>
-        　<td>
+          <td>
             <%= link_to artist_album_path(album.id) do %>
-            　<%= image_tag album.get_jacket_image(200,200) %><br>
-            　<%= album.name %>
-            　¥<%= album.price.to_s(:delimited) %>-
+              <%= image_tag album.get_jacket_image(200,200) %><br>
+              <%= album.name %>
+              ¥<%= album.price.to_s(:delimited) %>-
             <% end %>
-        　</td>
+          </td>
         <% end %>
-    　<% end %>
+      <% end %>
     </tr>
-　</tbody>
+  </tbody>
 </table>
+
