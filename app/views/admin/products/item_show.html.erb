@@ -5,10 +5,13 @@
     </div>
     <div class="col-5 offset-1 mt-4">
       <h4>
-          <strong>
-              <%= @item.name %>
-          </strong>
+        <strong>
+          <%= @item.name %>
+        </strong>
       </h4>
+        <p>
+          販売者：<%= @item.artist.name %>
+        </p>
         <p style="white-space: pre-line;">
           <%= @item.introduction %>
         </p>

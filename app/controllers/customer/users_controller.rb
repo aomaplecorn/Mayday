@@ -1,5 +1,7 @@
 class Customer::UsersController < ApplicationController
   before_action :authenticate_customer!
+  # アクセス制限（ゲスト不可）
+  before_action :guest_check, except: [:show]
 
   def show
     @customer = current_customer
@@ -38,4 +40,13 @@ class Customer::UsersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:name,:name_kana,:postal_code,:address,:telephone_number)
   end
+
+  # アクセス制限（ゲスト不可）
+  def guest_check
+    if current_customer.id == 1
+      flash[:notice] = "ゲストアカウントでは行えません"
+      redirect_to home_path
+    end
+  end
+
 end

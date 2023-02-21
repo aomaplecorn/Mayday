@@ -1,6 +1,9 @@
 class Customer::OrdersController < ApplicationController
   before_action :authenticate_customer!
+  # アクセス制限（自分以外のカスタマーがアクセスできないようにする）
   before_action :ensure_current_customer, only: [:show]
+  # アクセス制限（ゲスト不可）
+  before_action :guest_check
   require 'payjp'
 
   def new
@@ -128,6 +131,14 @@ class Customer::OrdersController < ApplicationController
     if current_customer.id != Order.find(params[:id]).customer.id
       flash[:notice] = "権限がありません"
       redirect_to customer_orders_path
+    end
+  end
+
+  # アクセス制限（ゲスト不可）
+  def guest_check
+    if current_customer.id == 1
+      flash[:notice] = "ゲストアカウントでは行えません"
+      redirect_to home_path
     end
   end
 

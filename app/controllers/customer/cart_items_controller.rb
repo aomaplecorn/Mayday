@@ -1,5 +1,7 @@
 class Customer::CartItemsController < ApplicationController
   before_action :authenticate_customer!
+  # アクセス制限（ゲスト不可）
+  before_action :guest_check
 
   def index
     @cart_item = CartItem.new
@@ -88,5 +90,14 @@ class Customer::CartItemsController < ApplicationController
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :customer_id, :amount)
   end
+
+  # アクセス制限（ゲスト不可）
+  def guest_check
+    if current_customer.id == 1
+      flash[:notice] = "ゲストアカウントでは行えません"
+      redirect_to home_path
+    end
+  end
+
 end
 

@@ -8,6 +8,7 @@
     </p>
   </div>
 </div>
+<% if !artist_signed_in? && !customer_signed_in? && !admin_signed_in? %>
 <div class="container">
   <div class="row">
     <div class="d-flex align-items-center justify-content-center my-auto mx-auto" style="height:300px;">
@@ -44,7 +45,23 @@
   <%= link_to 'ログイン（管理者）', admin_session_path, class: "btn btn-primary m-3", style: "width: 230px;" %>
 </div>
 <div class="d-flex justify-content-center">
-  <%= link_to 'ゲストログイン（管理者）', admins_guest_sign_in_path, method: :post, class: "login btn btn-warning m-3", style: "width: 230px;" %>
+  <%= link_to 'ゲストログイン（管理者）', admins_guest_sign_in_path, method: :post, class: "btn btn-warning m-3", style: "width: 230px;" %>
 </div>
 
+<!--アドミン-->
+<% elsif admin_signed_in? %>
+<div class="d-flex justify-content-center mt-5">
+  <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "btn btn-secondary" %>
+</div>
+<!--アーティスト-->
+<% elsif artist_signed_in? %>
+<div class="d-flex justify-content-center mt-5">
+  <%= link_to 'ログアウト', destroy_artist_session_path, method: :delete, class: "btn btn-secondary" %>
+</div>
+<!--カスタマー-->
+<% elsif customer_signed_in? %>
+<div class="d-flex justify-content-center mt-5">
+  <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn btn-secondary" %>
+</div>
 
+<% end %>

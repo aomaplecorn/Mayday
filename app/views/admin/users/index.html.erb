@@ -16,6 +16,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <td><h4>ID</h4></td>
           <td><h4>グループ名</h4></td>
           <td><h4>メールアドレス</h4></td>
           <td><h4>連絡先</h4></td>
@@ -25,6 +26,7 @@
       <tbody>
         <% @artists.each do |artist| %>
         <tr>
+          <td><%= artist.id %></td>
           <td><%= artist.name %></td>
           <td><%= artist.email %></td>
           <td><%= artist.telephone_number %></td>
@@ -52,6 +54,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <td><h4>ID</h4></td>
           <td><h4>氏名</h4></td>
           <td><h4>メールアドレス</h4></td>
           <td><h4>連絡先</h4></td>
@@ -61,6 +64,7 @@
       <tbody>
         <% @customers.each do |customer| %>
         <tr>
+          <td><%= customer.id %></td>
           <td><%= customer.name %></td>
           <td><%= customer.email %></td>
           <td><%= customer.telephone_number %></td>
@@ -82,3 +86,7 @@
   </div>
 </div>
 
+<div class="d-flex justify-content-end mr-5" >
+  <%= paginate @customers %>
+  <%= paginate @artists %>
+</div>

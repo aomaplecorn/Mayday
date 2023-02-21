@@ -16,6 +16,7 @@
     <table class="table table-striped">
       <thead>
           <tr>
+            <td><h4>販売者名</h4></td>
             <td><h4>商品名</h4></td>
             <td><h4>説明</h4></td>
             <td><h4>値段</h4></td>
@@ -26,6 +27,7 @@
         <tbody>
           <% @items.each do |item| %>
         <tr>
+          <td><%= item.artist.name %></td>
           <td><%= item.name %></td>
           <td><%= item.introduction %></td>
           <td><%= item.price %></td>
@@ -44,6 +46,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <td><h4>販売者名</h4></td>
           <td><h4>アルバム名</h4></td>
           <td><h4>製作者</h4></td>
           <td><h4>値段</h4></td>
@@ -54,6 +57,7 @@
       <tbody>
         <% @albums.each do |album| %>
         <tr>
+          <td><%= album.artist.name %></td>
           <td><%= album.name %></td>
           <% @artist = Artist.find(album.artist_id) %>
           <td><%= @artist.name %></td>
@@ -69,4 +73,9 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="d-flex justify-content-end mr-5" >
+  <%= paginate @items %>
+  <%= paginate @albums %>
 </div>

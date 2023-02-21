@@ -1,5 +1,7 @@
 class Customer::AlbumsController < ApplicationController
   before_action :authenticate_customer!, only: [:create]
+  # アクセス制限（ゲスト不可）
+  before_action :guest_check, only: [:create]
 
   def index
     @albums = Album.where(released: true).page(params[:page]).per(9).order(created_at: :desc)
@@ -53,6 +55,13 @@ class Customer::AlbumsController < ApplicationController
     params.require(:album).permit(:id,:price,:artist_id)
   end
 
+  # アクセス制限（ゲスト不可）
+  def guest_check
+    if current_customer.id == 1
+      flash[:notice] = "ゲストアカウントでは行えません"
+      redirect_to home_path
+    end
+  end
 
 
 end

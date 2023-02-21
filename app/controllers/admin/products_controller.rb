@@ -2,8 +2,8 @@ class Admin::ProductsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @items = Item.all
-    @albums = Album.all
+    @items = Item.page(params[:page]).per(30)
+    @albums = Album.page(params[:page]).per(30)
   end
 
   def item_show

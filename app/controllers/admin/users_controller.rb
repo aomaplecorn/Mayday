@@ -2,8 +2,8 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @artists = Artist.all
-    @customers = Customer.all
+    @artists = Artist.page(params[:page]).per(30)
+    @customers = Customer.page(params[:page]).per(30)
   end
 
   # artistのステータス更新
