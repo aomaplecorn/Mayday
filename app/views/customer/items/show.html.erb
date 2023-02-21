@@ -6,17 +6,12 @@
     </div>
     <div class="col-5 offset-1 mt-4">
       <h4>
-        <strong>
-          <%= @item.name %>
-        </strong>
+        <strong><%= @item.name %></strong>
       </h4>
-      <p style="white-space: pre-line;">
-        <%= @item.introduction %>
-      </p>
+      <p>販売者：<%= @item.artist.name %></p>
+      <p style="white-space: pre-line;"><%= @item.introduction %></p>
       <div class="mt-5">
-        <strong style="font-size: 20px;">
-          ¥ <%= @item.price.to_s(:delimited) %>
-        </strong>
+        <strong style="font-size: 20px;">¥ <%= @item.price.to_s(:delimited) %></strong>
       </div>
 
       <div class="mt-3">

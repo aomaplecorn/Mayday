@@ -18,7 +18,7 @@
           <%= audio_tag(polymorphic_path(music.get_test_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "align-middle") %>
         </p>
         <% end %>
-        <p class="card-text"><small class="text-muted">release date<%= album.updated_at.strftime( '%Y/%m/%d' ) %></small></p>
+        <p class="card-text"><small class="text-muted">Release date <%= album.updated_at.strftime( '%Y/%m/%d' ) %></small></p>
       </div>
     </div>
   </div>

@@ -11,10 +11,11 @@
       <div class="card-body">
         <h5 class="card-title text-dark"><%= item.name %></h5>
       <% end %>
+        <p class="card-text">販売者：<%= item.artist.name %></p>
         <p class="card-text">¥<%= item.price.to_s(:delimited) %>-</p>
         <p class="card-text">在庫<span class="text-danger">残り<%= item.amount %>個</span></p>
         <p class="card-text" style="white-space: pre-line;"><%= item.introduction %></p>
-        <p class="card-text"><small class="text-muted"><%= item.created_at.strftime( '%Y/%m/%d' ) %></small></p>
+        <p class="card-text"><small class="text-muted">Created date <%= item.created_at.strftime( '%Y/%m/%d' ) %></small></p>
       </div>
     </div>
   </div>
