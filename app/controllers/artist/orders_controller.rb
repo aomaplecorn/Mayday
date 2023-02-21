@@ -1,5 +1,6 @@
 class Artist::OrdersController < ApplicationController
   before_action :authenticate_artist!
+  # アクセス制限（自分以外のアーティストがアクセスできないようにする）
   before_action :ensure_current_artist, only: [:show, :update]
 
   def index
@@ -33,7 +34,7 @@ class Artist::OrdersController < ApplicationController
     params.require(:order).permit(:status)
   end
 
-    # アクセス制限（自分以外のアーティストがアクセスできないようにする）
+  # アクセス制限（自分以外のアーティストがアクセスできないようにする）
   def ensure_current_artist
     if current_artist.id != Order.find(params[:id]).artist.id
       flash[:notice] = "権限がありません"

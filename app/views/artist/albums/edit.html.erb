@@ -27,11 +27,18 @@
         販売価格：<%= f.number_field :price %>円
       </div>
       <div>
+        <!--リリース済-->
         <% if @album.released == true %>
           <p class="mx-auto my-auto">
             このアルバムはリリースされています。
           </p>
-        <% else %>
+        <!--アルバムに曲がない場合-->
+        <% elsif @album.musics.count < 1 %>
+          <p class="mx-auto my-auto">
+            音楽を１曲以上登録することでリリース可能になります
+          </p>
+        <!--アルバムに１曲以上ある場合（リリース可能）-->
+        <% elsif @album.released == false %>
           <%= f.check_box :released %>︎⬅︎リリース
           <p class="mx-auto my-auto">
             チェックをつけて「アルバムを更新」を押すと、アルバムをリリースします。<br>

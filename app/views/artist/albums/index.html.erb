@@ -4,7 +4,7 @@
   <p>
     こちらでは登録しているアルバム一覧が閲覧できます。<br>
     リリース中 ＝ <strong>販売（公開）</strong>しているもの<br>
-    未公開 ＝ <strong>未販売/販売停止</strong>しているもの
+    未公開 ＝ <strong>未販売</strong>のもの
   </p>
 </div>
 
@@ -48,3 +48,6 @@
   </tbody>
 </table>
 
+<div class="d-flex justify-content-end m-5" >
+  <%= paginate @albums %>
+</div>

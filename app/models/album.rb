@@ -13,7 +13,6 @@ class Album < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
-
   # ジャケット写真の確認
   def get_jacket_image(width,height)
     unless jacket_image.attached?

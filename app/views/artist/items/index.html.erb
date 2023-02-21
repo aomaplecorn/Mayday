@@ -3,13 +3,13 @@
     <div class="col-1"></div>
     <h4 class="d-flex align-items-center m-3" style="background-color: #EEEEEE;">登録しているグッズ一覧</h4>
   </div>
-  <div class="d-flex align-items-center justify-content-end"><%= link_to "新規追加", new_artist_item_path, class: "btn btn-primary" %></div>
+  <div class="d-flex align-items-center justify-content-end"><%= link_to "グッズ登録", new_artist_item_path, class: "btn btn-primary m-3" %></div>
 
   <div class="row">
     <table class="table text-center">
       <thead>
         <tr style="background-color: #EEEEEE;">
-          <th>写真</th>
+          <th>商品画像</th>
           <th>商品名</th>
           <th>販売価格</th>
           <th>在庫</th>
@@ -22,7 +22,7 @@
           <tr>
             <td class="align-middle"><%= image_tag item.get_item_image(150,150) %></td>
             <td class="align-middle"><%= item.name %></td>
-            <td class="align-middle"><%= item.price.to_s(:delimited) %></td>
+            <td class="align-middle">¥<%= item.price.to_s(:delimited) %></td>
             <td class="align-middle"><%= item.amount %></td>
             <td class="align-middle">
               <% if item.is_active == true %>
@@ -43,4 +43,8 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="d-flex justify-content-end m-5" >
+  <%= paginate @items %>
 </div>

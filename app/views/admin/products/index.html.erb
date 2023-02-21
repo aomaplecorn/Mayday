@@ -21,6 +21,7 @@
             <td><h4>説明</h4></td>
             <td><h4>値段</h4></td>
             <td><h4>在庫</h4></td>
+            <td><h4>販売ステータス</h4></td>
             <td></td>
           </tr>
         </thead>
@@ -32,6 +33,11 @@
           <td><%= item.introduction %></td>
           <td><%= item.price %></td>
           <td><%= item.amount %></td>
+          <% if item.is_active == true %>
+            <td><%= '販売中' %></td>
+          <% else %>
+            <td><%= '販売停止中' %></td>
+          <% end %>
           <td><%= link_to '詳細へ', admin_item_path(item.id) %></td>
         </tr>
         <% end %>

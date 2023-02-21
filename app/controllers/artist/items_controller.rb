@@ -1,6 +1,9 @@
 class Artist::ItemsController < ApplicationController
   before_action :authenticate_artist!
+  # アクセス制限（自分以外のアーティストがアクセスできないようにする）
   before_action :ensure_current_artist, only: [:edit, :update, :destroy]
+  # アクセス制限（ゲスト不可）
+  # before_action :guest_check, only: [:create,:update,:destroy]
 
   def new
     @item = Item.new
@@ -16,7 +19,7 @@ class Artist::ItemsController < ApplicationController
   end
 
   def index
-    @items = current_artist.items.all
+    @items = current_artist.items.page(params[:page]).per(8)
   end
 
   def edit
@@ -51,6 +54,14 @@ class Artist::ItemsController < ApplicationController
     if current_artist.id != Item.find(params[:id]).artist.id
       flash[:notice] = "権限がありません"
       redirect_to artist_items_path
+    end
+  end
+
+  # アクセス制限（ゲスト不可）
+  def guest_check
+    if current_artist.id == 1
+      flash[:notice] = "ゲストアカウントでは行えません"
+      redirect_to home_path
     end
   end
 

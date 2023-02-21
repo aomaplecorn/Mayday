@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :amount, presence: true
   validates :price, presence: true
-  validates :item_image, presence: true
+  # validates :item_image, presence: true
 
   # ジャケット写真の確認
   def get_item_image(width,height)
