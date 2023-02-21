@@ -17,8 +17,8 @@ class Music < ApplicationRecord
   # 音楽ファイルの確認
   def get_audio
     unless audio.attached?
-      file_path = Rails.root.join('app/assets/audios/default-audio.mp3')
-      audio.attach(io: File.open(file_path),filename: 'default-audio.mp3',content_type: 'audio/mp3')
+      file_path = Rails.root.join('app/assets/audios/Teeth.mp3')
+      audio.attach(io: File.open(file_path),filename: 'Teeth.mp3',content_type: 'audio/mp3')
     end
     audio
   end
@@ -26,8 +26,8 @@ class Music < ApplicationRecord
   # 音楽ファイル（試聴用）の確認
   def get_test_audio
     unless test_audio.attached?
-      file_path = Rails.root.join('app/assets/audios/default-test-audio.mp3')
-      test_audio.attach(io: File.open(file_path),filename: 'default-test-audio.mp3',content_type: 'audio/mp3')
+      file_path = Rails.root.join('app/assets/audios/Teeth_demo.mp3')
+      test_audio.attach(io: File.open(file_path),filename: 'Teeth_demo.mp3',content_type: 'audio/mp3')
     end
     test_audio
   end
