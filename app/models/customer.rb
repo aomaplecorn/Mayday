@@ -28,7 +28,7 @@ class Customer < ApplicationRecord
 
   # ゲストログイン
   def self.guest
-    find_or_create_by!(id: 1) do |customer|
+    find_or_create_by!(email: 'aaa@aaa.mayday') do |customer|
       customer.password = SecureRandom.urlsafe_base64
       customer.password_confirmation = customer.password
       customer.id = 1

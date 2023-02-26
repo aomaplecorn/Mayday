@@ -10,7 +10,7 @@
       <div class="card-body">
         <h5 class="card-title text-dark"><%= artist.name %></h5>
       <% end %>
-        <p class="card-text" style="white-space: pre-line;"><%= artist.introduction[0..50] + ' ...' %></p>
+        <p class="card-text" style="white-space: pre-line;"><%= artist.introduction %></p>
       </div>
       <div class="card-footer text-right">
         <small class="text-muted">Last updated <%= artist.updated_at.strftime( '%Y/%m/%d') %></small>
