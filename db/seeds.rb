@@ -15,7 +15,7 @@ Admin.create!(
 artists = Artist.create!(
   [
     # ゲストユーザー
-    {email: 'aaa@aaa.mayday',password: 'password', name: 'ゲスト（アーティスト）', telephone_number: '00012345678', is_deleted: 'false', introduction: ''},
+    {email: 'aaa@test.mayday',password: 'password', name: 'ゲスト（アーティスト）', telephone_number: '00012345678', is_deleted: 'false', introduction: ''},
     # テストデータ
     {email: 'redif@test.mayday', password: 'password', name: 'redif', telephone_number: '11123456789', delivery_cost: 500 , is_deleted: 'false',
     introduction: 'イギリスのリバプール出身５人組で構成された新進気鋭ロックバンド「The Red if」　Gt.Vo：John　Gt：Oliver　Ba：George　Dr：Harry　Ke：Noah　Johnから一言：日本の皆さんに会えて光栄です。ライブで一緒に叫ぼう。',
@@ -37,7 +37,7 @@ artists = Artist.create!(
 customers = Customer.create!(
   [
     # ゲストユーザー
-    {email: 'aaa@aaa.mayday', password: 'password', name: 'ゲスト（一般会員）', name_kana: 'ゲストイッパンカイイン', postal_code: '1234567', address: '住所', telephone_number: '00012345678', is_deleted: 'false'},
+    {email: 'aaa@test.mayday', password: 'password', name: 'ゲスト（一般会員）', name_kana: 'ゲストイッパンカイイン', postal_code: '1234567', address: '住所', telephone_number: '00012345678', is_deleted: 'false'},
     # テストデータ
     {email: 'nemunoki@test.mayday', password: 'password', name: '合歓木 優', name_kana: 'ネムノキユウ', postal_code: '1112345', address: '北海道富良野市メーデー2-10 めいでい302', telephone_number: '01012345678', is_deleted: 'false'},
     {email: 'kuwamori@test.mayday', password: 'password', name: '鍬守 健', name_kana: 'クワモリタケル', postal_code: '1112345', address: '岡山県倉敷市メーデー6-10 めいでい101', telephone_number: '01012345678', is_deleted: 'false'},

@@ -41,12 +41,12 @@ class Artist < ApplicationRecord
 
   # ゲストログイン
   def self.guest
-    find_or_create_by!(id: 1) do |artist|
+    find_or_create_by!(email: 'aaa@test.mayday') do |artist|
       artist.password = SecureRandom.urlsafe_base64
       artist.password_confirmation = artist.password
       artist.id = 1
       artist.name = 'ゲスト（アーティスト）'
-      artist.telephone_number = '08012345678'
+      artist.telephone_number = '00012345678'
     end
   end
 
