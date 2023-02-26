@@ -1,7 +1,7 @@
 class Customer::UsersController < ApplicationController
   before_action :authenticate_customer!
   # アクセス制限（ゲスト不可）
-  before_action :guest_check, except: [:show]
+  # before_action :guest_check, except: [:show]
 
   def show
     @customer = current_customer

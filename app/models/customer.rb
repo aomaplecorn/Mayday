@@ -28,12 +28,12 @@ class Customer < ApplicationRecord
 
   # ゲストログイン
   def self.guest
-    find_or_create_by!(email: 'aaa@aaa.com') do |customer|
+    find_or_create_by!(id: 1) do |customer|
       customer.password = SecureRandom.urlsafe_base64
       customer.password_confirmation = customer.password
       customer.id = 1
-      customer.name = 'ゲスト（カスタマー）'
-      customer.name_kana = 'ゲスト（カスタマー）'
+      customer.name = 'ゲスト（一般会員）'
+      customer.name_kana = 'ゲストイッパンカイイン'
       customer.postal_code = '1234567'
       customer.address = '住所'
       customer.telephone_number = '08012345678'

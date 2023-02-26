@@ -11,7 +11,8 @@ class Album < ApplicationRecord
 
   # バリデーション
   validates :name, presence: true
-  validates :price, presence: true
+    # 50以上
+  validates :price, presence: true, numericality: {greater_than_or_equal_to: 50 }
 
   # ジャケット写真の確認
   def get_jacket_image(width,height)

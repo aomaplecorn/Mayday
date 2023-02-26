@@ -11,7 +11,8 @@ class Item < ApplicationRecord
   # バリデーション
   validates :name, presence: true
   validates :amount, presence: true
-  validates :price, presence: true
+    # 50以上
+  validates :price, presence: true, numericality: {greater_than_or_equal_to: 50 }
   # validates :item_image, presence: true
 
   # ジャケット写真の確認

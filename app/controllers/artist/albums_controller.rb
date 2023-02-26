@@ -50,7 +50,6 @@ class Artist::AlbumsController < ApplicationController
     redirect_to artist_albums_path
   end
 
-
   private
   def album_params
     params.require(:album).permit(:name,:price,:released,:artist_id,:jacket_image)

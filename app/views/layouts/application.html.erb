@@ -66,7 +66,7 @@
                 <%= link_to 'グッズ一覧', artist_items_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
-                <%= link_to '注文一覧', artist_orders_path, class: "nav-link text-light" %>
+                <%= link_to '注文・販売履歴一覧', artist_orders_path, class: "nav-link text-light" %>
               </li>
               <li class="nav-item">
                 <%= link_to 'ログアウト', destroy_artist_session_path, method: :delete, class: "nav-link text-light" %>
@@ -132,6 +132,15 @@
     <main style="min-height: 100vh;">
       <%= yield %>
     </main>
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-right">
+            <h6 class="text-white mt-2 mb-3">本サイトに使用させて頂いた音素材：OtoLogic(https://otologic.jp)</h6>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
 

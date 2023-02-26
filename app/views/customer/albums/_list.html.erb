@@ -3,9 +3,9 @@
 <div class="card-deck row row-cols-1 row-cols-md-2 row-cols-lg-3">
   <% @albums.each do |album| %>
   <div class="col mb-3">
-    <div class="card">
+    <div class="card h-100">
       <%= link_to customer_album_path(album.id) do %>
-      <div class="bd-placeholder-img card-img-top">
+      <div class="bd-placeholder-img card-img-top text-center">
         <%= image_tag album.get_jacket_image(600,500), class: "img-fluid"%>
       </div>
       <div class="card-body">
@@ -18,7 +18,10 @@
           <%= audio_tag(polymorphic_path(music.get_test_audio), loop: "loop",controls: true ,controlslist: "nodownload", class: "align-middle") %>
         </p>
         <% end %>
-        <p class="card-text"><small class="text-muted">Release date <%= album.updated_at.strftime( '%Y/%m/%d' ) %></small></p>
+
+      </div>
+      <div class="card-footer text-right">
+        <small class="text-muted">Release date <%= album.updated_at.strftime( '%Y/%m/%d' ) %></small>
       </div>
     </div>
   </div>

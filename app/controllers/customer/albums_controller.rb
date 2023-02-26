@@ -1,7 +1,7 @@
 class Customer::AlbumsController < ApplicationController
   before_action :authenticate_customer!, only: [:create]
   # アクセス制限（ゲスト不可）
-  before_action :guest_check, only: [:create]
+  # before_action :guest_check, only: [:create]
 
   def index
     @albums = Album.where(released: true).page(params[:page]).per(9).order(created_at: :desc)

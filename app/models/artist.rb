@@ -41,7 +41,7 @@ class Artist < ApplicationRecord
 
   # ゲストログイン
   def self.guest
-    find_or_create_by!(email: 'aaa@aaa.com') do |artist|
+    find_or_create_by!(id: 1) do |artist|
       artist.password = SecureRandom.urlsafe_base64
       artist.password_confirmation = artist.password
       artist.id = 1

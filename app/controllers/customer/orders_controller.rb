@@ -3,7 +3,7 @@ class Customer::OrdersController < ApplicationController
   # アクセス制限（自分以外のカスタマーがアクセスできないようにする）
   before_action :ensure_current_customer, only: [:show]
   # アクセス制限（ゲスト不可）
-  before_action :guest_check
+  # before_action :guest_check
   require 'payjp'
 
   def new
