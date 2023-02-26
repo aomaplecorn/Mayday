@@ -5,7 +5,7 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def self.guest
-    find_or_create_by!(email: 'aaa@aaa.com') do |admin|
+    find_or_create_by!(email: 'aaa@test.mayday') do |admin|
       admin.password = SecureRandom.urlsafe_base64
       admin.password_confirmation = admin.password
     end
