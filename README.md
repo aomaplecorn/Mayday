@@ -19,7 +19,7 @@
 - アーティストが販売している音楽やグッズを購入したいとき
 
 ## 設計書
-- 作成中です。
+- ![ER図](/ER図.jpeg)
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -29,6 +29,8 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用する素材は検討中です。
+- 使用した画像素材：パブリックドメインQ(https://publicdomainq.net/)
+- 使用した画像素材：ぱくたそ(https://www.pakutaso.com/)
+- 使用した音素材：OtoLogic(https://otologic.jp)
 
 
