@@ -11,13 +11,13 @@ class Artist::MusicsController < ApplicationController
       else
         @album = @music.album
         @musics = @album.musics
-        flash[:notice_create] = "新規作成できませんでした"
+        flash[:notice] = "新規作成できませんでした"
         render '/artist/albums/edit'
       end
     else
       @album = @music.album
       @musics = @album.musics
-      flash[:notice_create] = "同じトラック番号があります"
+      flash[:notice] = "同じトラック番号があります"
       render '/artist/albums/edit'
     end
   end
@@ -36,13 +36,13 @@ class Artist::MusicsController < ApplicationController
       else
         @album = @music.album
         @musics = @album.musics
-        flash[:notice_update] = "変更が行えませんでした"
+        flash[:notice] = "変更が行えませんでした"
         render '/artist/albums/edit'
       end
     else
       @album = @music.album
       @musics = @album.musics
-      flash[:notice_update] = "同じトラック番号があります"
+      flash[:notice] = "同じトラック番号があります"
       render '/artist/albums/edit'
     end
   end

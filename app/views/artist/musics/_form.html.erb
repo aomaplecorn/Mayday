@@ -11,22 +11,6 @@
       ※登録できる音楽ファイル・デモファイルは『MP3』形式のみとなります。
     </p>
   </div>
-<!--以下、エラーメッセージ-->
-<% if @music.errors.any? %>
-  <div class="alert alert-warning">
-    <ul>
-      <% @music.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<% if flash[:notice_create] %>
-    <p id="notice" class="alert alert-warning">
-      <%= flash[:notice_create] %>
-    </p>
-<% end %>
-<!--ここまで、エラーメッセージ-->
 
 <div>
   <div>

@@ -1,19 +1,4 @@
-<!--以下、エラーメッセージ-->
-<% if @music.errors.any? %>
-  <div class="alert alert-warning">
-    <ul>
-      <% @music.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<% if flash[:notice_update] %>
-    <p id="notice" class="alert alert-warning">
-      <%= flash[:notice_update] %>
-    </p>
-<% end %>
-<!--ここまで、エラーメッセージ-->
+
 
 <!--以下、楽曲編集フォーム-->
 <table class="table table-striped">

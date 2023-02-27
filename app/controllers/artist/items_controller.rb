@@ -19,7 +19,7 @@ class Artist::ItemsController < ApplicationController
   end
 
   def index
-    @items = current_artist.items.page(params[:page]).per(8)
+    @items = current_artist.items.page(params[:page]).per(8).order(created_at: :desc)
   end
 
   def edit

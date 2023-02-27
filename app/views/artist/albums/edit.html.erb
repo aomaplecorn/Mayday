@@ -1,4 +1,4 @@
-<!--以下、エラーメッセージ-->
+<!--以下、アルバムのエラーメッセージ-->
 <% if @album.errors.any? %>
   <div class="alert alert-warning">
     <ul>
@@ -8,7 +8,17 @@
     </ul>
   </div>
 <% end %>
-<!--ここまで、エラーメッセージ-->
+<!--以下、ミュージックのエラーメッセージ-->
+<% if @music.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @music.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <!--以下、アルバム編集画面-->
 <%= form_with model: [:artist,@album] do |f| %>
   <div class="row d-flex justify-content-center m-5">
