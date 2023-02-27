@@ -18,16 +18,16 @@ artists = Artist.create!(
     {email: 'aaa@test.mayday',password: 'password', name: 'ゲスト（アーティスト）', telephone_number: '00012345678', is_deleted: 'false', introduction: ''},
     # テストデータ
     {email: 'redif@test.mayday', password: 'password', name: 'redif', telephone_number: '11123456789', delivery_cost: 500 , is_deleted: 'false',
-    introduction: 'イギリスのリバプール出身５人組で構成された新進気鋭ロックバンド「The Red if」　Gt.Vo：John　Gt：Oliver　Ba：George　Dr：Harry　Ke：Noah　Johnから一言：日本の皆さんに会えて光栄です。ライブで一緒に叫ぼう。',
+    introduction: 'イギリスのリバプール出身５人組で構成された新進気鋭ロックバンド「The Red if」　Gt.Vo：John　Gt：Oliver　Ba：George　Dr：Harry　Ke：Noah　Johnから一言：日本の皆さんにぜひ聴いて欲しいです。一緒にライブで叫ぼう。',
       background_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-background-image1.jpg"), filename:"test-background-image1.jpg"),
       introduction_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-artist1.jpg"), filename:"test-artist1.jpg")},
 
-    {email: 'kamisuki@test.mayday', password: 'password', name: '紙透 光太郎', telephone_number: '11123456789', delivery_cost: 350 , is_deleted: 'false',
+    {email: 'kamisuki@test.mayday', password: 'password', name: '紙透 光太郎', telephone_number: '22223456789', delivery_cost: 350 , is_deleted: 'false',
       introduction: '大学生になってまもない頃、道端に落ちてるアコギを拾い音楽に目覚めてからずっとシンガーソングライターやってます！たまに岡山のパパツーでライブやってます！よかったら楽曲聴いてってください',
       background_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-background-image2.jpg"), filename:"test-background-image2.jpg"),
       introduction_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-artist2.jpg"), filename:"test-artist2.jpg")},
 
-    {email: 'ys0624@test.mayday', password: 'password', name: 'Yuri Shiraki', telephone_number: '11123456789', delivery_cost: 400 , is_deleted: 'false',
+    {email: 'ys0624@test.mayday', password: 'password', name: 'Yuri Shiraki', telephone_number: '33323456789', delivery_cost: 400 , is_deleted: 'false',
       introduction: 'みなさんこんにちは、Yuri Shirakiです。普段は新宿のジャズバーでピアノを弾いています。趣味は旅行で、背景の星空は長野で撮ったものです。よかったらピアノ聴きにきてくださいねヽ(*＾ω＾*)ﾉ',
       background_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-background-image3.jpg"), filename:"test-background-image3.jpg"),
       introduction_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-artist3.jpg"), filename:"test-artist3.jpg")}
@@ -39,9 +39,9 @@ customers = Customer.create!(
     # ゲストユーザー
     {email: 'aaa@test.mayday', password: 'password', name: 'ゲスト（一般会員）', name_kana: 'ゲストイッパンカイイン', postal_code: '1234567', address: '住所', telephone_number: '00012345678', is_deleted: 'false'},
     # テストデータ
-    {email: 'nemunoki@test.mayday', password: 'password', name: '合歓木 優', name_kana: 'ネムノキユウ', postal_code: '1112345', address: '北海道富良野市メーデー2-10 めいでい302', telephone_number: '01012345678', is_deleted: 'false'},
-    {email: 'kuwamori@test.mayday', password: 'password', name: '鍬守 健', name_kana: 'クワモリタケル', postal_code: '1112345', address: '岡山県倉敷市メーデー6-10 めいでい101', telephone_number: '01012345678', is_deleted: 'false'},
-    {email: 'warabino@test.mayday', password: 'password', name: '蕨野 翔太', name_kana: 'ワラビノショウタ', postal_code: '1112345', address: '東京都新宿区メーデー5-20 めいでい501', telephone_number: '01012345678', is_deleted: 'false'}
+    {email: 'nemunoki@test.mayday', password: 'password', name: '合歓木 優', name_kana: 'ネムノキユウ', postal_code: '1112345', address: '北海道富良野市メーデー2-10 めいでい302', telephone_number: '01112345678', is_deleted: 'false'},
+    {email: 'kuwamori@test.mayday', password: 'password', name: '鍬守 健', name_kana: 'クワモリタケル', postal_code: '2222345', address: '岡山県倉敷市メーデー6-10 めいでい101', telephone_number: '02212345678', is_deleted: 'false'},
+    {email: 'warabino@test.mayday', password: 'password', name: '蕨野 翔太', name_kana: 'ワラビノショウタ', postal_code: '3332345', address: '東京都新宿区メーデー5-20 めいでい501', telephone_number: '03312345678', is_deleted: 'false'}
   ]
 )
 
@@ -69,13 +69,13 @@ Music.create!(
       audio: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/Teeth.mp3"), filename:"Teeth.mp3"),
       test_audio:  ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/Teeth-demo.mp3"), filename:"Teeth-demo.mp3") },
 
-    {name: 'Still In Love', track: 1, index_info: 'コーヒー片手にStill In Loveを聴いてみるのはどうですか？', artist_id: artists[2].id, album_id: albums[0].id,
+    {name: 'Still In Love', track: 1, index_info: '作曲：紙透 光太郎　コーヒー片手にぜひ聴いてみてほしいです。　よかったら聴いてみてください！', artist_id: artists[2].id, album_id: albums[0].id,
       audio: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/Still In Love.mp3"), filename:"Still In Love.mp3"),
       test_audio:  ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/Still In Love-demo.mp3"), filename:"Still In Love-demo.mp3") },
-    {name: 'hokkori tea time', track: 2, index_info: 'ゆったりとした曲調。よく行くカフェで作曲した曲です。', artist_id: artists[2].id, album_id: albums[0].id,
+    {name: 'hokkori tea time', track: 2, index_info: '作曲：紙透 光太郎　ゆったりとした曲調。よく行くカフェで作曲した曲です。', artist_id: artists[2].id, album_id: albums[0].id,
       audio: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/hokkori tea time.mp3"), filename:"hokkori tea time.mp3"),
       test_audio:  ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/hokkori tea time-demo.mp3"), filename:"hokkori tea time-demo.mp3") },
-    {name: 'Someday in the Rain', track: 3, index_info: '作業曲としておすすめです。', artist_id: artists[2].id, album_id: albums[0].id,
+    {name: 'Someday in the Rain', track: 3, index_info: '作曲：紙透 光太郎　作業曲としておすすめです。', artist_id: artists[2].id, album_id: albums[0].id,
       audio: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/Someday in the Rain.mp3"), filename:"Someday in the Rain.mp3"),
       test_audio:  ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/Someday in the Rain-demo.mp3"), filename:"Someday in the Rain-demo.mp3") },
 
@@ -104,7 +104,7 @@ Music.create!(
 
 Item.create!(
   [
-    {name: 'サイト応援Tシャツ', introduction: 'いつもお世話になっているMaydayさんへの応援Tシャツです！', amount: 20, price: 1500, is_active: true, artist_id: artists[2].id,
+    {name: 'サイト応援Tシャツ', introduction: 'いつもお世話になっているMaydayさんへの応援Tシャツです！サイズはMのみ', amount: 20, price: 1500, is_active: true, artist_id: artists[2].id,
       item_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-item-image3.jpg"), filename:"test-item-image3.jpg") },
     {name: 'スマホケース', introduction: 'なぜこれを作ったのか自分でもわからない！大学の友達とお試しで作ったのでよければぜひどうぞ！対応機種：ipon13,ipon14', amount: 5, price: 3000, is_active: true, artist_id: artists[2].id,
       item_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-item-image4.jpg"), filename:"test-item-image4.jpg") },
@@ -114,7 +114,7 @@ Item.create!(
       item_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-item-image5.jpg"), filename:"test-item-image5.jpg") },
     {name: 'Redif限定Tシャツ', introduction: 'The Red if限定のオリジナルTシャツ！ぜひお買い求めください！', amount: 30, price: 2000, is_active: true, artist_id: artists[1].id,
       item_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-item-image1.jpg"), filename:"test-item-image1.jpg") },
-    {name: 'Redif限定トートバッグ', introduction: 'The Red if限定のオリジナルTシャツ！ぜひお買い求めください！', amount: 10, price: 3500, is_active: true, artist_id: artists[1].id,
+    {name: 'Redif限定トートバッグ', introduction: 'The Red if限定のオリジナルトートバッグ！ぜひお買い求めください！', amount: 10, price: 3500, is_active: true, artist_id: artists[1].id,
       item_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/test-item-image2.jpg"), filename:"test-item-image2.jpg") },
   ]
 )

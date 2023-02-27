@@ -31,22 +31,19 @@
         　<% @album_orders.each do |order| %>
         　<tr>
             <!--購入日-->
-            <td class="align-middle">
-            　<%= order.created_at.strftime( '%Y/%m/%d') %>
-        　　</td>
+            <td class="align-middle"><%= order.created_at.strftime( '%Y/%m/%d') %></td>
             <!--購入したアルバム名-->
-            <td class="align-middle">
-            　<% order.order_details.each do |order_detail| %>
-            　　<%= order_detail.album.name %>
-            　<% end %>
-            </td>
+            <% order.order_details.each do |order_detail| %>
+              <td class="align-middle">
+                <span>
+                  <%= image_tag order_detail.album.get_jacket_image(100,100) %>
+                  <%= order_detail.album.name %>
+                </span>
+              </td>
+            <% end %>
             <!--「支払金額」合計を表示-->
-            <td class="align-middle">
-            　<%= order.total_payment.to_s(:delimited) %>円
-            </td>
-            <td class="align-middle">
-            　<%= link_to "表示する", customer_order_path(order.id), class: "btn btn-primary" %>
-            </td>
+            <td class="align-middle"><%= order.total_payment.to_s(:delimited) %>円</td>
+            <td class="align-middle"><%= link_to "表示する", customer_order_path(order.id), class: "btn btn-primary" %></td>
         　</tr>
         　<% end %>
         </tbody>

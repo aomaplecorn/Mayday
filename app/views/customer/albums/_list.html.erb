@@ -11,6 +11,7 @@
       <div class="card-body">
         <h5 class="card-title text-dark"><%= album.name %></h5>
       <% end %>
+        <p class="card-text"><%= album.artist.name %></p>
         <p class="card-text">¥<%= album.price.to_s(:delimited) %>-</p>
         <% album.musics.first(3).each do |music| %>
         <p class="card-text align-middle">
